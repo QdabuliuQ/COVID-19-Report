@@ -1,0 +1,8 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+:root{
+  --color: #1d99d3;
+  --marginB: 20px;
+}
