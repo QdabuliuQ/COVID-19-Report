@@ -4,8 +4,14 @@ import router from './router'
 import store from './store'
 
 import { Swipe, SwipeItem } from 'vant';  // 导入轮播图
+import { NavBar } from 'vant';  // 导航栏组件
+import { Icon } from 'vant';  // 图标组件
+
+
 Vue.use(Swipe);
 Vue.use(SwipeItem);
+Vue.use(NavBar);
+Vue.use(Icon);
 
 import ContentSplit from "components/private/contentSplit/index.js"  // 引入分割线组件
 Vue.use(ContentSplit)
@@ -19,7 +25,7 @@ import 'lib-flexible'  // 导入lib-flexible
 
 import * as echarts from 'echarts'  // 导入echarts
 Vue.prototype.$echarts = echarts
-import 'assets/js/china.js'  // 导入china.js配合地图显示
+import 'static/js/china.js'  // 导入china.js配合地图显示
 
 Vue.config.productionTip = false
 

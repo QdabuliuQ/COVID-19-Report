@@ -36,5 +36,6 @@ export default {
   font-weight: 550;
   position: relative;
   top: -0.5px;
+  letter-spacing: 1px;
 }
 </style>

@@ -216,7 +216,7 @@ export default {
           ); // 创建echarts对象
           myChart.setOption(option);
           myChart.resize();
-        }, 600);
+        }, 300);
       }
     });
   },

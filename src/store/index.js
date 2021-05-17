@@ -6,13 +6,16 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isGetDemosticDetail: false,
-    demosticDetail: null,  // 中国目前所有数据
-    chinaTrendDetail: null,  // 中国疫情趋势数据
+    demosticDetail: null, // 中国目前所有数据
+    chinaTrendDetail: null, // 中国疫情趋势数据
   },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
+  // state: sessionStorage.getItem('state') ?   // 解决刷新后vuex数据不存在
+  //   JSON.parse(sessionStorage.getItem('state')) : {
+  //   oisGetDemosticDetail: false,
+  //   demosticDetail: null,  // 中国目前所有数据
+  //   chinaTrendDetail: null,  // 中国疫情趋势数据
+  // },
+  mutations: {},
+  actions: {},
+  modules: {},
 })

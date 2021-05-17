@@ -4,6 +4,7 @@
       <!-- 图表轮播 -->
       <van-swipe
         ref="charts_swipe"
+        @change='chartsChange'
         :touchable="true"
         class="my-swipe"
         indicator-color="transparent"
@@ -70,6 +71,10 @@ export default {
       });
     },
 
+    chartsChange(index) {  // 监听轮播图改变
+      this.currentIndex = index
+    },
+
     chartsOption(titleText = "", xData = [], color = [], series = []) {  // 图表设置选项
       return {
         title: {  // 标题
@@ -85,7 +90,7 @@ export default {
           top: "15%",
           left: "3%",
           right: "3%",
-          bottom: "3%",
+          bottom: "2%",
           containLabel: true,
         },
         legend: {  // 图例
@@ -102,6 +107,7 @@ export default {
             type: "category",
             data: xData,
             axisLabel: {
+              rotate: 40,
               textStyle: {
                 fontSize: this.fGetChartFontSize(),
               },
@@ -114,7 +120,6 @@ export default {
         ],
         yAxis: {  // y轴
           type: "value",
-          boundaryGap: true,
           axisLabel: {
             textStyle: {
               fontSize: this.fGetChartFontSize(),
@@ -214,11 +219,12 @@ export default {
 <style scoped>
 #demosticTrend {
   width: 100%;
-  height: 280px;
+  height: 295px;
+  margin-bottom: 10px;
 }
 .trend_charts_container {
   width: 100%;
-  height: 82%;
+  height: 84%;
 }
 .charts_indicators{
   margin-top: 1%;

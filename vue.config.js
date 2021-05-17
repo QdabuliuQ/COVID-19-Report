@@ -1,5 +1,5 @@
 module.exports = {
-    publicPath: './',
+    publicPath: '/',
     // 配置路径别名
     configureWebpack: {
         resolve: {
@@ -9,6 +9,7 @@ module.exports = {
                 'components': '@/components',
                 'network': '@/network',
                 'views': '@/views',
+                'static': '@/static'
             }
         }
     },

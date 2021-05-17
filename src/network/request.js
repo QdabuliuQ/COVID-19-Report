@@ -87,3 +87,20 @@ export function rumorRequest(config) {
   })
   return instance(config) // 返回 实例对象
 }
+
+export function provinceJsonRequest(cityName) {  // 获取省份json文件
+  const instance = axios.create({
+    baseURL: 'https://file1.dxycdn.com/',
+    timeout: 5000
+  })
+  instance.interceptors.request.use(config => {
+    startLoading()
+    return config
+  })
+
+  instance.interceptors.response.use(config => {
+    exitLoading()
+    return config
+  })
+  return instance(config) // 返回 实例对象
+}

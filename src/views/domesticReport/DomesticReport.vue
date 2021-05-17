@@ -4,108 +4,150 @@
       <div class="top_bgcImg_container">
         <div class="bgcImg_container_firstTitle">新型冠状病毒</div>
         <div class="bgcImg_container_secondTitle">疫情实时大数据报告</div>
-        <div class="bgcImg_container_resource">数据来源：国家及各地卫健委每日信息发布</div>
+        <div class="bgcImg_container_resource">
+          数据来源：国家及各地卫健委每日信息发布
+        </div>
       </div>
-      <img src="https://img.coolcr.cn/2021/05/05/6da62c2601d05.png" alt="">
+      <img src="https://img.coolcr.cn/2021/05/05/6da62c2601d05.png" alt="" />
     </div>
     <div v-if="demosticList" class="report_container">
       <!-- 疫情信息汇总表格 -->
       <report-table></report-table>
-      <div class="pushTime">统计截至：{{demosticList.lastUpdateTime}}</div>
-      <content-split :text='"中国疫情分布图"'></content-split>
+      <div class="pushTime">统计截至：{{ demosticList.lastUpdateTime }}</div>
+      <content-split :text="'中国疫情分布图'"></content-split>
       <!-- 中国地图 -->
       <demostic-map></demostic-map>
-      <content-split :text='"中国疫情趋势图表"'></content-split>
+      <content-split :text="'中国疫情趋势图表'"></content-split>
       <!-- 疫情趋势 -->
       <demostic-trend></demostic-trend>
+      <!-- 无症状数量趋势 -->
+      <demostic-noinfect></demostic-noinfect>
+
+      <content-split :text="'中国各省市数据汇总'"></content-split>
+      <demostic-city-table ref="cityTable"></demostic-city-table>
     </div>
   </div>
 </template>
 
 <script>
-import reportTable from './childComps/reportTable'
-import demosticMap from './childComps/demosticMap'  // 地图组件
-import demosticTrend from './childComps/demosticTrend'  // 图表组件
+import reportTable from "./childComps/reportTable";
+import demosticMap from "./childComps/demosticMap"; // 地图组件
+import demosticTrend from "./childComps/demosticTrend"; // 图表组件
+import demosticNoinfect from "./childComps/demosticNoinfect"; // 图表组件
+import demosticCityTable from "./childComps/demosticCityTable"; // 城市数据汇总
 
-import {getDemosticDetail} from 'network/demosticReport'  // 网络请求
+import { getDemosticDetail } from "network/demosticReport"; // 网络请求
 
 export default {
-  name: 'DomesticReport',
-  data () {
+  name: "DomesticReport",
+  data() {
     return {
-      pushTime: '',
-      demosticList: null
-    }
+      pushTime: "",
+      demosticList: null,
+      tableToTop: 500, // 表格顶部的距离
+    };
   },
   methods: {
-
     DemosticDetail() {
-      if (!this.$store.state.demosticDetail) {  // 判断本地是否储存了数据
+      if (!this.$store.state.demosticDetail) {
+        // 判断本地是否储存了数据
         // 发起网络请求
-        getDemosticDetail().then(res => {
-          if (typeof(res.data.data) == 'string') {
-            let result = JSON.parse(res.data.data)
-            this.demosticList = result
-            this.$store.state.demosticDetail = result  // 保存数据到store
+        getDemosticDetail().then((res) => {
+          if (typeof res.data.data == "string") {
+            let result = JSON.parse(res.data.data);
+            this.demosticList = result;
+            this.$store.state.demosticDetail = result; // 保存数据到store
           }
-        })
+        });
       } else {
-        this.demosticList = this.$store.state.demosticDetail  
+        this.demosticList = this.$store.state.demosticDetail;
       }
-    }
+    },
+
+    throttle(fn, delay) {  // 节流函数
+      let valid = true;
+      return function () {
+        if (!valid) {
+          // 休息时间 暂不工作
+          return false;
+        }
+        // 工作时间，执行函数并且在间隔期内把状态设定为无效
+        valid = false;
+        setTimeout(() => {
+          fn();
+          valid = true;
+        }, delay);
+      };
+    },
   },
   components: {
     reportTable,
     demosticMap,
-    demosticTrend
+    demosticTrend,
+    demosticNoinfect,
+    demosticCityTable,
   },
-  created () {
-    this.DemosticDetail()
-  }
-}
-
+  created() {
+    this.DemosticDetail();
+  },
+  mounted() {
+    setTimeout(() => {
+      this.tableToTop = this.$refs.cityTable.$el.getBoundingClientRect().top;
+      window.addEventListener("scroll", (e) => {  // 监听滚动
+        if (window.pageYOffset >= this.tableToTop && window.pageYOffset <= this.tableToTop + 100) {
+          this.throttle(this.$refs.cityTable.fixdHead(), 300)
+        } else if(window.pageYOffset < this.tableToTop){
+          this.throttle(this.$refs.cityTable.hideHead(), 300)
+        }
+      });
+    }, 600);
+  },
+};
 </script>
 <style scoped>
-.report_top_bgcImg{
+#DomesticReport{
+  margin-bottom: calc(45px + var(--marginB));
+}
+.report_top_bgcImg {
   width: 100%;
   position: relative;
   z-index: 0;
 }
-.report_top_bgcImg img{
+.report_top_bgcImg img {
   width: 100%;
 }
-.top_bgcImg_container{
+.top_bgcImg_container {
   position: absolute;
   top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   white-space: nowrap;
   text-align: center;
-  color: #Fff;
+  color: #fff;
 }
-.bgcImg_container_firstTitle{
+.bgcImg_container_firstTitle {
   font-size: 14px;
   letter-spacing: 1px;
   margin-bottom: 3px;
 }
-.bgcImg_container_secondTitle{
+.bgcImg_container_secondTitle {
   font-size: 20px;
   font-weight: 550;
   margin-bottom: 4px;
   letter-spacing: 2px;
 }
-.bgcImg_container_resource{
+.bgcImg_container_resource {
   font-size: 12px;
   color: rgb(221, 221, 221);
   letter-spacing: 0.5px;
 }
-.report_container{
+.report_container {
   margin-top: -25px;
   padding: 0 15px;
   position: relative;
   z-index: 1;
 }
-.pushTime{
+.pushTime {
   margin-top: 8px;
   text-align: right;
   color: rgb(131, 131, 131);
