@@ -122,6 +122,7 @@ export default {
   left: 0;
   right: 0;
   display: flex;
+  background-color: #f2f2f2;
 }
 .table_head_td{
   padding: 7px 0;

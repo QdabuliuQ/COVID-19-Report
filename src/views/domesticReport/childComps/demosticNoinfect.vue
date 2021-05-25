@@ -53,6 +53,30 @@ export default {
           right: "1%",
           data: detailText,
         },
+        tooltip: {
+          trigger: "axis",
+          triggerOn:"click",
+          textStyle: {
+            color: '#FFF',     // 文字的颜色
+            fontSize: '20',    // 文字字体大小
+          },
+          padding:[12],
+          backgroundColor:"#000000b2", 
+          borderColor: 'transparent',  
+          axisPointer: {
+            type: "cross",
+            crossStyle: {
+              color: "#999",
+            },
+          },
+          formatter: function (params) {
+            let str = `地点：${params[0].axisValue}<br>`;
+            for (const item of params) {
+              str += `${item.seriesName}：${item.data}<br>`
+            }
+            return str
+          },
+        },
         grid: {
           // 布局
           top: "18%",

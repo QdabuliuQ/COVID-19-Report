@@ -142,6 +142,30 @@ export default {
           },
           pieces: nowPieces,
         },
+        tooltip: {
+          trigger: "item",
+          triggerOn:"click",
+          textStyle: {
+            color: '#FFF',     // 文字的颜色
+            fontSize: '20',    // 文字字体大小
+          },
+          padding:[12],
+          backgroundColor:"#000000b2", 
+          borderColor: 'transparent',  
+          axisPointer: {
+            type: "cross",
+            crossStyle: {
+              color: "#999",
+            },
+          },
+          formatter: function (params) {
+            return (
+              "地区："+params.data.name +
+              "<br>" +
+              "确诊人数：" +params.data.value
+            );
+          },
+        },
         series: [
           {
             name: "",
@@ -178,9 +202,6 @@ export default {
       };
     },
   },
-  computed: {},
-  watch: {},
-  created() {},
   mounted() {
     this.$nextTick(() => {
       if (this.$store.state.demosticDetail) {
@@ -239,6 +260,7 @@ export default {
   border: 1px solid rgb(235, 235, 235);
   border-radius: 5px;
   transition: all 0.2s linear;
+  /* background-color: #00000081; */
 }
 .activeModule {
   color: var(--color);

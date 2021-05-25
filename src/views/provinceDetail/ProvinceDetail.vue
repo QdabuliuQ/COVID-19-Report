@@ -26,7 +26,17 @@
         </div>
       </div>
       <div ref="provinceTable" class="province_detail_container">
-        <province-table></province-table>
+        <province-table class="province-table"></province-table>
+        <provinceMap></provinceMap>
+        <content-split
+          :text="$route.params.cityName + '疫情趋势图'"
+        ></content-split>
+        <province-month-data></province-month-data>
+        <province-hospital></province-hospital>
+        <content-split
+          :text="$route.params.cityName + '疫情资讯'"
+        ></content-split>
+        <province-news></province-news>
       </div>
     </div>
   </div>
@@ -35,6 +45,11 @@
 <script>
 import 'assets/css/vantCss/provinceDetail.css'  // 引入css文件
 import provinceTable from './childComps/provinceTable'  // 导入表格组件
+import provinceMap from './childComps/provinceMap'  // 地图组件
+import provinceMonthData from './childComps/provinceMonthData'  // 两个月数据图表
+import provinceHospital from './childComps/provinceHospital'  // 医院组件
+import provinceNews from './childComps/provinceNews'  // 疫情资讯
+
 export default {
   name: 'ProvinceDetail',
   data () {
@@ -49,9 +64,9 @@ export default {
       this.$router.go(-1)
     },
     listenScroll(){
-      if (window.pageYOffset > this.tableToTop && window.pageYOffset < this.tableToTop + 100) {
+      if (window.pageYOffset > this.tableToTop && window.pageYOffset < this.tableToTop + 200) {
         this.showNavBar = true
-      } else if (window.pageYOffset < this.tableToTop && window.pageYOffset > this.tableToTop - 100) {
+      } else if (window.pageYOffset < this.tableToTop && window.pageYOffset > this.tableToTop - 200) {
         this.showNavBar = false
       }
     }
@@ -59,9 +74,6 @@ export default {
   created () {
     this.navTitle = this.$route.params.cityName  // 保存城市名称
     this.cityIndex = this.$route.params.tableIndex
-    if (this.$store.state.demosticDetail) {
-      console.log(this.$store.state.demosticDetail);
-    }
   },
   mounted () {
     setTimeout(() => {
@@ -73,7 +85,11 @@ export default {
     window.removeEventListener('scroll', this.listenScroll)  // 删除事件
   },
   components: {
-    provinceTable
+    provinceTable,
+    provinceMap,
+    provinceMonthData,
+    provinceHospital,
+    provinceNews
   }
 }
 
@@ -81,7 +97,6 @@ export default {
 <style scoped>
 #ProvinceDetail{
   min-width: 100vw;
-  min-height: 200vh;
   background-color: #FFF;
   position: relative;
   z-index: 11;
@@ -153,8 +168,11 @@ export default {
 }
 .province_detail_container{
   margin-top: -25px;
-  padding: 0 15px;
+  padding: 0 15px 20px;
   position: relative;
   z-index: 3;
+}
+.province-table{
+  margin-bottom: 20px;
 }
 </style>

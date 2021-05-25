@@ -18,10 +18,10 @@ function exitLoading() {
   }
 }
 
-let ajaxTime = 0
-export function request(config) {
+
+function requestMethod(config, baseURL) {  // 封装请求
   const instance = axios.create({
-    baseURL: 'https://api.inews.qq.com/newsqa/v1',  // 请求根路径
+    baseURL,  // 请求根路径
     timeout: 5000,  // 请求时间
   })
   instance.interceptors.request.use(config => {
@@ -34,73 +34,38 @@ export function request(config) {
     return config
   })
   return instance(config) // 返回 实例对象
+}
+
+let ajaxTime = 0
+export function request(config) {
+  return requestMethod(config, 'https://api.inews.qq.com/newsqa/v1')
 }
 
 export function viewRequest(config) {
-  const instance = axios.create({
-    baseURL: '/viewRequest',  // 请求根路径
-    timeout: 5000,  // 请求时间
-  })
-
-  instance.interceptors.request.use(config => {
-    startLoading()
-    return config
-  })
-
-  instance.interceptors.response.use(config => {
-    exitLoading()
-    return config
-  })
-  return instance(config) // 返回 实例对象
+  return requestMethod(config, '/viewRequest')
 }
 
 export function anotherRequest(config) {
-  const instance = axios.create({
-    baseURL: '/inewsRequest',  // 请求根路径
-    timeout: 5000,  // 请求时间
-  })
-  instance.interceptors.request.use(config => {
-    startLoading()
-    return config
-  })
-
-  instance.interceptors.response.use(config => {
-    exitLoading()
-    return config
-  })
-  return instance(config) // 返回 实例对象
+  return requestMethod(config, '/inewsRequest')
 }
 
 export function rumorRequest(config) { 
-  const instance = axios.create({
-    baseURL: 'https://file1.dxycdn.com/',
-    timeout: 5000
-  })
-  instance.interceptors.request.use(config => {
-    startLoading()
-    return config
-  })
-
-  instance.interceptors.response.use(config => {
-    exitLoading()
-    return config
-  })
-  return instance(config) // 返回 实例对象
+  return requestMethod(config, 'https://file1.dxycdn.com/')
 }
 
-export function provinceJsonRequest(cityName) {  // 获取省份json文件
-  const instance = axios.create({
-    baseURL: 'https://file1.dxycdn.com/',
-    timeout: 5000
-  })
-  instance.interceptors.request.use(config => {
-    startLoading()
-    return config
-  })
+export function provinceJsonRequest(config) {  // 获取省份json文件
+  return requestMethod(config, 'https://file1.dxycdn.com/')
+}
 
-  instance.interceptors.response.use(config => {
-    exitLoading()
-    return config
-  })
-  return instance(config) // 返回 实例对象
+
+export function provinceHospital(config){
+  return requestMethod(config, 'https://wechat.wecity.qq.com/')
+}
+
+export function provinceMapJson(config){  // 地图json数据
+  return requestMethod(config, '/provinceMapJson')
+}
+
+export function provinceNews(config) {
+  return requestMethod(config, '/provinceNewsRequest')
 }

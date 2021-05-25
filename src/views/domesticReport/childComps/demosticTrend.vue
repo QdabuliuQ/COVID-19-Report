@@ -80,18 +80,42 @@ export default {
         title: {  // 标题
           text: titleText,
           textStyle: {
-            fontSize: this.fGetChartFontSize() + 17,
+            fontSize: this.fGetChartFontSize() + 10,
           },
-          top: '3%',
-          left: "3%",
+          top: '4%',
+          left: "1%",
         },
         color,  // 颜色
         grid: {  // 布局
           top: "15%",
-          left: "3%",
-          right: "3%",
+          left: "1%",
+          right: "1%",
           bottom: "2%",
           containLabel: true,
+        },
+        tooltip: {
+          trigger: "axis",
+          triggerOn:"click",
+          textStyle: {
+            color: '#FFF',     // 文字的颜色
+            fontSize: '20',    // 文字字体大小
+          },
+          padding:[12],
+          backgroundColor:"#000000b2", 
+          borderColor: 'transparent',  
+          axisPointer: {
+            type: "cross",
+            crossStyle: {
+              color: "#999",
+            },
+          },
+          formatter: function (params) {
+            let str = `日期：${params[0].axisValue}<br>`;
+            for (const item of params) {
+              str += `${item.seriesName}：${item.data}<br>`
+            }
+            return str
+          },
         },
         legend: {  // 图例
           itemWidth: 30,
@@ -100,7 +124,7 @@ export default {
             fontSize: this.fGetChartFontSize() + 10,
           },
           top: '4%',
-          right: '3%',
+          right: '1%',
         },
         xAxis: [  // x轴
           {
@@ -247,7 +271,7 @@ export default {
   background-color: #21aff136;
   color: #21aff1;
   border: 1px solid #21aff1;
-  
+  /* background-color: #000000b2; */
 }
 .my-swipe {
   width: 100%;
