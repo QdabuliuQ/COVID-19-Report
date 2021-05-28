@@ -112,7 +112,7 @@ export default {
           formatter: function (params) {
             let str = `日期：${params[0].axisValue}<br>`;
             for (const item of params) {
-              str += `${item.seriesName}：${item.data}<br>`
+              str += `${item.marker} ${item.seriesName}：${item.data}<br>`
             }
             return str
           },

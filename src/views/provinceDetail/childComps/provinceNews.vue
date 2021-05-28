@@ -1,5 +1,8 @@
 <template>
-  <div id="getProvinceNews">
+  <div v-if="newsList != null" id="getProvinceNews">
+    <content-split
+      :text="$route.params.cityName + '疫情资讯'"
+    ></content-split>
     <a :href="item.news_url" class="news_items" v-for="item,index in newsList" :key="index">
       <div class="left_news_items">
         <div class="left_news_title">
@@ -24,7 +27,7 @@ export default {
   name: "getProvinceNews",
   data () {
     return {
-      newsList: []  
+      newsList: []
     }
   },
   methods: {

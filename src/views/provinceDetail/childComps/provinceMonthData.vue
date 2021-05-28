@@ -127,7 +127,7 @@ export default {
         document.querySelector(".provinceSumData")
       );
       myChartDom4.setOption(
-        this.setChartsOptions("广东累计疫情趋势", [
+        this.setChartsOptions(this.$route.params.cityName+"累计疫情趋势", [
           {
             name: '累计确诊',
             data: this.cityDate.confirm,
@@ -154,7 +154,7 @@ export default {
         document.querySelector(".provinceNewData")
       );
       myChartDom5.setOption(
-        this.setChartsOptions("广东新增疫情趋势", [
+        this.setChartsOptions(this.$route.params.cityName+"新增疫情趋势", [
           {
             name: '新增确诊',
             data: this.cityDate.newConfirm,

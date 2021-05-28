@@ -1,5 +1,5 @@
 <template>
-  <div v-if="dataLength.lenght != 0" id="provinceHospital">
+  <div v-if="dataLength.lenght > 0" id="provinceHospital">
     <content-split
       :text="$route.params.cityName + '医疗救助医院'"
     ></content-split>

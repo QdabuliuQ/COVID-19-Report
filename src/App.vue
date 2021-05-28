@@ -67,14 +67,20 @@ export default {
   methods: {
     toggleTabbar(index) {
       this.activeIndex = index;
-    },
-
-    saveState () {
-      // sessionStorage.setItem('state', JSON.stringify(this.$store.state))
+      switch (index) {
+        case 0:
+          this.$router.push('/DomesticReport')
+          break;
+        case 2:
+          this.$router.push('/VaccineInformation')
+          break;
+        default:
+          break;
+      }
     }
   },
   mounted () {
-    // window.addEventListener('unload', this.saveState)
+
   },
   created () {
     //在页面加载时读取sessionStorage里的状态信息

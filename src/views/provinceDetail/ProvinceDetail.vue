@@ -33,9 +33,6 @@
         ></content-split>
         <province-month-data></province-month-data>
         <province-hospital></province-hospital>
-        <content-split
-          :text="$route.params.cityName + '疫情资讯'"
-        ></content-split>
         <province-news></province-news>
       </div>
     </div>

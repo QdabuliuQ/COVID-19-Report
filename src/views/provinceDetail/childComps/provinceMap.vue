@@ -68,6 +68,19 @@ export default {
         data.UTF8Encoding = true;
         this.featuresData = JSON.stringify(data);
       });
+
+      setTimeout(() => {
+        if ( this.setAllDetail ) {
+          mapChartDom = this.$echarts.init(
+            document.getElementById("provinceMap")
+          ); // 获取dom元素
+          this.$echarts.registerMap(
+            this.$route.params.cityName,
+            this.featuresData
+          ); // 注册地图
+          mapChartDom.setOption(this.getMapOptions(this.cityNowData)); // 设置地图数据
+        }
+      }, 800);
     }
   },
 
@@ -287,18 +300,6 @@ export default {
   },
 
   mounted() {
-    if ( this.setAllDetail ) {
-      setTimeout(() => {
-        mapChartDom = this.$echarts.init(
-          document.getElementById("provinceMap")
-        ); // 获取dom元素
-        this.$echarts.registerMap(
-          this.$route.params.cityName,
-          this.featuresData
-        ); // 注册地图
-        mapChartDom.setOption(this.getMapOptions(this.cityNowData)); // 设置地图数据
-      }, 400);
-    }
   },
 };
 </script>
@@ -309,10 +310,9 @@ export default {
 #provinceMap {
   width: 100%;
   height: 260px !important;
-  z-index: 1;
   position: relative;
+  z-index: 1;
   background-color: #ffffff;
-  /* background-color: #f7f7f7; */
 }
 .map_toggle_item {
   padding: 5px 10px;
