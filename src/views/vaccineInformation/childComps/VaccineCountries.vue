@@ -173,6 +173,9 @@ export default {
 
 </script>
 <style scoped>
+#VaccineCountries{
+  margin-bottom: var(--marginB);
+}
 .container_charts{
   width: 100%;
   height: 280px;

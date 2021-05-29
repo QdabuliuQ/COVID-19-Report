@@ -48,7 +48,9 @@ export default {
       nowConfirmList: [],  // 目前确诊
       indicatorsList: ['疫情新增趋势','疫情累计趋势','现有确诊趋势'],
       currentIndex: 0,  // 活跃索引
-      refChartsSwipe: null
+      refChartsSwipe: null,
+      chartDom2: false,  // 判断图表是否已经被加载
+      chartDom3: false,
     };
   },
   methods: {
@@ -72,6 +74,20 @@ export default {
     },
 
     chartsChange(index) {  // 监听轮播图改变
+      if (index != 0) {
+        switch (index) {
+          case 1:
+            this.loadCharts(index)
+            this.chartDom2 = true
+            break;
+          case 2:
+            this.loadCharts(index)
+            this.chartDom3 = true
+            break;
+          default:
+            break;
+        }
+      }
       this.currentIndex = index
     },
 
@@ -158,6 +174,46 @@ export default {
     toggle_indicators(i) {  // 图表切换
       this.currentIndex = i
       this.refChartsSwipe.swipeTo(i)  // 切换轮播图
+    },
+
+    loadCharts(index) {
+      switch (index) {
+        case 1:
+          if (!this.chartDom2) {
+            let options2 = this.chartsOption("全国疫情累计趋势", this.dateList, ["#be1313", "#3ed81f", "#888888"], [
+              {
+                name: "累计确诊",
+                type: "line",
+                data: this.confirmList,
+              },
+              {
+                name: "累计治愈",
+                type: "line",
+                data: this.healList,
+              },
+              {
+                name: "累计死亡",
+                type: "line",
+                data: this.deadList,
+              },
+            ])
+            myChartDom2.setOption(options2);
+          }
+          break;
+        case 2:
+          if (!this.chartDom3) {
+            let options3 = this.chartsOption("全国现有确诊趋势", this.dateList,["#be1313"], [
+              {
+                name: "现有确诊",
+                type: "line",
+                data: this.nowConfirmList,
+              },
+            ])
+            myChartDom3.setOption(options3)
+          }
+        default:
+          break;
+      }
     }
   },
   created() {
@@ -208,33 +264,33 @@ export default {
             },
           },
         ]);
-        let options2 = this.chartsOption("全国疫情累计趋势", this.dateList, ["#be1313", "#3ed81f", "#888888"], [
-          {
-            name: "累计确诊",
-            type: "line",
-            data: this.confirmList,
-          },
-          {
-            name: "累计治愈",
-            type: "line",
-            data: this.healList,
-          },
-          {
-            name: "累计死亡",
-            type: "line",
-            data: this.deadList,
-          },
-        ])
-        let options3 = this.chartsOption("全国现有确诊趋势", this.dateList,["#be1313"], [
-          {
-            name: "现有确诊",
-            type: "line",
-            data: this.nowConfirmList,
-          },
-        ])
+        // let options2 = this.chartsOption("全国疫情累计趋势", this.dateList, ["#be1313", "#3ed81f", "#888888"], [
+        //   {
+        //     name: "累计确诊",
+        //     type: "line",
+        //     data: this.confirmList,
+        //   },
+        //   {
+        //     name: "累计治愈",
+        //     type: "line",
+        //     data: this.healList,
+        //   },
+        //   {
+        //     name: "累计死亡",
+        //     type: "line",
+        //     data: this.deadList,
+        //   },
+        // ])
+        // let options3 = this.chartsOption("全国现有确诊趋势", this.dateList,["#be1313"], [
+        //   {
+        //     name: "现有确诊",
+        //     type: "line",
+        //     data: this.nowConfirmList,
+        //   },
+        // ])
         myChartDom1.setOption(options);
-        myChartDom2.setOption(options2);
-        myChartDom3.setOption(options3)
+        // myChartDom2.setOption(options2);
+        // myChartDom3.setOption(options3)
       }
     }, 600);
   },

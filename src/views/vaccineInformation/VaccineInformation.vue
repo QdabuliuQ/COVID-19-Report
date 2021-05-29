@@ -24,6 +24,10 @@
         :text="'世界主要国家接种情况'"
       ></content-split>
       <vaccine-countries></vaccine-countries>
+      <content-split
+        :text="'世界各国疫苗信息'"
+      ></content-split>
+      <vaccine-detail-table></vaccine-detail-table>
     </div>
   </div>
 </template>
@@ -33,6 +37,7 @@ import VaccineTable from './childComps/VaccineTable'  // 疫情表格
 import VaccineMap from './childComps/VaccineMap'  // 地图组件
 import VaccineNationTend from './childComps/VaccineNationTend'  // 国内疫苗趋势
 import VaccineCountries from './childComps/VaccineCountries'  // 世界各国疫苗趋势
+import VaccineDetailTable from './childComps/VaccineDetailTable'  // 世界疫苗信息
 
 export default {
   name: 'VaccineInformation',
@@ -44,7 +49,8 @@ export default {
     VaccineTable,
     VaccineMap,
     VaccineNationTend,
-    VaccineCountries
+    VaccineCountries,
+    VaccineDetailTable
   }
 }
 

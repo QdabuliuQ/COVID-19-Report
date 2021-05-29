@@ -29,3 +29,9 @@ export function getVaccineCountries() {  // 世界各国疫苗接种情况
     url: 'automation/modules/list?modules=VaccineTrendData'
   })
 }
+
+export function getVaccineAllData() {  // 世界各国疫苗信息
+  return request({
+    url: 'automation/modules/list?modules=VaccineSituationData'
+  })
+}

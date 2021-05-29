@@ -75,7 +75,6 @@ export default {
         },
         yAxis: {
           type: "value",
-
           axisLabel: {
             textStyle: {
               fontSize: this.fGetChartFontSize(),
