@@ -27,6 +27,75 @@ export default {
           this.infectDetail.cityList.push(item.province);
           this.infectDetail.confirmList.push(item.confirm);
         }
+        setTimeout(() => {
+          myChartDom4 = this.$echarts.init(
+            document.querySelector("#demosticNoinfect"),
+            null,
+            { renderer: "svg" }
+          );
+          let num = this.infectDetail.confirmList[0];
+          let num2 = this.infectDetail.increaseList[0];
+          for (const item of this.infectDetail.confirmList) {
+            // 获取最大值
+            if (item > num) {
+              num = item;
+            }
+          }
+          for (const item of this.infectDetail.increaseList) {
+            // 获取最大值
+            if (item > num) {
+              num2 = item;
+            }
+          }
+          let options = this.chartsOptions(
+            this.infectDetail.cityList,
+            this.infectDetail.confirmList,
+            this.infectDetail.increaseList,
+            [
+              {
+                type: "value",
+                name: "现有无症状患者",
+                min: 0, // 设置最小值
+                max: this.getMaxNum(num), // 设置最大值
+                interval: this.getMaxNum(num) / 5,
+                axisLabel: {
+                  textStyle: {
+                    fontSize: this.fGetChartFontSize(),
+                  },
+                },
+                nameTextStyle: {
+                  // 顶部名称字体大小
+                  fontSize: this.fGetChartFontSize() + 7,
+                  align: "left", // 位置
+
+                  lineHeight: this.fGetChartFontSize() + 15,
+                },
+              },
+              {
+                type: "value",
+                name: "新增无症状患者",
+                min: 0, // 设置最小值
+                max: this.getMaxNum(num2), // 设置最大值
+                interval: this.getMaxNum(num2) / 5,
+                axisLabel: {
+                  // 字体大小
+                  textStyle: {
+                    fontSize: this.fGetChartFontSize(),
+                  },
+                },
+                nameTextStyle: {
+                  // 顶部名称字体大小
+                  fontSize: this.fGetChartFontSize() + 7,
+                  align: "right", // 位置
+
+                  lineHeight: this.fGetChartFontSize() + 15,
+                },
+              },
+            ],
+            ["现有无症状患者", "新增无症状患者"]
+          );
+          myChartDom4.setOption(options);
+        }, 1000);
       });
     },
 
@@ -42,7 +111,7 @@ export default {
           top: "0%",
           left: "1%",
         },
-        color: ['#fd4a4a', '#fda94a'],
+        color: ["#fd4a4a", "#fda94a"],
         legend: {
           itemWidth: 30,
           itemHeight: 20,
@@ -55,14 +124,14 @@ export default {
         },
         tooltip: {
           trigger: "axis",
-          triggerOn:"click",
+          triggerOn: "click",
           textStyle: {
-            color: '#FFF',     // 文字的颜色
-            fontSize: '20',    // 文字字体大小
+            color: "#FFF", // 文字的颜色
+            fontSize: "20", // 文字字体大小
           },
-          padding:[12],
-          backgroundColor:"#000000b2", 
-          borderColor: 'transparent',  
+          padding: [12],
+          backgroundColor: "#000000b2",
+          borderColor: "transparent",
           axisPointer: {
             type: "cross",
             crossStyle: {
@@ -72,9 +141,9 @@ export default {
           formatter: function (params) {
             let str = `地点：${params[0].axisValue}<br>`;
             for (const item of params) {
-              str += `${item.marker} ${item.seriesName}：${item.data}<br>`
+              str += `${item.marker} ${item.seriesName}：${item.data}<br>`;
             }
-            return str
+            return str;
           },
         },
         grid: {
@@ -132,77 +201,7 @@ export default {
   created() {
     this.demosticNoinfect();
   },
-  mounted() {
-    setTimeout(() => {
-      myChartDom4 = this.$echarts.init(
-        document.querySelector("#demosticNoinfect"),
-        null,
-        { renderer: "svg" }
-      );
-      let num = this.infectDetail.confirmList[0];
-      let num2 = this.infectDetail.increaseList[0];
-      for (const item of this.infectDetail.confirmList) {
-        // 获取最大值
-        if (item > num) {
-          num = item;
-        }
-      }
-      for (const item of this.infectDetail.increaseList) {
-        // 获取最大值
-        if (item > num) {
-          num2 = item;
-        }
-      }
-      let options = this.chartsOptions(
-        this.infectDetail.cityList,
-        this.infectDetail.confirmList,
-        this.infectDetail.increaseList,
-        [
-          {
-            type: "value",
-            name: "现有无症状患者",
-            min: 0, // 设置最小值
-            max: this.getMaxNum(num), // 设置最大值
-            interval: this.getMaxNum(num) / 5,
-            axisLabel: {
-              textStyle: {
-                fontSize: this.fGetChartFontSize(),
-              },
-            },
-            nameTextStyle: {
-              // 顶部名称字体大小
-              fontSize: this.fGetChartFontSize() + 7,
-              align: "left", // 位置
-
-              lineHeight: this.fGetChartFontSize() + 15,
-            },
-          },
-          {
-            type: "value",
-            name: "新增无症状患者",
-            min: 0, // 设置最小值
-            max: this.getMaxNum(num2), // 设置最大值
-            interval: this.getMaxNum(num2) / 5,
-            axisLabel: {
-              // 字体大小
-              textStyle: {
-                fontSize: this.fGetChartFontSize(),
-              },
-            },
-            nameTextStyle: {
-              // 顶部名称字体大小
-              fontSize: this.fGetChartFontSize() + 7,
-              align: "right", // 位置
-
-              lineHeight: this.fGetChartFontSize() + 15,
-            },
-          },
-        ],
-        ["现有无症状患者", "新增无症状患者"]
-      );
-      myChartDom4.setOption(options);
-    }, 600);
-  },
+  mounted() {},
 };
 </script>
 <style scoped>

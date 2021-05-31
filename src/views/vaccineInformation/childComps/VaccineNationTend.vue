@@ -57,6 +57,21 @@ export default {
         this.vaccineData.rate.push(item.total_vaccinations_per_hundred);
         this.vaccineData.date.push(item.date);
       }
+      setTimeout(() => {
+        let myChart = this.$echarts.init(
+          document.querySelector(".nation_charts"),
+          null,
+          { renderer: "svg" }
+        );
+        myChart.setOption(this.setChartsOption(this.vaccineData.sum));
+
+        let myChart2 = this.$echarts.init(
+          document.querySelector(".nation_charts2"),
+          null,
+          { renderer: "svg" }
+        );
+        myChart2.setOption(this.setChartsOption(this.vaccineData.rate));
+      }, 700);
     });
   },
   methods: {
@@ -147,21 +162,7 @@ export default {
     swipeButton,
   },
   mounted() {
-    setTimeout(() => {
-      let myChart = this.$echarts.init(
-        document.querySelector(".nation_charts"),
-        null,
-        { renderer: "svg" }
-      );
-      myChart.setOption(this.setChartsOption(this.vaccineData.sum));
-
-      let myChart2 = this.$echarts.init(
-        document.querySelector(".nation_charts2"),
-        null,
-        { renderer: "svg" }
-      );
-      myChart2.setOption(this.setChartsOption(this.vaccineData.rate, true));
-    }, 300);
+    
   },
 };
 </script>

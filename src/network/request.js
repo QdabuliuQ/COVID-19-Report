@@ -22,7 +22,7 @@ function exitLoading() {
 function requestMethod(config, baseURL) {  // 封装请求
   const instance = axios.create({
     baseURL,  // 请求根路径
-    timeout: 5000,  // 请求时间
+    timeout: 10000,  // 请求时间
   })
   instance.interceptors.request.use(config => {
     startLoading()

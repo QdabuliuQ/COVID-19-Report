@@ -15,6 +15,7 @@ VueRouter.prototype.push = function push(location) {
 const DomesticReport = () => import( "views/domesticReport/DomesticReport" )  // 国内疫情
 const ProvinceDetail = () => import( "views/provinceDetail/ProvinceDetail" )  // 省份疫情
 const VaccineInformation = () => import( "views/vaccineInformation/VaccineInformation" )  // 疫苗接种
+const WorldReport = () => import("views/worldReport/WorldReport")  // 世界疫情报告
 
 const routes = [
   { path: '/', redirect: '/DomesticReport' },
@@ -23,7 +24,8 @@ const routes = [
     component: DomesticReport, 
   },
   { path: '/ProvinceDetail/:cityName&:tableIndex', name: 'ProvinceDetail', component: ProvinceDetail },
-  { path: '/VaccineInformation', component: VaccineInformation }
+  { path: '/VaccineInformation', component: VaccineInformation },
+  { path: '/WorldReport', component: WorldReport },
 ]
 
 const router = new VueRouter({

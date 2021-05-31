@@ -39,6 +39,7 @@ Vue.config.productionTip = false
 Vue.prototype.fGetChartFontSize = () => {
   // 获取像素比
   const dpr = window.devicePixelRatio;
+  
   let fontSize = 14;
   if (dpr == 2) {
     fontSize = 19;
@@ -108,6 +109,8 @@ var getDigit = function (integer) {
   }
   return digit;
 }
+
+Vue.prototype.$EventBus = new Vue()  // 创建事件总线
 
 new Vue({
   router,

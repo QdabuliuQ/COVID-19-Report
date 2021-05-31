@@ -74,6 +74,13 @@ export default {
           )
         );
       }
+      setTimeout(() => {
+        let myChart1 = this.$echarts.init(document.querySelector(".countries_trend"), null, {renderer: 'svg'})
+        myChart1.setOption(this.setLineChartsOption(this.getVaccineCountries.totalTrend.country, this.getVaccineCountries.totalTrend.trend, '各国疫苗累计接种','剂'))
+
+        let myChart2 = this.$echarts.init(document.querySelector(".countries_trend2"), null, {renderer: 'svg'})
+        myChart2.setOption(this.setLineChartsOption(this.getVaccineCountries.perHundredTrend.country, this.getVaccineCountries.perHundredTrend.trend, '各国疫苗每百人接种','剂'))
+      }, 800);
     });
   },
   components: {
@@ -131,6 +138,9 @@ export default {
             textStyle: {
               fontSize: this.fGetChartFontSize(),
             },
+            formatter: function(val) {
+              return that.setUnitChar(val)
+            }
           },
         },
         yAxis: {
@@ -161,13 +171,7 @@ export default {
     },
   },
   mounted () {
-    setTimeout(() => {
-      let myChart1 = this.$echarts.init(document.querySelector(".countries_trend"), null, {renderer: 'svg'})
-      myChart1.setOption(this.setLineChartsOption(this.getVaccineCountries.totalTrend.country, this.getVaccineCountries.totalTrend.trend, '各国疫苗累计接种','剂'))
-
-      let myChart2 = this.$echarts.init(document.querySelector(".countries_trend2"), null, {renderer: 'svg'})
-      myChart2.setOption(this.setLineChartsOption(this.getVaccineCountries.perHundredTrend.country, this.getVaccineCountries.perHundredTrend.trend, '各国疫苗每百人接种','剂'))
-    }, 500);
+    
   }
 }
 

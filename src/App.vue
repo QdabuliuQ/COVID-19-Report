@@ -71,6 +71,9 @@ export default {
         case 0:
           this.$router.push('/DomesticReport')
           break;
+        case 1:
+          this.$router.push('/WorldReport')
+          break;
         case 2:
           this.$router.push('/VaccineInformation')
           break;

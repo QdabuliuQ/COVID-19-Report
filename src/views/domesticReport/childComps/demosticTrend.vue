@@ -104,8 +104,8 @@ export default {
         color,  // 颜色
         grid: {  // 布局
           top: "15%",
-          left: "1%",
-          right: "1%",
+          left: "3%",
+          right: "3%",
           bottom: "2%",
           containLabel: true,
         },
@@ -264,33 +264,7 @@ export default {
             },
           },
         ]);
-        // let options2 = this.chartsOption("全国疫情累计趋势", this.dateList, ["#be1313", "#3ed81f", "#888888"], [
-        //   {
-        //     name: "累计确诊",
-        //     type: "line",
-        //     data: this.confirmList,
-        //   },
-        //   {
-        //     name: "累计治愈",
-        //     type: "line",
-        //     data: this.healList,
-        //   },
-        //   {
-        //     name: "累计死亡",
-        //     type: "line",
-        //     data: this.deadList,
-        //   },
-        // ])
-        // let options3 = this.chartsOption("全国现有确诊趋势", this.dateList,["#be1313"], [
-        //   {
-        //     name: "现有确诊",
-        //     type: "line",
-        //     data: this.nowConfirmList,
-        //   },
-        // ])
         myChartDom1.setOption(options);
-        // myChartDom2.setOption(options2);
-        // myChartDom3.setOption(options3)
       }
     }, 600);
   },

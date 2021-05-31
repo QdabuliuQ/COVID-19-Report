@@ -29,15 +29,17 @@ export default {
         });
       }
 
-      setTimeout(() => {
-        let mapDom = this.$echarts.init(
-          document.getElementById("VaccineMap"),
-          null,
-          { renderer: "svg" }
-        );
-        this.$echarts.registerMap("world", this.mapData);
-        mapDom.setOption(this.getMapOptions(this.countryData, world));
-      }, 300);
+      this.$nextTick(() => {
+        setTimeout(() => {
+          let mapDom = this.$echarts.init(
+            document.getElementById("VaccineMap"),
+            null,
+            { renderer: "svg" }
+          );
+          this.$echarts.registerMap("world", this.mapData);
+          mapDom.setOption(this.getMapOptions(this.countryData, world));
+        }, 500);
+      });
     });
   },
   methods: {
@@ -88,7 +90,7 @@ export default {
             "#ecf5ff",
           ],
           botton: 20,
-          left: 20
+          left: 20,
         },
         series: [
           {

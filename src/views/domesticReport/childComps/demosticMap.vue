@@ -133,12 +133,13 @@ export default {
           show: true,
           type: "piecewise",
           splitNumber: 4,
-          itemWidth: "50px",
-          itemHeight: "20px",
+          itemWidth: 30,
+          itemHeight: 15,
           itemGap: 5,
           textStyle: {
             color: "#999",
-            fontSize: this.fGetChartFontSize(),
+            fontSize: 12,
+            // fontSize: this.fGetChartFontSize(),
           },
           pieces: nowPieces,
         },
@@ -150,7 +151,7 @@ export default {
             fontSize: '20',    // 文字字体大小
           },
           padding:[12],
-          backgroundColor:"#000000b2", 
+          backgroundColor:"rgba(0, 0, 0, 0.623)", 
           borderColor: 'transparent',  
           axisPointer: {
             type: "cross",
@@ -188,7 +189,8 @@ export default {
             label: {
               normal: {
                 textStyle: {
-                  fontSize: this.fGetChartFontSize(),
+                  fontSize: 12,
+                  // fontSize: this.fGetChartFontSize(),
                   color: "#333",
                 },
               },
@@ -260,7 +262,7 @@ export default {
   border: 1px solid rgb(235, 235, 235);
   border-radius: 5px;
   transition: all 0.2s linear;
-  /* background-color: #00000081; */
+  /* background-color: rgba(0, 0, 0, 0.623); */
 }
 .activeModule {
   color: var(--color);
