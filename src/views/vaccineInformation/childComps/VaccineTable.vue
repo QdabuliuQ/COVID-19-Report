@@ -141,4 +141,5 @@ export default {
 .marBottom{
   margin-bottom: 1px;
 }
+
 </style>

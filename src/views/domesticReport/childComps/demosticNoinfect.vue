@@ -43,7 +43,7 @@ export default {
           }
           for (const item of this.infectDetail.increaseList) {
             // 获取最大值
-            if (item > num) {
+            if (item > num2) {
               num2 = item;
             }
           }
@@ -106,9 +106,9 @@ export default {
           // 标题
           text: "无症状感染者趋势",
           textStyle: {
-            fontSize: this.fGetChartFontSize() + 17,
+            fontSize: this.fGetChartFontSize() + 10,
           },
-          top: "0%",
+          top: "1%",
           left: "1%",
         },
         color: ["#fd4a4a", "#fda94a"],

@@ -11,11 +11,14 @@ VueRouter.prototype.push = function push(location) {
   return originalReplace.call(this, location).catch(err => err)
 }
 
-
+// 路由懒加载
 const DomesticReport = () => import( "views/domesticReport/DomesticReport" )  // 国内疫情
 const ProvinceDetail = () => import( "views/provinceDetail/ProvinceDetail" )  // 省份疫情
 const VaccineInformation = () => import( "views/vaccineInformation/VaccineInformation" )  // 疫苗接种
 const WorldReport = () => import("views/worldReport/WorldReport")  // 世界疫情报告
+const ToolsBox = () => import("views/toolsBox/ToolsBox")  // 世界疫情报告
+const NationalNews = () => import("views/toolsBox/childComps/nationalNews")  // 国内疫情速报
+const RumourRanking = () => import("views/toolsBox/childComps/rumourRanking")  // 疫情问题大全
 
 const routes = [
   { path: '/', redirect: '/DomesticReport' },
@@ -26,6 +29,12 @@ const routes = [
   { path: '/ProvinceDetail/:cityName&:tableIndex', name: 'ProvinceDetail', component: ProvinceDetail },
   { path: '/VaccineInformation', component: VaccineInformation },
   { path: '/WorldReport', component: WorldReport },
+  { 
+    path: '/ToolsBox', 
+    component: ToolsBox,
+  },
+  { path: '/NationalNews', component: NationalNews },
+  { path: '/RumourRanking', component: RumourRanking },
 ]
 
 const router = new VueRouter({

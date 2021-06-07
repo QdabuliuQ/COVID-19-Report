@@ -5,3 +5,6 @@
 .van-nav-bar__title{
   letter-spacing: 1px;
 }
+.van-nav-bar{
+  box-shadow: 0 1px 10px rgba(0, 0, 0, .1);
+}

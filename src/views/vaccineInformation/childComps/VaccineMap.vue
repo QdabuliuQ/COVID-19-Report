@@ -10,7 +10,6 @@ export default {
   name: "VaccineMap",
   data() {
     return {
-      mapJson: null,
       countryData: [],
       mapData: null,
     };

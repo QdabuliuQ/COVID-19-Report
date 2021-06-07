@@ -13,12 +13,15 @@ import {
 import {
   Icon
 } from 'vant'; // 图标组件
-
+import {
+  Sticky
+} from 'vant'; // 粘性布局
 
 Vue.use(Swipe);
 Vue.use(SwipeItem);
 Vue.use(NavBar);
 Vue.use(Icon);
+Vue.use(Sticky);
 
 import ContentSplit from "components/private/contentSplit/index.js" // 引入分割线组件
 Vue.use(ContentSplit)
@@ -37,31 +40,31 @@ import 'static/js/china.js' // 导入china.js配合地图显示
 Vue.config.productionTip = false
 
 Vue.prototype.fGetChartFontSize = () => {
-  // 获取像素比
-  const dpr = window.devicePixelRatio;
-  
-  let fontSize = 14;
-  if (dpr == 2) {
-    fontSize = 19;
-  } else if (dpr == 3) {
-    fontSize = 30;
-  } else if (dpr > 3) {
-    fontSize = 30;
-  }
-  return fontSize;
-},
+    // 获取像素比
+    const dpr = window.devicePixelRatio;
 
-Vue.filter('addCount', function (val) { // 设置数据显示方式
-  if (val > 0) {
-    return '较昨日+' + val
-  } else if (val == 0) {
-    return '较昨日无新增'
-  } else {
-    return '较昨日' + val
-  }
-})
+    let fontSize = 14;
+    if (dpr == 2) {
+      fontSize = 19;
+    } else if (dpr == 3) {
+      fontSize = 30;
+    } else if (dpr > 3) {
+      fontSize = 30;
+    }
+    return fontSize;
+  },
 
-Vue.prototype.setUnitChar = (number, decimalDigit) => {
+  Vue.filter('addCount', function (val) { // 设置数据显示方式
+    if (val > 0) {
+      return '较昨日+' + val
+    } else if (val == 0) {
+      return '较昨日无新增'
+    } else {
+      return '较昨日' + val
+    }
+  })
+
+Vue.prototype.setUnitChar = (number, decimalDigit) => {  // 设置单位
   decimalDigit = decimalDigit == null ? 2 : decimalDigit;
   var integer = Math.floor(number);
   var digit = getDigit(integer);
@@ -89,7 +92,6 @@ Vue.filter('setUnit', function (number, decimalDigit) { // 设置数据格式
 })
 
 var addWan = function (integer, number, mutiple, decimalDigit) {
-  var me = this;
   var digit = getDigit(integer);
   if (digit > 3) {
     var remainder = digit % 8;
@@ -110,7 +112,7 @@ var getDigit = function (integer) {
   return digit;
 }
 
-Vue.prototype.$EventBus = new Vue()  // 创建事件总线
+Vue.prototype.$EventBus = new Vue() // 创建事件总线
 
 new Vue({
   router,

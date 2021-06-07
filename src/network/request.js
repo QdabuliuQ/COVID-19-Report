@@ -69,3 +69,7 @@ export function provinceMapJson(config){  // 地图json数据
 export function provinceNews(config) {
   return requestMethod(config, '/provinceNewsRequest')
 }
+
+export function RumourList(config) {
+  return requestMethod(config, 'https://file1.dxycdn.com')
+}

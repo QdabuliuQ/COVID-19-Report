@@ -215,11 +215,8 @@ export default {
           break;
       }
     },
-  },
-  mounted() {
-    
-    this.$EventBus.$on("successfullySetData", () => {
-      console.log(11);
+
+    setChartsOption2() {
       let data = this.$store.state.worldData.FAutoGlobalDailyList;
       for (const item of data) {
         // 处理数据
@@ -234,7 +231,7 @@ export default {
           let myChart = this.$echarts.init(
             document.querySelector(".overseaTrend_item_charts_dom1")
           );
-          
+
           myChart.setOption(
             this.setChartsOption(
               "海外疫情累计趋势",
@@ -261,14 +258,30 @@ export default {
           );
         }, 600);
       });
-    });
+    },
+  },
+  watch: {
+    "$store.state.worldData": {
+      deep: true,
+      handler: function () {
+        this.setChartsOption2()
+      },
+    },
   },
   components: {
     swipeButton,
   },
+  mounted () {
+    if (JSON.stringify(this.$store.state.worldData) != '{}') {
+      this.setChartsOption2()
+    }
+  }
 };
 </script>
 <style scoped>
+#overseaTrend {
+  margin-bottom: var(--marginB);
+}
 .my-swipe {
   width: 100%;
   height: 250px;

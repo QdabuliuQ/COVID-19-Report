@@ -13,29 +13,37 @@
     </div>
     <div class="report_center_container">
       <report-table></report-table>
+      <content-split :text="'全球疫情信息分布情况'"></content-split>
+      <world-map></world-map>
       <content-split :text="'海外多国累计趋势'"></content-split>
       <countries-trend></countries-trend>
       <content-split :text="'印度疫情趋势图'"></content-split>
       <serious-country></serious-country>
       <content-split :text="'海外疫情趋势图'"></content-split>
       <oversea-trend></oversea-trend>
+      <content-split :text="'海外各国详情信息'"></content-split>
+      <countries-table></countries-table>
     </div>
   </div>
 </template>
 
 <script>
 import reportTable from './childComps/reportTable'  // 基本数据表格
+import worldMap from './childComps/worldMap'  // 世界地图组件
 import countriesTrend from './childComps/countriesTrend'  // 主要国家疫情趋势
 import seriousCountry from './childComps/seriousCountry'  // 严重国家的疫情趋势
 import overseaTrend from './childComps/overseaTrend'  // 海外趋势
+import countriesTable from './childComps/countriesTable'  // 各国详情信息
 
 export default {
   name: 'WorldReport',
   components: {
+    worldMap,
     reportTable,
     countriesTrend,
     seriousCountry,
-    overseaTrend
+    overseaTrend,
+    countriesTable
   }
 }
 

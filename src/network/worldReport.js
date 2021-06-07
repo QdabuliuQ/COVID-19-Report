@@ -23,3 +23,10 @@ export function getOverseaTrend() {  // 海外疫情总趋势
     url: 'automation/modules/list?modules=FAutoGlobalStatis,FAutoGlobalDailyList,FAutoCountryConfirmAdd'
   })
 }
+
+export function getAllCountryData() {  // 获取所有国家疫情信息
+  return request({
+    url: 'automation/foreign/country/ranklist',
+    method: 'post'
+  })
+}

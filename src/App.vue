@@ -77,6 +77,9 @@ export default {
         case 2:
           this.$router.push('/VaccineInformation')
           break;
+        case 3:
+          this.$router.push('/ToolsBox')
+          break;
         default:
           break;
       }
