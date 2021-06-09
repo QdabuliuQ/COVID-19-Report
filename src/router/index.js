@@ -19,6 +19,7 @@ const WorldReport = () => import("views/worldReport/WorldReport")  // 世界疫�
 const ToolsBox = () => import("views/toolsBox/ToolsBox")  // 世界疫情报告
 const NationalNews = () => import("views/toolsBox/childComps/nationalNews")  // 国内疫情速报
 const RumourRanking = () => import("views/toolsBox/childComps/rumourRanking")  // 疫情问题大全
+const GoOutPolicy = () => import("views/toolsBox/childComps/goOutPolicy")  // 疫情问题大全
 
 const routes = [
   { path: '/', redirect: '/DomesticReport' },
@@ -35,6 +36,7 @@ const routes = [
   },
   { path: '/NationalNews', component: NationalNews },
   { path: '/RumourRanking', component: RumourRanking },
+  { path: '/GoOutPolicy', component: GoOutPolicy },
 ]
 
 const router = new VueRouter({

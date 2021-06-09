@@ -70,7 +70,7 @@ export default {
           null,
           { renderer: "svg" }
         );
-        myChart2.setOption(this.setChartsOption(this.vaccineData.rate));
+        myChart2.setOption(this.setChartsOption(this.vaccineData.rate, true));
       }, 700);
     });
   },
@@ -84,7 +84,7 @@ export default {
           axisLabel: {
             rotate: 40,
             textStyle: {
-              fontSize: this.fGetChartFontSize(),
+              fontSize: 11,
             },
           },
         },
@@ -92,7 +92,7 @@ export default {
           type: "value",
           axisLabel: {
             textStyle: {
-              fontSize: this.fGetChartFontSize(),
+              fontSize: 11,
             },
             formatter: function (val) {
               if (percentage) {
@@ -107,10 +107,10 @@ export default {
           triggerOn: "click",
           textStyle: {
             color: "#FFF", // 文字的颜色
-            fontSize: "20", // 文字字体大小
+            fontSize: "11", // 文字字体大小
           },
-          padding: [12],
-          backgroundColor: "#000000b2",
+          padding: [7],
+          backgroundColor: "rgba(0, 0, 0, 0.623)",
           borderColor: "transparent",
           axisPointer: {
             type: "cross",
@@ -135,9 +135,9 @@ export default {
         grid: {
           // 布局
           top: "8%",
-          left: "4%",
-          right: "4%",
-          bottom: "3%",
+          left: "3%",
+          right: "3%",
+          bottom: "2%",
           containLabel: true,
         },
         series: [
@@ -173,7 +173,7 @@ export default {
 }
 .nation_charts {
   width: 100%;
-  height: 210px;
+  height: 230px;
 }
 .nation_charts2 {
   width: 100%;

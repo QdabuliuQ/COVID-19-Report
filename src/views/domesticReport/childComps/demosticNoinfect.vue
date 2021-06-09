@@ -60,15 +60,13 @@ export default {
                 interval: this.getMaxNum(num) / 5,
                 axisLabel: {
                   textStyle: {
-                    fontSize: this.fGetChartFontSize(),
+                    fontSize: 11,
                   },
                 },
                 nameTextStyle: {
                   // 顶部名称字体大小
-                  fontSize: this.fGetChartFontSize() + 7,
+                  fontSize: 11,
                   align: "left", // 位置
-
-                  lineHeight: this.fGetChartFontSize() + 15,
                 },
               },
               {
@@ -80,15 +78,13 @@ export default {
                 axisLabel: {
                   // 字体大小
                   textStyle: {
-                    fontSize: this.fGetChartFontSize(),
+                    fontSize: 11,
                   },
                 },
                 nameTextStyle: {
                   // 顶部名称字体大小
-                  fontSize: this.fGetChartFontSize() + 7,
+                  fontSize: 11,
                   align: "right", // 位置
-
-                  lineHeight: this.fGetChartFontSize() + 15,
                 },
               },
             ],
@@ -106,31 +102,32 @@ export default {
           // 标题
           text: "无症状感染者趋势",
           textStyle: {
-            fontSize: this.fGetChartFontSize() + 10,
+            fontSize: 14,
           },
           top: "1%",
           left: "1%",
         },
         color: ["#fd4a4a", "#fda94a"],
         legend: {
-          itemWidth: 30,
-          itemHeight: 20,
+          itemWidth: 24,
+          itemHeight: 12,
           textStyle: {
-            fontSize: this.fGetChartFontSize() + 5,
+            fontSize: 12,
           },
-          top: "1.3%",
-          right: "1%",
           data: detailText,
+          x:'left', 
+          top: "8%",
+          right: "1%",
         },
         tooltip: {
           trigger: "axis",
           triggerOn: "click",
           textStyle: {
             color: "#FFF", // 文字的颜色
-            fontSize: "20", // 文字字体大小
+            fontSize: "12", // 文字字体大小
           },
-          padding: [12],
-          backgroundColor: "#000000b2",
+          padding: [7],
+          backgroundColor: "rgba(0, 0, 0, 0.623)",
           borderColor: "transparent",
           axisPointer: {
             type: "cross",
@@ -148,7 +145,7 @@ export default {
         },
         grid: {
           // 布局
-          top: "18%",
+          top: "26%",
           left: "0%",
           right: "0%",
           bottom: "0%",
@@ -163,7 +160,7 @@ export default {
               interval: 0,
               rotate: 40,
               textStyle: {
-                fontSize: this.fGetChartFontSize(),
+                fontSize: 10,
               },
             },
           },
@@ -174,7 +171,7 @@ export default {
             name: detailText[0],
             type: "bar",
             data: confirmList,
-            barWidth: 15,
+            barWidth: 12,
           },
           {
             name: detailText[1],
@@ -207,7 +204,7 @@ export default {
 <style scoped>
 #demosticNoinfect {
   width: 100%;
-  height: 240px;
+  height: 280px;
   margin-bottom: var(--marginB);
 }
 </style>

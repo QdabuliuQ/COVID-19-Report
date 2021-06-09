@@ -3,7 +3,7 @@
   <div id="worldReport">
     <div class="report_top_container">
       <div class="top_container_imgBox">
-        <img src="https://img.coolcr.cn/2021/05/29/f2e71a252333b.jpg" alt="">
+        <img src="https://www.picbed.cn/images/2021/06/08/1622190733.jpg" alt="">
       </div>
       <div class="top_container_textBox">
         <div class="textBox_title">新型冠状病毒</div>
@@ -86,9 +86,9 @@ export default {
   letter-spacing: 1px;
 }
 .report_center_container{
-  margin-top: -25px;
   padding: 0 15px;
   position: relative;
   z-index: 1;
+  background-color: #fff;
 }
 </style>

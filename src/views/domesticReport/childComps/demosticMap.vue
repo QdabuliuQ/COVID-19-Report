@@ -133,13 +133,12 @@ export default {
           show: true,
           type: "piecewise",
           splitNumber: 4,
-          itemWidth: 30,
-          itemHeight: 15,
+          itemWidth: 24,
+          itemHeight: 12,
           itemGap: 5,
           textStyle: {
             color: "#999",
             fontSize: 12,
-            // fontSize: this.fGetChartFontSize(),
           },
           pieces: nowPieces,
         },
@@ -148,9 +147,9 @@ export default {
           triggerOn:"click",
           textStyle: {
             color: '#FFF',     // 文字的颜色
-            fontSize: '20',    // 文字字体大小
+            fontSize: '12',    // 文字字体大小
           },
-          padding:[12],
+          padding:[7],
           backgroundColor:"rgba(0, 0, 0, 0.623)", 
           borderColor: 'transparent',  
           axisPointer: {
@@ -189,8 +188,7 @@ export default {
             label: {
               normal: {
                 textStyle: {
-                  fontSize: 12,
-                  // fontSize: this.fGetChartFontSize(),
+                  fontSize: 10,
                   color: "#333",
                 },
               },
@@ -262,12 +260,13 @@ export default {
   border: 1px solid rgb(235, 235, 235);
   border-radius: 5px;
   transition: all 0.2s linear;
+  font-size: 12px;
   /* background-color: rgba(0, 0, 0, 0.623); */
 }
 .activeModule {
   color: var(--color);
-  background-color: #1d99d31f;
-  border: 1px solid #1d99d31f;
+  background-color: rgba(29, 153, 211, 0.122);
+  border: 1px solid rgba(29, 153, 211, 0.122);
 }
 #demostic_map_container {
   width: 100%;

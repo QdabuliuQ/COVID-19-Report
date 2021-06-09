@@ -59,12 +59,12 @@ export default {
           axisLabel: {
             rotate: 40,
             textStyle: {
-              fontSize: this.fGetChartFontSize(),
+              fontSize: 11,
             },
           },
         },
         grid: {  // 布局
-          top: "17%",
+          top: "18%",
           left: "1%",
           right: "1%",
           bottom: "2%",
@@ -75,10 +75,10 @@ export default {
           triggerOn:"click",
           textStyle: {
             color: '#FFF',     // 文字的颜色
-            fontSize: '20',    // 文字字体大小
+            fontSize: '11',    // 文字字体大小
           },
-          padding:[12],
-          backgroundColor:"#000000b2", 
+          padding:[7],
+          backgroundColor:"rgba(0, 0, 0, 0.623)", 
           borderColor: 'transparent',  
           axisPointer: {
             type: "cross",
@@ -97,18 +97,18 @@ export default {
         legend: {
           data: legendData,
           icon: 'rect',
-          itemWidth: 30,
-          itemHeight: 20,
+          itemWidth: 20,
+          itemHeight: 10,
           textStyle: {
-            fontSize: this.fGetChartFontSize() + 7,
+            fontSize: 11,
           },
-          itemGap: 20 
+          itemGap: 7 
         },
         yAxis: {
           type: "value",
           axisLabel: {
             textStyle: {
-              fontSize: this.fGetChartFontSize() + 5,
+              fontSize: 11,
             },
             formatter: function (val) {
               return that.setUnitChar(val);

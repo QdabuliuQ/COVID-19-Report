@@ -96,9 +96,9 @@ export default {
         title: {  // 标题
           text: titleText,
           textStyle: {
-            fontSize: this.fGetChartFontSize() + 10,
+            fontSize: 14,
           },
-          top: '4%',
+          top: '3%',
           left: "1%",
         },
         color,  // 颜色
@@ -114,10 +114,10 @@ export default {
           triggerOn:"click",
           textStyle: {
             color: '#FFF',     // 文字的颜色
-            fontSize: '20',    // 文字字体大小
+            fontSize: '12',    // 文字字体大小
           },
-          padding:[12],
-          backgroundColor:"#000000b2", 
+          padding:[7],
+          backgroundColor:"rgba(0, 0, 0, 0.66)", 
           borderColor: 'transparent',  
           axisPointer: {
             type: "cross",
@@ -134,12 +134,12 @@ export default {
           },
         },
         legend: {  // 图例
-          itemWidth: 30,
-          itemHeight: 20,
+          itemWidth: 24,
+          itemHeight: 12,
           textStyle: {
-            fontSize: this.fGetChartFontSize() + 10,
+            fontSize: 12,
           },
-          top: '4%',
+          top: '3%',
           right: '1%',
         },
         xAxis: [  // x轴
@@ -149,7 +149,7 @@ export default {
             axisLabel: {
               rotate: 40,
               textStyle: {
-                fontSize: this.fGetChartFontSize(),
+                fontSize: '10',
               },
             },
             axisTick: {
@@ -162,7 +162,7 @@ export default {
           type: "value",
           axisLabel: {
             textStyle: {
-              fontSize: this.fGetChartFontSize(),
+              fontSize: '10',
             },
           },
           nameGap: 20
@@ -296,9 +296,10 @@ export default {
   margin: 0 5px;
   transition: all 0.15s linear;
   box-sizing: border-box;
+  font-size: 12px;
 }
 .activeCharts{
-  background-color: #21aff136;
+  background-color: rgba(33, 175, 241, 0.212);
   color: #21aff1;
   border: 1px solid #21aff1;
   /* background-color: #000000b2; */
@@ -317,5 +318,6 @@ export default {
 .trand_item_dom {
   width: 100%;
   height: 100%;
+  /* background-color: rgba(0, 0, 0, 0.466); */
 }
 </style>

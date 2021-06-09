@@ -98,6 +98,7 @@ export default {
 }
 .table_thead_td{
   padding: 7px 0 !important;
+  font-size: 12px;
 }
 .thead_td_color1{
   background-color: rgba(236, 236, 236, 0.486);
@@ -120,6 +121,7 @@ export default {
 }
 .td_item_name{
   font-weight: 550;
+  font-size: 12px;
 }
 .country_tr:nth-of-type(even){
   background-color: #9696960c;

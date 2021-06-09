@@ -8,7 +8,7 @@
           数据来源：国家及各地卫健委每日信息发布
         </div>
       </div>
-      <img src="https://img.coolcr.cn/2021/05/05/6da62c2601d05.png" alt="" />
+      <img src="https://www.picbed.cn/images/2021/06/08/bg.png" alt="" />
     </div>
     <div v-if="demosticList" class="report_container">
       <!-- 疫情信息汇总表格 -->
@@ -149,6 +149,7 @@ export default {
 }
 .pushTime {
   margin-top: 8px;
+  font-size: 11px;
   text-align: right;
   color: rgb(131, 131, 131);
   margin-bottom: var(--marginB);

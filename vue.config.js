@@ -1,5 +1,17 @@
 module.exports = {
 	publicPath: '/',
+	chainWebpack: config => {
+		config.module
+			.rule('css')
+			.test(/\.css$/)
+			.oneOf('vue')
+			.resourceQuery(/\?vue/)
+			.use('px2rem')
+			.loader('px2rem-loader')
+			.options({
+				remUnit: 37.5
+			})
+	},
 	// 配置路径别名
 	configureWebpack: {
 		resolve: {
@@ -59,16 +71,16 @@ module.exports = {
 		}
 	},
 	// postcss-px2rem配置
-	css: {
-		loaderOptions: {
-			css: {},
-			postcss: {
-				plugins: [
-					require('postcss-px2rem')({
-						remUnit: 37.5
-					})
-				]
-			}
-		}
-	},
+	// css: {
+	// 	loaderOptions: {
+	// 		css: {},
+	// 		postcss: {
+	// 			plugins: [
+	// 				require('postcss-px2rem')({
+	// 					remUnit: 37.5
+	// 				})
+	// 			]
+	// 		}
+	// 	}
+	// },
 }

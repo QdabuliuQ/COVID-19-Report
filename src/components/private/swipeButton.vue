@@ -50,9 +50,10 @@ export default {
   transition: all 0.15s linear;
   padding: 10px 0;
   box-sizing: border-box;
+  font-size: 12px;
 }
 .activeCharts{
-  background-color: #21aff136;
+  background-color: rgba(33, 175, 241, 0.212);
   color: #21aff1;
   border: 1px solid #21aff1;
   /* background-color: #000000b2; */

@@ -62,7 +62,7 @@ export default {
         title: {
           text: titleText,
           textStyle: {
-            fontSize: this.fGetChartFontSize() + 10,
+            fontSize: 14,
           },
           top: "1.5%",
           left: "3%",
@@ -70,10 +70,10 @@ export default {
         color, // 颜色
         grid: {
           // 布局
-          top: "13.5%",
+          top: "22%",
           left: "3%",
           right: "3%",
-          bottom: "2.5%",
+          bottom: "2%",
           containLabel: true,
         },
         tooltip: {
@@ -81,10 +81,10 @@ export default {
           triggerOn: "click",
           textStyle: {
             color: "#FFF", // 文字的颜色
-            fontSize: "20", // 文字字体大小
+            fontSize: "12", // 文字字体大小
           },
-          padding: [12],
-          backgroundColor: "#000000b2",
+          padding: [7],
+          backgroundColor: "rgba(0, 0, 0, 0.623)",
           borderColor: "transparent",
           axisPointer: {
             type: "cross",
@@ -103,13 +103,14 @@ export default {
         legend: {
           // 图例
           icon: "rect",
-          itemWidth: 30,
-          itemHeight: 20,
+          itemWidth: 20,
+          itemHeight: 10,
           textStyle: {
-            fontSize: this.fGetChartFontSize() + 7,
+            fontSize: 11,
           },
-          top: "2%",
-          right: "2%",
+          top: "10%",
+          left: "2%",
+          x:'left',
         },
         xAxis: [
           // x轴
@@ -119,7 +120,7 @@ export default {
             axisLabel: {
               rotate: 40,
               textStyle: {
-                fontSize: this.fGetChartFontSize(),
+                fontSize: 11,
               },
             },
             axisTick: {
@@ -133,7 +134,7 @@ export default {
           type: "value",
           axisLabel: {
             textStyle: {
-              fontSize: this.fGetChartFontSize() + 5,
+              fontSize: 11,
             },
             formatter: function (val) {
               return that.setUnitChar(val);
@@ -284,7 +285,7 @@ export default {
 }
 .my-swipe {
   width: 100%;
-  height: 250px;
+  height: 300px;
 }
 .overseaTrand_item_dom {
   width: 100%;

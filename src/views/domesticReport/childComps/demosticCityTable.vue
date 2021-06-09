@@ -126,6 +126,7 @@ export default {
 }
 .table_head_td{
   padding: 7px 0;
+  font-size: 12px;
 }
 .head_td1{
   color: #000;
@@ -175,6 +176,7 @@ export default {
   color: rgb(143, 143, 143);
 }
 .province_container_td{
+  font-size: 12px;
   padding: 5px 0;
   box-sizing: border-box;
   border-bottom: 1px solid rgb(245, 245, 245);

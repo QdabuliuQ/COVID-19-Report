@@ -95,6 +95,7 @@ export default {
   height: 100%;
   background-color: #1d99d369;
 }
+
 .item_container {
   flex: 9;
   padding: 12px;

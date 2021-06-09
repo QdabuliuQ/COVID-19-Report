@@ -50,12 +50,22 @@ export default {
       this.cityDetail[0].name != "地区待确认"
     ) {
       this.setAllDetail = true;  // 修改判断条件
-      if (this.$route.params.cityName != "重庆") {
+      if (this.$route.params.cityName != "重庆" && this.$route.params.cityName != "内蒙古") {
         this.cityPY = codefans_net_CC2PY(
           this.$route.params.cityName
         ).toLowerCase(); // 获取城市拼音
       } else {
-        this.cityPY = "chongqing";
+        switch (this.$route.params.cityName) {
+          case '重庆':
+            this.cityPY = "chongqing";
+            break;
+          case '内蒙古':
+            this.cityPY = "neimenggu";
+            break;
+          default:
+            break;
+        }
+        
       }
 
       this.setProvinceDetail(); // 处理数据

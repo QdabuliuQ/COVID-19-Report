@@ -102,7 +102,7 @@ export default {
         title: {
           text,
           textStyle: {
-            fontSize: this.fGetChartFontSize() + 10,
+            fontSize: 14,
           },
           top: '-1%',
           left: "1%",
@@ -114,10 +114,10 @@ export default {
           },
           textStyle: {
             color: "#FFF", // 文字的颜色
-            fontSize: '20',    // 文字字体大小
+            fontSize: '11',    // 文字字体大小
           },
-          padding: [12],
-          backgroundColor: "#000000b2",
+          padding: [7],
+          backgroundColor: "rgba(0, 0, 0, 0.623)",
           borderColor: "transparent",
           formatter: function (params) {
             let str = `国家：${params[0].name}</br>${params[0].marker} ${that.setUnitChar(params[0].value)}${unit}`
@@ -136,7 +136,7 @@ export default {
           boundaryGap: [0, 0.01],
           axisLabel: {
             textStyle: {
-              fontSize: this.fGetChartFontSize(),
+              fontSize:11,
             },
             formatter: function(val) {
               return that.setUnitChar(val)
@@ -148,7 +148,7 @@ export default {
           data: country,
           axisLabel: {
             textStyle: {
-              fontSize: this.fGetChartFontSize() + 4,
+              fontSize: 11,
             },
           },
         },

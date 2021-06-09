@@ -3,6 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+import 'lib-flexible/flexible'  // 弹性布局
+
 import {
   Swipe,
   SwipeItem
@@ -16,12 +18,16 @@ import {
 import {
   Sticky
 } from 'vant'; // 粘性布局
+import { Popup } from 'vant';  // 弹出层
+import { Cascader } from 'vant';
 
 Vue.use(Swipe);
 Vue.use(SwipeItem);
 Vue.use(NavBar);
 Vue.use(Icon);
 Vue.use(Sticky);
+Vue.use(Popup);
+Vue.use(Cascader);
 
 import ContentSplit from "components/private/contentSplit/index.js" // 引入分割线组件
 Vue.use(ContentSplit)
@@ -31,7 +37,7 @@ import 'vant/lib/index.css' // 引入vantCss文件
 import 'assets/css/base.css' // 导入全局样式
 import 'assets/icon/common.css' // 导入全局字体图标
 
-import 'lib-flexible' // 导入lib-flexible
+// import 'lib-flexible' // 导入lib-flexible
 
 import * as echarts from 'echarts' // 导入echarts
 Vue.prototype.$echarts = echarts

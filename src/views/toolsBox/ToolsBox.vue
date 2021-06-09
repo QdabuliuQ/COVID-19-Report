@@ -42,6 +42,9 @@ export default {
         case 1:
           this.setRouter('/RumourRanking')
           break;
+        case 2:
+          this.setRouter('/GoOutPolicy')
+          break;
         default:
           break;
       }
@@ -107,9 +110,6 @@ export default {
 .even_item{
   clip-path: polygon(0% 0%, 34% 0, 31% 50%, 34% 100%, 0% 100%);
 }
-/* .tools_item:active .left_item{
-  clip-path: polygon(0% 0%, 100% 0, 100% 50%, 100% 100%, 0% 100%);
-} */
 .clickTextClass {
   margin-left: 0;
   font-size: 24px;
@@ -122,13 +122,4 @@ export default {
 .clickClipClass {
   clip-path: polygon(0% 0%, 100% 0, 100% 50%, 100% 100%, 0% 100%);
 }
-/* .tools_item:active .iconfont{
-  transform: scale(3);
-  opacity: 0;
-} */
-/* .tools_item:active .tools_item_name{
-  margin-left: 0;
-  font-size: 25px;
-  font-weight: 550;
-} */
 </style>

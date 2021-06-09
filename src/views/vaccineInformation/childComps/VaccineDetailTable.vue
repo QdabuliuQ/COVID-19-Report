@@ -43,7 +43,6 @@ export default {
         console.log();
         for (let i = 0; i < theadTrDomItem.length; i++) {
           theadDom[i].style.width = (window.getComputedStyle(theadTrDomItem[i])).width
-          theadDom[i].style.height = '85px'
           if (i != theadTrDomItem.length - 1) {
             theadDom[i].style.marginRight = '1.6px'
           }
@@ -98,5 +97,7 @@ export default {
   color: #fff;
   padding: 0 5px;
   box-sizing:border-box;
+  font-size: 12px;
+  height: 45px;
 }
 </style>

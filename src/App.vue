@@ -122,7 +122,6 @@ export default {
 }
 .app_container {
   position: relative;
-  /* margin-bottom: calc(45px + var(--marginB)); */
 }
 .app_nav_bar_item {
   flex: 1;

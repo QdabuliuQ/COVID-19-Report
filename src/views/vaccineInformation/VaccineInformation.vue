@@ -2,7 +2,7 @@
   <div id="VaccineInformation">
     <div class="vac_top_container">
       <div class="vac_top_bgImg">
-        <img src="https://img.coolcr.cn/2021/05/26/0328b3ac79b3f.png" alt="">
+        <img src="https://www.picbed.cn/images/2021/06/08/head_bg_new.png" alt="">
       </div>
       <div class="vac_top_textBox">
         <div class="textBox_title">全球新冠疫苗</div>
@@ -59,6 +59,7 @@ export default {
 #VaccineInformation{
   width: 100%;
   margin-bottom: calc(45px + var(--marginB));
+  background-color: #fff;
 }
 .vac_top_container{
   width: 100%;

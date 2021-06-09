@@ -78,29 +78,20 @@ export default {
   methods: {
     getMapOptions(  // 生成地图数据
       data,
-      color = [
-        "#1480fa",
-        "#499eff",
-        "#73b4fd",
-        "#a1ccfd",
-        "#c8e1fd",
-        "#ecf5ff",
-      ],
+      pieces,
       world,
       formatterText,
-      max=10000000
     ) {
-      let that = this;
       return {
         tooltip: {
           trigger: "item",
           textStyle: {
             color: "#FFF", // 文字的颜色
-            fontSize: "20", // 文字字体大小
+            fontSize: "12", // 文字字体大小
           },
           triggerOn: "click",
-          padding: [12],
-          backgroundColor: "#000000b2",
+          padding: [7],
+          backgroundColor: "rgba(0, 0, 0, 0.623)",
           borderColor: "transparent",
           axisPointer: {
             type: "cross",
@@ -129,14 +120,17 @@ export default {
           },
         },
         visualMap: {
-          min: 0,
-          max,
-          text: ["高", "低"],
-          realtime: false,
-          calculable: true,
-          color,
-          botton: 20,
-          left: 20,
+          type: 'piecewise',
+          splitNumber: 6,
+          orient: 'horizontal',
+          itemGap: 0,
+          pieces,
+          bottom: 10,
+          left: 10,
+          itemWidth: 45,
+          itemHeight: 6,
+          showLabel: false,
+          left: 'center',
         },
         series: [
           {
@@ -177,7 +171,14 @@ export default {
         mapDom.setOption(
           this.getMapOptions(
             this.worldData.confirm,
-            ["#d11010", "#ff3e3e", "#ff6e6e", "#ffa0a0", "#fdc1c1", "#fff5f5"],
+            [      // 自定义每一段的范围，以及每一段的文字
+              { gte: 10000000, color: "#d11010" }, // 不指定 max，表示 max 为无限大（Infinity）。
+              { gte: 1000000, lte: 9999999, color: "#ff3e3e" },
+              { gte: 100000, lte: 999999, color: "#ff6e6e" },
+              { gte: 10000, lte: 99999, color: "#ffa0a0" },
+              { gte: 11, lte: 9999, color: "#fdc1c1" },
+              { lte: 10, color: "#fff5f5" }          // 不指定 min，表示 min 为无限大（-Infinity）。
+            ],
             world,
             "累计确诊人数 : ",
           )
@@ -195,7 +196,14 @@ export default {
             mapDom.setOption(
               this.getMapOptions(
                 this.worldData.confirm,
-                ["#d11010", "#ff3e3e", "#ff6e6e", "#ffa0a0", "#fdc1c1", "#fff5f5"],
+                [      // 自定义每一段的范围，以及每一段的文字
+                  { gte: 10000000, color: "#d11010" }, // 不指定 max，表示 max 为无限大（Infinity）。
+                  { gte: 1000000, lte: 9999999, color: "#ff3e3e" },
+                  { gte: 100000, lte: 999999, color: "#ff6e6e" },
+                  { gte: 10000, lte: 99999, color: "#ffa0a0" },
+                  { gte: 11, lte: 9999, color: "#fdc1c1" },
+                  { lte: 10, color: "#fff5f5" }          // 不指定 min，表示 min 为无限大（-Infinity）。
+                ],
                 world,
                 "累计确诊人数 : ",
               )
@@ -205,7 +213,14 @@ export default {
             mapDom.setOption(
               this.getMapOptions(
                 this.worldData.confirm,
-                ["#d11010", "#ff3e3e", "#ff6e6e", "#ffa0a0", "#fdc1c1", "#fff5f5"],
+                [      // 自定义每一段的范围，以及每一段的文字
+                  { gte: 10000000, color: "#d11010" }, // 不指定 max，表示 max 为无限大（Infinity）。
+                  { gte: 1000000, lte: 9999999, color: "#ff3e3e" },
+                  { gte: 100000, lte: 999999, color: "#ff6e6e" },
+                  { gte: 10000, lte: 99999, color: "#ffa0a0" },
+                  { gte: 11, lte: 9999, color: "#fdc1c1" },
+                  { lte: 10, color: "#fff5f5" }          // 不指定 min，表示 min 为无限大（-Infinity）。
+                ],
                 world,
                 "累计确诊人数 : ",
               )
@@ -217,10 +232,16 @@ export default {
             mapDom.setOption(
               this.getMapOptions(
                 this.worldData.nowConfirm,
-                ["#ff8317","#ff9d48","#fdb474","#ffcb9e","#fde5d1", "#fcf2e9"],
+                [      // 自定义每一段的范围，以及每一段的文字
+                  { gte: 1000000, color: "#ff8317" }, // 不指定 max，表示 max 为无限大（Infinity）。
+                  { gte: 100000, lte: 999999, color: "#ff9d48" },
+                  { gte: 10000, lte: 99999, color: "#fdb474" },
+                  { gte: 1000, lte: 9999, color: "#ffcb9e" },
+                  { gte: 11, lte: 999, color: "#fde5d1" },
+                  { lte: 10, color: "#fcf2e9" }          // 不指定 min，表示 min 为无限大（-Infinity）。
+                ],
                 world,
                 "现存确诊人数 : ",
-                500000
               )
             )
           } else {
@@ -228,7 +249,14 @@ export default {
             mapDom.setOption(
               this.getMapOptions(
                 this.worldData.nowConfirm,
-                ["#ff8317","#ff9d48","#fdb474","#ffcb9e","#fde5d1", "#fcf2e9"],
+                [      // 自定义每一段的范围，以及每一段的文字
+                  { gte: 1000000, color: "#ff8317" }, // 不指定 max，表示 max 为无限大（Infinity）。
+                  { gte: 100000, lte: 999999, color: "#ff9d48" },
+                  { gte: 10000, lte: 99999, color: "#fdb474" },
+                  { gte: 1000, lte: 9999, color: "#ffcb9e" },
+                  { gte: 11, lte: 999, color: "#fde5d1" },
+                  { lte: 10, color: "#fcf2e9" }          // 不指定 min，表示 min 为无限大（-Infinity）。
+                ],
                 world,
                 "现存确诊人数 : ",
                 500000
@@ -241,10 +269,16 @@ export default {
             mapDom.setOption(
               this.getMapOptions(
                 this.worldData.dead,
-                ["#5a5a5a","#818181","#a3a3a3","#bbbbbb","#d8d8d8", "#f5f5f5"],
+                [      // 自定义每一段的范围，以及每一段的文字
+                  { gte: 500000, color: "#5a5a5a" }, // 不指定 max，表示 max 为无限大（Infinity）。
+                  { gte: 50000, lte: 499999, color: "#818181" },
+                  { gte: 5000, lte: 49999, color: "#a3a3a3" },
+                  { gte: 500, lte: 4999, color: "#bbbbbb" },
+                  { gte: 11, lte: 499, color: "#d8d8d8" },
+                  { lte: 10, color: "#f5f5f5" }          // 不指定 min，表示 min 为无限大（-Infinity）。
+                ],
                 world,
                 "累计死亡人数 : ",
-                500000
               )
             )
           } else {
@@ -252,10 +286,16 @@ export default {
             mapDom.setOption(
               this.getMapOptions(
                 this.worldData.dead,
-                ["#5a5a5a","#818181","#a3a3a3","#bbbbbb","#d8d8d8", "#f5f5f5"],
+                [      // 自定义每一段的范围，以及每一段的文字
+                  { gte: 500000, color: "#5a5a5a" }, // 不指定 max，表示 max 为无限大（Infinity）。
+                  { gte: 50000, lte: 499999, color: "#818181" },
+                  { gte: 5000, lte: 49999, color: "#a3a3a3" },
+                  { gte: 500, lte: 4999, color: "#bbbbbb" },
+                  { gte: 11, lte: 499, color: "#d8d8d8" },
+                  { lte: 10, color: "#f5f5f5" }          // 不指定 min，表示 min 为无限大（-Infinity）。
+                ],
                 world,
                 "累计死亡人数 : ",
-                500000
               )
             )
           }
@@ -298,16 +338,16 @@ export default {
   border-radius: 5px;
   transition: all 0.2s linear;
   background-color: #f5f5f5;
+  font-size: 12px;
 }
 .map_container {
   width: 100%;
-  height: 210px;
-  background-color: #fff;
-  /* background-color: #ff8317; */
+  height: 230px;
+  background-color: transparent;
 }
 .activeModule {
   color: var(--color);
-  background-color: #1d99d31f;
+  background-color: rgba(29, 153, 211, 0.122);
   border: 1px solid #1d99d31f;
 }
 </style>

@@ -53,9 +53,6 @@ export default {
   },
   created() {
     this.getData();
-    // this.$EventBus.$on('componentLoad', () => {
-    //   this.getData();
-    // })
   },
   methods: {
     getData() {
@@ -75,6 +72,7 @@ export default {
 </script>
 <style scoped>
 #reportTable {
+  margin-top: -25px;
   width: 100%;
   display: flex;
   background-color: #fff;
@@ -83,6 +81,9 @@ export default {
   overflow: hidden;
   box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.08);
   margin-bottom: var(--marginB);
+}
+.table_item_title{
+  font-size: 12px;
 }
 .report_table_item {
   flex: 1;
