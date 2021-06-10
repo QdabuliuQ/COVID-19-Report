@@ -19,9 +19,9 @@
       <demostic-map></demostic-map>
       <content-split :text="'中国疫情趋势图表'"></content-split>
       <!-- 疫情趋势 -->
-      <demostic-trend></demostic-trend>
+      <demostic-trend ref="demostic_trend"></demostic-trend>
       <!-- 无症状数量趋势 -->
-      <demostic-noinfect></demostic-noinfect>
+      <demostic-noinfect ref="demostic_noinfect"></demostic-noinfect>
 
       <content-split :text="'中国各省市数据汇总'"></content-split>
       <demostic-city-table ref="cityTable"></demostic-city-table>
@@ -35,7 +35,7 @@ import demosticMap from "./childComps/demosticMap"; // 地图组件
 import demosticTrend from "./childComps/demosticTrend"; // 图表组件
 import demosticNoinfect from "./childComps/demosticNoinfect"; // 图表组件
 import demosticCityTable from "./childComps/demosticCityTable"; // 城市数据汇总
-
+import { throttle } from "static/js/throttle"
 import { getDemosticDetail } from "network/demosticReport"; // 网络请求
 
 export default {
@@ -45,6 +45,8 @@ export default {
       pushTime: "",
       demosticList: null,
       tableToTop: 500, // 表格顶部的距离
+      demostic_trend_load: false,  // 国内疫情趋势是否加载
+      demostic_noinfect_load: false  // 国内无症状趋势是否加载
     };
   },
   methods: {
@@ -64,21 +66,31 @@ export default {
       }
     },
 
-    throttle(fn, delay) {  // 节流函数
-      let valid = true;
-      return function () {
-        if (!valid) {
-          // 休息时间 暂不工作
-          return false;
-        }
-        // 工作时间，执行函数并且在间隔期内把状态设定为无效
-        valid = false;
-        setTimeout(() => {
-          fn();
-          valid = true;
-        }, delay);
-      };
+    // 加载图表
+    loadDemosticTrend() {
+      let toTop = this.$refs.demostic_trend.$el.getBoundingClientRect().top
+      if (toTop <= window.innerHeight - this.$store.state.nav_bar_clientHeight) {
+        this.$refs.demostic_trend.loadCharts(0)  // 加载图表
+        this.demostic_trend_load = true  // 修改判断条件
+      }
     },
+
+    loadDemosticNoinfect() {
+      let toTop = this.$refs.demostic_noinfect.$el.getBoundingClientRect().top
+      if (toTop <= window.innerHeight - this.$store.state.nav_bar_clientHeight) {
+        this.$refs.demostic_noinfect.setChartsOption()
+        this.demostic_noinfect_load = true
+      }
+    },
+
+    listenScroll() {
+      if (!this.demostic_trend_load) {
+        this.loadDemosticTrend()
+      }
+      if (!this.demostic_noinfect_load) {
+        this.loadDemosticNoinfect()
+      }
+    }
   },
   components: {
     reportTable,
@@ -95,13 +107,19 @@ export default {
       this.tableToTop = this.$refs.cityTable.$el.getBoundingClientRect().top;
       window.addEventListener("scroll", (e) => {  // 监听滚动
         if (window.pageYOffset >= this.tableToTop && window.pageYOffset <= this.tableToTop + 100) {
-          this.throttle(this.$refs.cityTable.fixdHead(), 300)
+          throttle(this.$refs.cityTable.fixdHead(), 300)
         } else if(window.pageYOffset < this.tableToTop){
-          this.throttle(this.$refs.cityTable.hideHead(), 300)
+          throttle(this.$refs.cityTable.hideHead(), 300)
         }
       });
     }, 600);
   },
+  activated () {
+    document.addEventListener('scroll', this.listenScroll)
+  },
+  deactivated () {
+    document.removeEventListener('scroll', this.listenScroll)
+  }
 };
 </script>
 <style scoped>

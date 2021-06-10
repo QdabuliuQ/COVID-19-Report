@@ -11,6 +11,7 @@ export default new Vuex.Store({
     worldData: {},  // 世界疫情基本数据
     indexSet: 0,  // 判断是否设置数据
     allCountryData: null,  // 世界各国疫情信息
+    nav_bar_clientHeight: 0,
   },
   mutations: {},
   actions: {},

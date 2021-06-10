@@ -289,7 +289,7 @@ export default {
   mounted() {
     this.mTop =
       document.getElementsByClassName("van-nav-bar")[0].clientHeight + "px";
-    this.noContentDomHeight = (window.screen.height*2 - document.getElementsByClassName("van-nav-bar")[0].clientHeight - document.getElementsByClassName('policy_container')[0].clientHeight) + "px"
+    this.noContentDomHeight = (window.screen.height - document.getElementsByClassName("van-nav-bar")[0].clientHeight - document.getElementsByClassName('policy_container')[0].clientHeight) + "px"
   },
   created() {
     getCityList().then((res) => {
@@ -302,15 +302,14 @@ export default {
 #goOutPolicy {
   min-width: 100vw;
   min-height: 100vh;
-  background-color: #fff;
   position: relative;
   z-index: 11;
   top: 0;
   overflow: hidden;
+  background-color: #fff;
 }
 .policy_container {
   padding: 25px 15px;
-
   position: relative;
 }
 .clip_container {
@@ -447,15 +446,19 @@ export default {
 }
 .item_right_title {
   font-size: 16px !important;
-  font-weight: 550;
-  margin-bottom: 5px;
+  font-weight: bold;
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
+}
+.item_right_title .icon-zhongdian{
+  color: rgb(250, 180, 50) !important;
 }
 .item_right_title .iconfont {
   color: var(--color);
   position: relative;
   margin-left: 8px;
+  font-size: 20px;
 }
 .item_right_title .icon-fengxian1 {
   color: rgb(255, 43, 43);
@@ -471,9 +474,10 @@ export default {
   right: 0;
 }
 .item_right_reach_item {
-  font-size: 11px;
+  font-size: 14px;
   color: rgba(0, 0, 0, 0.644);
   margin-bottom: 6px;
+  letter-spacing: 1px;
 }
 .item_highRisk_item {
   display: flex;
@@ -493,7 +497,7 @@ export default {
   flex: 9;
   display: flex;
   align-items: center;
-  font-size: 12px;
+  font-size: 13px;
 }
 .middleTarget {
   background-color: rgba(255, 167, 34, 0.301);
@@ -522,11 +526,11 @@ export default {
 .line_box {
   content: "";
   position: absolute;
-  top: 18px;
+  top: 16px;
   width: 1px;
-  left: 9px;
+  left: 7px;
   height: 100%;
-  background-color: #1d99d369;
+  background-color: rgba(29, 153, 211, 0.412);
 }
 .item_right_left_target {
   display: flex;

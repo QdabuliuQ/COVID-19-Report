@@ -166,11 +166,11 @@ export default {
 }
 .romour_item_mainSummary {
   color: var(--color);
-  font-size: 13px;
+  font-size: 15px;
 }
 .romour_item_body {
   margin-top: 7px;
-  font-size: 7px;
+  font-size: 13px;
   letter-spacing: 1.5px;
   line-height: 20px;
   transition: all 0.2s linear;
@@ -179,10 +179,10 @@ export default {
   margin-top: 7px;
   width: 100%;
   text-align: right;
-  font-size: 6px;
+  font-size: 12px;
 }
 .romour_item_show .iconfont {
   margin-top: 2px;
-  font-size: 6px;
+  font-size: 10px;
 }
 </style>

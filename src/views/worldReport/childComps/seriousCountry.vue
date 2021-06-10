@@ -16,11 +16,12 @@
       </van-swipe-item>
     </van-swipe>
     <swipe-button
-    ref="overseaCountry_swipe_btn"
-    :currentIndex="currentIndex"
-    @toggleSwipe="toggleSwipe"
-    class="swipeButton"
-    :btnList="btnList"></swipe-button>
+      ref="overseaCountry_swipe_btn"
+      :currentIndex="currentIndex"
+      @toggleSwipe="toggleSwipe"
+      class="swipeButton"
+      :btnList="btnList"
+    ></swipe-button>
   </div>
 </template>
 
@@ -32,7 +33,8 @@ export default {
   name: "seriousCountry",
   data() {
     return {
-      countryData: {  // 国家数据
+      countryData: {
+        // 国家数据
         comfirm: [],
         comfirmAdd: [],
         date: [],
@@ -40,44 +42,64 @@ export default {
         dead: [],
       },
       currentIndex: 0,
-      btnList: [  // 切换按钮
-        '疫情累计趋势',
-        '疫情新增趋势'
+      btnList: [
+        // 切换按钮
+        "疫情累计趋势",
+        "疫情新增趋势",
       ],
-      chartDom: false,  // 判断条件
+      chartDom: false, // 判断条件
     };
   },
   components: {
     swipeButton,
   },
   methods: {
-    chartsChange(index) {  // 切换图表
+    chartsChange(index) {
+      // 切换图表
       this.$refs.overseaCountry_swipe_btn.setIndex(index);
-      this.setChartsOption(index)
+      this.setChartsOption(index);
     },
 
-    setChartsOption(index) {
-      if (index != 0) {
-        if (!this.chartDom) {
-          let myChart = this.$echarts.init(
-            document.querySelector(".trend_item_charts_dom2")
+    setChartsOption() {
+      this.$nextTick(() => {
+        let myChart = this.$echarts.getInstanceByDom(
+          document.querySelector(".trend_item_charts_dom1")
+        );
+        if (myChart == null) {
+          myChart = this.$echarts.init(
+            document.querySelector(".trend_item_charts_dom1")
           );
-          myChart.setOption(
-            this.getChartsOption(['#ee4646'], this.countryData.date, [
-              {
-                name: "新增确诊",
-                type: "line",
-                data: this.countryData.comfirmAdd
-              },
-            ])
-          );
-          this.chartDom = true
         }
-      }
+        setTimeout(() => {
+          let option = this.getChartsOption(
+          ["#bd1e1e", "#14a11c", "#6d6d6d"],
+          this.countryData.date,
+          [
+            {
+              name: "累计确诊",
+              type: "line",
+              data: this.countryData.comfirm,
+            },
+            {
+              name: "累计治愈",
+              type: "line",
+              data: this.countryData.heal,
+            },
+            {
+              name: "累计死亡",
+              type: "line",
+              data: this.countryData.dead,
+            },
+          ]
+        );
+        myChart.setOption(option);
+        }, 400);
+      });
     },
 
-    getChartsOption(color, xData, series) {  // 设置图表选项
-      let that = this
+    getChartsOption(color, xData, series) {
+      // 设置图表选项
+      let that = this;
       return {
         color, // 颜色
         grid: {
@@ -85,7 +107,7 @@ export default {
           top: "14%",
           left: "3%",
           right: "3%",
-          bottom: "3%",
+          bottom: "2%",
           containLabel: true,
         },
         tooltip: {
@@ -114,7 +136,7 @@ export default {
         },
         legend: {
           // 图例
-          icon: 'rect',
+          icon: "rect",
           itemWidth: 20,
           itemHeight: 10,
           textStyle: {
@@ -147,9 +169,9 @@ export default {
             textStyle: {
               fontSize: 11,
             },
-            formatter: function(val) {
-              return that.setUnitChar(val)
-            }
+            formatter: function (val) {
+              return that.setUnitChar(val);
+            },
           },
           nameGap: 20,
         },
@@ -157,10 +179,35 @@ export default {
       };
     },
 
-    toggleSwipe(index) {  // 切换图表
+    toggleSwipe(index) {
+      // 切换图表
       this.$refs.overseaCountry_swipe.swipeTo(index); // 切换轮播图
-      this.setChartsOption(index)
-    }
+      this.manipulateChart(index);
+    },
+
+    manipulateChart(index) {
+      // 生成图表
+      this.$nextTick(() => {
+        if (index != 0) {
+          if (!this.chartDom) {
+            let myChart = this.$echarts.init(
+              document.querySelector(".trend_item_charts_dom2")
+            );
+            myChart.setOption(
+              this.getChartsOption(["#ee4646"], this.countryData.date, [
+                {
+                  name: "新增确诊",
+                  type: "line",
+                  data: this.countryData.comfirmAdd,
+                },
+              ])
+            );
+            this.chartDom = true;
+          }
+        } else {
+        }
+      });
+    },
   },
   created() {
     getCountryData("印度").then((res) => {
@@ -171,34 +218,7 @@ export default {
         this.countryData.heal.push(item.heal);
         this.countryData.dead.push(item.dead);
       }
-      setTimeout(() => {
-      let myChart = this.$echarts.init(
-        document.querySelector(".trend_item_charts_dom1")
-      );
-      myChart.setOption(
-        this.getChartsOption(['#bd1e1e','#14a11c','#6d6d6d'],this.countryData.date, [
-          {
-            name: "累计确诊",
-            type: "line",
-            data: this.countryData.comfirm
-          },
-          {
-            name: "累计治愈",
-            type: "line",
-            data: this.countryData.heal
-          },
-          {
-            name: "累计死亡",
-            type: "line",
-            data: this.countryData.dead
-          },
-        ])
-      );
-    }, 500);
     });
-  },
-  mounted() {
-    
   },
 };
 </script>
@@ -207,7 +227,7 @@ export default {
   width: 100%;
   margin-bottom: var(--marginB);
 }
-.trand_item_dom{
+.trand_item_dom {
   width: 100%;
   height: 230px;
 }

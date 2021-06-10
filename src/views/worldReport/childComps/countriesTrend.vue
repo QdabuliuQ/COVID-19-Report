@@ -30,23 +30,6 @@ export default {
         }
         flag = true;
       }
-      setTimeout(() => {
-        let myChart = this.$echarts.init(
-          document.getElementById("countriesTrend")
-        );
-        let series= [];
-        for (const str in this.countriesData) {
-          if (str != 'date' && str != 'countries') {
-            series.push({
-              name: str,
-              data: this.countriesData[str],
-              type: 'line',
-              smooth: true
-            })
-          }
-        }
-        myChart.setOption(this.setChartsOption(this.countriesData.date, series, this.countriesData.countries));
-      }, 500);
     });
   },
   methods: {
@@ -118,6 +101,26 @@ export default {
         series,
       };
     },
+
+    setCharts() {
+      let myChart = this.$echarts.init(
+        document.getElementById("countriesTrend")
+      );
+      myChart.showLoading();
+      let series= [];
+      for (const str in this.countriesData) {
+        if (str != 'date' && str != 'countries') {
+          series.push({
+            name: str,
+            data: this.countriesData[str],
+            type: 'line',
+            smooth: true
+          })
+        }
+      }
+      myChart.hideLoading();
+      myChart.setOption(this.setChartsOption(this.countriesData.date, series, this.countriesData.countries));
+    }
   },
   mounted() {
     

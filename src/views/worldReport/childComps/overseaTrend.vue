@@ -110,7 +110,7 @@ export default {
           },
           top: "10%",
           left: "2%",
-          x:'left',
+          x: "left",
         },
         xAxis: [
           // x轴
@@ -227,56 +227,41 @@ export default {
         this.overseaData.date.push(item.date);
       }
       this.$nextTick(() => {
-        setTimeout(() => {
-          // 加载图表
-          let myChart = this.$echarts.init(
-            document.querySelector(".overseaTrend_item_charts_dom1")
-          );
+        // 加载图表
+        let myChart = this.$echarts.init(
+          document.querySelector(".overseaTrend_item_charts_dom1")
+        );
 
-          myChart.setOption(
-            this.setChartsOption(
-              "海外疫情累计趋势",
-              this.overseaData.date,
-              [
-                {
-                  name: "累计确诊",
-                  type: "line",
-                  data: this.overseaData.confirm,
-                },
-                {
-                  name: "累计治愈",
-                  type: "line",
-                  data: this.overseaData.heal,
-                },
-                {
-                  name: "累计死亡",
-                  type: "line",
-                  data: this.overseaData.dead,
-                },
-              ],
-              ["#f73838", "#3dbe31", "#6e6e6e"]
-            )
-          );
-        }, 600);
+        myChart.setOption(
+          this.setChartsOption(
+            "海外疫情累计趋势",
+            this.overseaData.date,
+            [
+              {
+                name: "累计确诊",
+                type: "line",
+                data: this.overseaData.confirm,
+              },
+              {
+                name: "累计治愈",
+                type: "line",
+                data: this.overseaData.heal,
+              },
+              {
+                name: "累计死亡",
+                type: "line",
+                data: this.overseaData.dead,
+              },
+            ],
+            ["#f73838", "#3dbe31", "#6e6e6e"]
+          )
+        );
       });
-    },
-  },
-  watch: {
-    "$store.state.worldData": {
-      deep: true,
-      handler: function () {
-        this.setChartsOption2()
-      },
     },
   },
   components: {
     swipeButton,
   },
-  mounted () {
-    if (JSON.stringify(this.$store.state.worldData) != '{}') {
-      this.setChartsOption2()
-    }
-  }
 };
 </script>
 <style scoped>

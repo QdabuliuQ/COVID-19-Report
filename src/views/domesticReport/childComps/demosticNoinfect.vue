@@ -27,72 +27,73 @@ export default {
           this.infectDetail.cityList.push(item.province);
           this.infectDetail.confirmList.push(item.confirm);
         }
-        setTimeout(() => {
-          myChartDom4 = this.$echarts.init(
-            document.querySelector("#demosticNoinfect"),
-            null,
-            { renderer: "svg" }
-          );
-          let num = this.infectDetail.confirmList[0];
-          let num2 = this.infectDetail.increaseList[0];
-          for (const item of this.infectDetail.confirmList) {
-            // 获取最大值
-            if (item > num) {
-              num = item;
-            }
-          }
-          for (const item of this.infectDetail.increaseList) {
-            // 获取最大值
-            if (item > num2) {
-              num2 = item;
-            }
-          }
-          let options = this.chartsOptions(
-            this.infectDetail.cityList,
-            this.infectDetail.confirmList,
-            this.infectDetail.increaseList,
-            [
-              {
-                type: "value",
-                name: "现有无症状患者",
-                min: 0, // 设置最小值
-                max: this.getMaxNum(num), // 设置最大值
-                interval: this.getMaxNum(num) / 5,
-                axisLabel: {
-                  textStyle: {
-                    fontSize: 11,
-                  },
-                },
-                nameTextStyle: {
-                  // 顶部名称字体大小
-                  fontSize: 11,
-                  align: "left", // 位置
-                },
-              },
-              {
-                type: "value",
-                name: "新增无症状患者",
-                min: 0, // 设置最小值
-                max: this.getMaxNum(num2), // 设置最大值
-                interval: this.getMaxNum(num2) / 5,
-                axisLabel: {
-                  // 字体大小
-                  textStyle: {
-                    fontSize: 11,
-                  },
-                },
-                nameTextStyle: {
-                  // 顶部名称字体大小
-                  fontSize: 11,
-                  align: "right", // 位置
-                },
-              },
-            ],
-            ["现有无症状患者", "新增无症状患者"]
-          );
-          myChartDom4.setOption(options);
-        }, 1000);
+        myChartDom4 = this.$echarts.init(
+          document.querySelector("#demosticNoinfect"),
+          null,
+          { renderer: "svg" }
+        );
       });
+    },
+
+    setChartsOption() {
+      let num = this.infectDetail.confirmList[0];
+      let num2 = this.infectDetail.increaseList[0];
+      for (const item of this.infectDetail.confirmList) {
+        // 获取最大值
+        if (item > num) {
+          num = item;
+        }
+      }
+      for (const item of this.infectDetail.increaseList) {
+        // 获取最大值
+        if (item > num2) {
+          num2 = item;
+        }
+      }
+      let options = this.chartsOptions(
+        this.infectDetail.cityList,
+        this.infectDetail.confirmList,
+        this.infectDetail.increaseList,
+        [
+          {
+            type: "value",
+            name: "现有无症状患者",
+            min: 0, // 设置最小值
+            max: this.getMaxNum(num), // 设置最大值
+            interval: this.getMaxNum(num) / 5,
+            axisLabel: {
+              textStyle: {
+                fontSize: 11,
+              },
+            },
+            nameTextStyle: {
+              // 顶部名称字体大小
+              fontSize: 11,
+              align: "left", // 位置
+            },
+          },
+          {
+            type: "value",
+            name: "新增无症状患者",
+            min: 0, // 设置最小值
+            max: this.getMaxNum(num2), // 设置最大值
+            interval: this.getMaxNum(num2) / 5,
+            axisLabel: {
+              // 字体大小
+              textStyle: {
+                fontSize: 11,
+              },
+            },
+            nameTextStyle: {
+              // 顶部名称字体大小
+              fontSize: 11,
+              align: "right", // 位置
+            },
+          },
+        ],
+        ["现有无症状患者", "新增无症状患者"]
+      );
+      myChartDom4.setOption(options);
     },
 
     // 获取图表选项
@@ -115,7 +116,7 @@ export default {
             fontSize: 12,
           },
           data: detailText,
-          x:'left', 
+          x: "left",
           top: "8%",
           right: "1%",
         },

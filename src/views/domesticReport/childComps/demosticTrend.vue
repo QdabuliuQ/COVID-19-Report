@@ -4,7 +4,7 @@
       <!-- 图表轮播 -->
       <van-swipe
         ref="charts_swipe"
-        @change='chartsChange'
+        @change="chartsChange"
         :touchable="true"
         class="my-swipe"
         indicator-color="transparent"
@@ -20,8 +20,14 @@
         </van-swipe-item>
       </van-swipe>
       <div class="charts_indicators">
-        <div :class="[currentIndex == index ? 'activeCharts': '']" @click="toggle_indicators(index)" class="indicators_item" v-for="item,index in indicatorsList" :key="index">
-          {{item}}
+        <div
+          :class="[currentIndex == index ? 'activeCharts' : '']"
+          @click="toggle_indicators(index)"
+          class="indicators_item"
+          v-for="(item, index) in indicatorsList"
+          :key="index"
+        >
+          {{ item }}
         </div>
       </div>
     </div>
@@ -42,14 +48,15 @@ export default {
       dateList: [], // 日期数组
       addConfirmList: [], // 新增确诊数据
       addHealList: [], // 新增治愈数组
-      confirmList: [],  // 全国累计确诊
-      healList: [],  // 全国累计治愈
-      deadList: [],  // 全国累计死亡
-      nowConfirmList: [],  // 目前确诊
-      indicatorsList: ['疫情新增趋势','疫情累计趋势','现有确诊趋势'],
-      currentIndex: 0,  // 活跃索引
+      confirmList: [], // 全国累计确诊
+      healList: [], // 全国累计治愈
+      deadList: [], // 全国累计死亡
+      nowConfirmList: [], // 目前确诊
+      indicatorsList: ["疫情新增趋势", "疫情累计趋势", "现有确诊趋势"],
+      currentIndex: 0, // 活跃索引
       refChartsSwipe: null,
-      chartDom2: false,  // 判断图表是否已经被加载
+      chartDom1: false, // 判断图表是否已经被加载
+      chartDom2: false,
       chartDom3: false,
     };
   },
@@ -59,51 +66,53 @@ export default {
       getEpidemicTrend().then((res) => {
         this.$store.state.chinaTrendDetail = res.data.data; // 保存数据
         for (const item of res.data.data.chinaDayList) {
-          this.dateList.push(item.date);  // 添加日期
-          this.confirmList.push(item.confirm)  // 累计确诊
-          this.healList.push(item.heal)  // 累计治愈
-          this.deadList.push(item.dead)  // 累计死亡
-          this.nowConfirmList.push(item.nowConfirm)  // 现有确诊
+          this.dateList.push(item.date); // 添加日期
+          this.confirmList.push(item.confirm); // 累计确诊
+          this.healList.push(item.heal); // 累计治愈
+          this.deadList.push(item.dead); // 累计死亡
+          this.nowConfirmList.push(item.nowConfirm); // 现有确诊
         }
 
         for (const item of res.data.data.chinaDayAddList) {
-          this.addConfirmList.push(item.confirm);  // 新增确诊
-          this.addHealList.push(item.heal);  // 新增治愈
+          this.addConfirmList.push(item.confirm); // 新增确诊
+          this.addHealList.push(item.heal); // 新增治愈
         }
       });
     },
 
-    chartsChange(index) {  // 监听轮播图改变
-      if (index != 0) {
-        switch (index) {
-          case 1:
-            this.loadCharts(index)
-            this.chartDom2 = true
-            break;
-          case 2:
-            this.loadCharts(index)
-            this.chartDom3 = true
-            break;
-          default:
-            break;
-        }
+    chartsChange(index) {
+      // 监听轮播图改变
+      switch (index) {
+        case 1:
+          this.loadCharts(index);
+          this.chartDom2 = true;
+          break;
+        case 2:
+          this.loadCharts(index);
+          this.chartDom3 = true;
+          break;
+        default:
+          break;
       }
-      this.currentIndex = index
+      this.currentIndex = index;
     },
 
-    chartsOption(titleText = "", xData = [], color = [], series = []) {  // 图表设置选项
+    chartsOption(titleText = "", xData = [], color = [], series = []) {
+      // 图表设置选项
       return {
-        title: {  // 标题
+        title: {
+          // 标题
           text: titleText,
           textStyle: {
             fontSize: 14,
           },
-          top: '3%',
+          top: "3%",
           left: "1%",
         },
-        color,  // 颜色
-        grid: {  // 布局
-          top: "15%",
+        color, // 颜色
+        grid: {
+          // 布局
+          top: "22%",
           left: "3%",
           right: "3%",
           bottom: "2%",
@@ -111,14 +120,14 @@ export default {
         },
         tooltip: {
           trigger: "axis",
-          triggerOn:"click",
+          triggerOn: "click",
           textStyle: {
-            color: '#FFF',     // 文字的颜色
-            fontSize: '12',    // 文字字体大小
+            color: "#FFF", // 文字的颜色
+            fontSize: "12", // 文字字体大小
           },
-          padding:[7],
-          backgroundColor:"rgba(0, 0, 0, 0.66)", 
-          borderColor: 'transparent',  
+          padding: [7],
+          backgroundColor: "rgba(0, 0, 0, 0.66)",
+          borderColor: "transparent",
           axisPointer: {
             type: "cross",
             crossStyle: {
@@ -128,100 +137,152 @@ export default {
           formatter: function (params) {
             let str = `日期：${params[0].axisValue}<br>`;
             for (const item of params) {
-              str += `${item.marker} ${item.seriesName}：${item.data}<br>`
+              str += `${item.marker} ${item.seriesName}：${item.data}<br>`;
             }
-            return str
+            return str;
           },
         },
-        legend: {  // 图例
+        legend: {
+          // 图例
           itemWidth: 24,
           itemHeight: 12,
           textStyle: {
             fontSize: 12,
           },
-          top: '3%',
-          right: '1%',
+          top: "10%",
+          left: "5%",
+          left: 'left'
         },
-        xAxis: [  // x轴
+        xAxis: [
+          // x轴
           {
             type: "category",
             data: xData,
             axisLabel: {
               rotate: 40,
               textStyle: {
-                fontSize: '10',
+                fontSize: "10",
               },
             },
             axisTick: {
               show: true,
-              alignWithLabel: true
-            }
+              alignWithLabel: true,
+            },
           },
         ],
-        yAxis: {  // y轴
+        yAxis: {
+          // y轴
           type: "value",
           axisLabel: {
             textStyle: {
-              fontSize: '10',
+              fontSize: "10",
             },
           },
-          nameGap: 20
+          nameGap: 20,
         },
-        series,  // 数据源
+        series, // 数据源
       };
     },
 
-    toggle_indicators(i) {  // 图表切换
-      this.currentIndex = i
-      this.refChartsSwipe.swipeTo(i)  // 切换轮播图
+    toggle_indicators(i) {
+      // 图表切换
+      this.currentIndex = i;
+      this.refChartsSwipe.swipeTo(i); // 切换轮播图
     },
 
-    loadCharts(index) {
+    loadCharts(index) {  // 加载图表
       switch (index) {
+        case 0:
+          if (!this.chartDom1) {
+            let options = this.chartsOption(
+              "全国疫情新增趋势",
+              this.dateList,
+              ["#be1313", "#3ed81f"],
+              [
+                {
+                  name: "新增确诊",
+                  type: "line",
+                  data: this.addConfirmList,
+                  itemStyle: {
+                    normal: {
+                      lineStyle: {
+                        color: "#fd3053",
+                      },
+                    },
+                  },
+                },
+                {
+                  name: "新增治愈",
+                  type: "line",
+                  data: this.addHealList,
+                  itemStyle: {
+                    normal: {
+                      lineStyle: {
+                        color: "#1edd1e",
+                      },
+                    },
+                  },
+                },
+              ]
+            );
+            myChartDom1.setOption(options);
+          }
+          this.chartDom1 = true;
+          break
         case 1:
           if (!this.chartDom2) {
-            let options2 = this.chartsOption("全国疫情累计趋势", this.dateList, ["#be1313", "#3ed81f", "#888888"], [
-              {
-                name: "累计确诊",
-                type: "line",
-                data: this.confirmList,
-              },
-              {
-                name: "累计治愈",
-                type: "line",
-                data: this.healList,
-              },
-              {
-                name: "累计死亡",
-                type: "line",
-                data: this.deadList,
-              },
-            ])
+            let options2 = this.chartsOption(
+              "全国疫情累计趋势",
+              this.dateList,
+              ["#be1313", "#3ed81f", "#888888"],
+              [
+                {
+                  name: "累计确诊",
+                  type: "line",
+                  data: this.confirmList,
+                },
+                {
+                  name: "累计治愈",
+                  type: "line",
+                  data: this.healList,
+                },
+                {
+                  name: "累计死亡",
+                  type: "line",
+                  data: this.deadList,
+                },
+              ]
+            );
             myChartDom2.setOption(options2);
           }
           break;
         case 2:
           if (!this.chartDom3) {
-            let options3 = this.chartsOption("全国现有确诊趋势", this.dateList,["#be1313"], [
-              {
-                name: "现有确诊",
-                type: "line",
-                data: this.nowConfirmList,
-              },
-            ])
-            myChartDom3.setOption(options3)
+            let options3 = this.chartsOption(
+              "全国现有确诊趋势",
+              this.dateList,
+              ["#be1313"],
+              [
+                {
+                  name: "现有确诊",
+                  type: "line",
+                  data: this.nowConfirmList,
+                },
+              ]
+            );
+            myChartDom3.setOption(options3);
           }
         default:
           break;
       }
-    }
+    },
   },
   created() {
     this.epidemicTrend();
   },
   mounted() {
     setTimeout(() => {
-      this.refChartsSwipe = this.$refs.charts_swipe
+      this.refChartsSwipe = this.$refs.charts_swipe;
       if (this.$store.state.chinaTrendDetail) {
         myChartDom1 = this.$echarts.init(
           document.querySelector(".trend_item_charts_dom1"),
@@ -238,33 +299,6 @@ export default {
           null,
           { renderer: "svg" }
         );
-        let options = this.chartsOption("全国疫情新增趋势", this.dateList,["#be1313", "#3ed81f"], [
-          {
-            name: "新增确诊",
-            type: "line",
-            data: this.addConfirmList,
-            itemStyle: {
-              normal: {
-                lineStyle: {
-                  color: "#fd3053",
-                },
-              },
-            },
-          },
-          {
-            name: "新增治愈",
-            type: "line",
-            data: this.addHealList,
-            itemStyle: {
-              normal: {
-                lineStyle: {
-                  color: "#1edd1e",
-                },
-              },
-            },
-          },
-        ]);
-        myChartDom1.setOption(options);
       }
     }, 600);
   },
@@ -273,20 +307,20 @@ export default {
 <style scoped>
 #demosticTrend {
   width: 100%;
-  height: 295px;
+  height: 320px;
   margin-bottom: 10px;
 }
 .trend_charts_container {
   width: 100%;
   height: 84%;
 }
-.charts_indicators{
+.charts_indicators {
   margin-top: 1%;
   height: 17%;
   width: 100%;
   display: flex;
 }
-.indicators_item{
+.indicators_item {
   flex: 1;
   display: flex;
   align-items: center;
@@ -298,7 +332,7 @@ export default {
   box-sizing: border-box;
   font-size: 12px;
 }
-.activeCharts{
+.activeCharts {
   background-color: rgba(33, 175, 241, 0.212);
   color: #21aff1;
   border: 1px solid #21aff1;

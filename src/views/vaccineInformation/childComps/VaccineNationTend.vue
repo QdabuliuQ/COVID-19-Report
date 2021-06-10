@@ -177,7 +177,7 @@ export default {
 }
 .nation_charts2 {
   width: 100%;
-  height: 210px;
+  height: 230px;
 }
 .van-swipe-item {
   width: 100%;

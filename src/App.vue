@@ -86,7 +86,7 @@ export default {
     }
   },
   mounted () {
-
+    this.$store.state.nav_bar_clientHeight = document.getElementsByClassName('app_nav_bar')[0].clientHeight
   },
   created () {
     //在页面加载时读取sessionStorage里的状态信息
@@ -107,6 +107,7 @@ export default {
   width: 100%;
   position: relative;
   z-index: 0;
+  background-color: #fff;
 }
 .app_nav_bar {
   width: 100%;

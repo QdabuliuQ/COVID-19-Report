@@ -85,15 +85,16 @@ export default {
 .topleft_icon .iconfont {
   color: var(--color);
   position: relative;
+  font-size: 15px;
 }
 .line_box::before{
   content: '';
   position: absolute;
-  top: 26px;
+  top: 25.5px;
   width: 1px;
-  left: 7.5px;
+  left: 7px;
   height: 100%;
-  background-color: #1d99d369;
+  background-color: rgba(29, 153, 211, 0.412);
 }
 
 .item_container {

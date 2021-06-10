@@ -113,7 +113,7 @@ export default {
 .clickTextClass {
   margin-left: 0;
   font-size: 24px;
-  font-weight: 540;
+  font-weight: bold;
 }
 .clickIconClass {
   transform: scale(3);

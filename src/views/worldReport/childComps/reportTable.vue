@@ -72,7 +72,6 @@ export default {
 </script>
 <style scoped>
 #reportTable {
-  margin-top: -25px;
   width: 100%;
   display: flex;
   background-color: #fff;
