@@ -1,7 +1,7 @@
 <template>
   <div id="VaccineNationTend">
     <van-swipe
-      :loop='false'
+      :loop="false"
       @change="chartsChange"
       class="my-swipe"
       ref="vaccine_swipe"
@@ -26,9 +26,7 @@
 </template>
 
 <script>
-import {
-  getVaccineChina
-} from "network/vaccineInformation";
+import { getVaccineChina } from "network/vaccineInformation";
 import swipeButton from "components/private/swipeButton"; // 图表切换组件
 export default {
   name: "VaccineNationTend",
@@ -56,22 +54,8 @@ export default {
         this.vaccineData.sum.push(item.total_vaccinations);
         this.vaccineData.rate.push(item.total_vaccinations_per_hundred);
         this.vaccineData.date.push(item.date);
+        this.chartsChange(0)
       }
-      setTimeout(() => {
-        let myChart = this.$echarts.init(
-          document.querySelector(".nation_charts"),
-          null,
-          { renderer: "svg" }
-        );
-        myChart.setOption(this.setChartsOption(this.vaccineData.sum));
-
-        let myChart2 = this.$echarts.init(
-          document.querySelector(".nation_charts2"),
-          null,
-          { renderer: "svg" }
-        );
-        myChart2.setOption(this.setChartsOption(this.vaccineData.rate, true));
-      }, 700);
     });
   },
   methods: {
@@ -150,20 +134,53 @@ export default {
       };
     },
 
-    toggleSwipe(index) {  // 切换图表
+    toggleSwipe(index) {
+      // 切换图表
       this.$refs.vaccine_swipe.swipeTo(index); // 切换轮播图
+      this.loadCharts(index)
     },
 
-    chartsChange(index) {  // 监听图表替换
+    chartsChange(index) {
+      // 监听图表替换
       this.$refs.vaccine_swipe_btn.setIndex(index);
-    }
+      this.loadCharts(index)
+    },
+
+    loadCharts(index) {  // 设置图表
+      switch (index) {
+        case 0:
+          let myChart = this.$echarts.getInstanceByDom(
+            document.querySelector(".nation_charts")
+          );
+          if (myChart == null) {
+            myChart = this.$echarts.init(
+              document.querySelector(".nation_charts")
+            );
+          }
+          myChart.setOption(this.setChartsOption(this.vaccineData.sum));
+          break;
+        case 1:
+          let myChart2 = this.$echarts.getInstanceByDom(
+            document.querySelector(".nation_charts2")
+          );
+          if (myChart2 == null) {
+            myChart2 = this.$echarts.init(
+              document.querySelector(".nation_charts2"),
+              null,
+              { renderer: "svg" }
+            );
+          }
+          myChart2.setOption(this.setChartsOption(this.vaccineData.rate, true));
+          break;
+        default:
+          break;
+      }
+    },
   },
   components: {
     swipeButton,
   },
-  mounted() {
-    
-  },
+  mounted() {},
 };
 </script>
 <style scoped>

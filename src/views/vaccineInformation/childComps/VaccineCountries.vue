@@ -74,13 +74,9 @@ export default {
           )
         );
       }
-      setTimeout(() => {
-        let myChart1 = this.$echarts.init(document.querySelector(".countries_trend"), null, {renderer: 'svg'})
-        myChart1.setOption(this.setLineChartsOption(this.getVaccineCountries.totalTrend.country, this.getVaccineCountries.totalTrend.trend, '各国疫苗累计接种','剂'))
-
-        let myChart2 = this.$echarts.init(document.querySelector(".countries_trend2"), null, {renderer: 'svg'})
-        myChart2.setOption(this.setLineChartsOption(this.getVaccineCountries.perHundredTrend.country, this.getVaccineCountries.perHundredTrend.trend, '各国疫苗每百人接种','剂'))
-      }, 800);
+      this.$nextTick(() => {
+        this.loadChart(0)
+      })
     });
   },
   components: {
@@ -164,11 +160,34 @@ export default {
 
     chartsChange(index) {  // 切换图表
       this.$refs.vaccine_swipe_btn2.setIndex(index);
+      this.loadChart(index)
     },
 
     toggleSwipe(index) {  // 切换图表
       this.$refs.vaccine_swipe2.swipeTo(index); // 切换轮播图
+      this.loadChart(index)
     },
+
+    loadChart(index) {  // 加载图表
+      switch (index) {
+        case 0:
+          let myChart1 = this.$echarts.getInstanceByDom(document.querySelector(".countries_trend"))
+          if (myChart1 == null) {
+            myChart1 = this.$echarts.init(document.querySelector(".countries_trend"), null, {renderer: 'svg'})
+          }
+          myChart1.setOption(this.setLineChartsOption(this.getVaccineCountries.totalTrend.country, this.getVaccineCountries.totalTrend.trend, '各国疫苗累计接种','剂'))
+          break;
+        case 1:
+          let myChart2 = this.$echarts.getInstanceByDom(document.querySelector(".countries_trend2"))
+          if (myChart2 == null) {
+            myChart2 = this.$echarts.init(document.querySelector(".countries_trend2"), null, {renderer: 'svg'})
+          }
+          myChart2.setOption(this.setLineChartsOption(this.getVaccineCountries.totalTrend.country, this.getVaccineCountries.totalTrend.trend, '各国疫苗累计接种','剂'))
+          break;
+        default:
+          break;
+      }
+    }
   },
   mounted () {
     
