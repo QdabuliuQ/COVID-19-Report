@@ -300,7 +300,7 @@ export default {
           null,
           { renderer: "svg" }
         );
-        mapDom.showLoading();  // 加载动画
+        mapDom.showLoading({ text: "正在加载数据" });  // 加载动画
         this.gainAllData(); // 获取数据
         setTimeout(() => {
           this.$echarts.registerMap("world", this.mapJson);
@@ -320,7 +320,7 @@ export default {
               "累计确诊人数 : "
             )
           );
-          mapDom.hideLoading({ text: "正在加载数据" });  // 隐藏加载动画
+          mapDom.hideLoading();  // 隐藏加载动画
         }, 200);
       });
     },

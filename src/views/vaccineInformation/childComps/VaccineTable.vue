@@ -63,7 +63,6 @@
 
 <script>
 import {getWorldVaccineData} from 'network/vaccineInformation'
-import {addChineseUnit} from 'static/js/setUnit'
 
 export default {
   name: 'VaccineTable',

@@ -84,6 +84,7 @@ export default {
   left: 0;
   bottom: 2px;
   color: #9e9e9e;
+  font-size: 12px;
 }
 .right_news_items{
   margin-left: 5px;

@@ -23,7 +23,7 @@
       <content-split
         :text="'世界主要国家接种情况'"
       ></content-split>
-      <vaccine-countries></vaccine-countries>
+      <vaccine-countries ref="vaccine_countries"></vaccine-countries>
       <content-split
         :text="'世界各国疫苗信息'"
       ></content-split>
@@ -43,6 +43,7 @@ export default {
   name: 'VaccineInformation',
   data () {
     return {
+      vaccine_countries_load: false
     }
   },
   components: {
@@ -51,6 +52,21 @@ export default {
     VaccineNationTend,
     VaccineCountries,
     VaccineDetailTable
+  },
+  methods: {
+    listenScroll() {
+      if (!this.vaccine_countries_load) {
+        this.$refs.vaccine_countries.loadChart(0)
+        this.vaccine_countries_load = true
+      }
+    }
+  },
+  activated () {
+    document.addEventListener('scroll', this.listenScroll)
+  },
+
+  deactivated () {
+    document.removeEventListener('scroll', this.listenScroll)
   }
 }
 
@@ -82,12 +98,12 @@ export default {
 }
 .textBox_title{
   font-size: 18px;
-  font-weight: 550;
+  font-weight: bold;
   letter-spacing: 2px;
   margin-bottom: 3px;
 }
 .textBox_title2{
-  font-size: 17px;
+  font-size: 14px;
   letter-spacing: 2px;
   margin-bottom: 3px;
 }

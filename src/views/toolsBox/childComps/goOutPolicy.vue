@@ -243,7 +243,6 @@ export default {
     },
 
     onFinish(detail) {  // 监听是否选择完成
-    
       let result = detail.selectedOptions;
       if (this.selectFlag == "start") {
         if (this.endPlace != result[result.length - 1].text) {
@@ -262,7 +261,6 @@ export default {
     },
 
     togglePlace() { // 切换目的地
-     
       if (
         this.startPlace.name != "请选择出发点" &&
         this.endPlace.name != "请选择目的地"

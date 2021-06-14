@@ -18,7 +18,7 @@ export default {
         {name: '国内疫情速报', icon: 'icon-subao'},
         {name: '谣言排行榜', icon: 'icon-yaoyan'},
         {name: '出行政策查询', icon: 'icon-zengce'},
-        {name: '患者同行查询', icon: 'icon-chuxing'},
+        {name: '患者行程轨迹', icon: 'icon-chuxing'},
         {name: '核酸检测机构', icon: 'icon-jigou'},
         {name: '疫情风险等级', icon: 'icon-fengxian'},
       ]
@@ -44,6 +44,12 @@ export default {
           break;
         case 2:
           this.setRouter('/GoOutPolicy')
+          break;
+        case 3:
+          this.setRouter('/PatientRoute')
+          break;
+        case 4:
+          this.setRouter('/SearchInstitution')
           break;
         default:
           break;

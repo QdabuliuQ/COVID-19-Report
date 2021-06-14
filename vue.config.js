@@ -68,19 +68,16 @@ module.exports = {
 					'^/provinceNewsRequest': '' //代理路径
 				}
 			},
+			'/apiMapQQ': {
+				//代理api
+				target: 'https://apis.map.qq.com', // 代理接口(注意只要域名就够了)
+				changeOrigin: true, //是否跨域
+				secure: false,
+				pathRewrite: {
+					//重写路径
+					'^/apiMapQQ': '' //代理路径
+				}
+			},
 		}
 	},
-	// postcss-px2rem配置
-	// css: {
-	// 	loaderOptions: {
-	// 		css: {},
-	// 		postcss: {
-	// 			plugins: [
-	// 				require('postcss-px2rem')({
-	// 					remUnit: 37.5
-	// 				})
-	// 			]
-	// 		}
-	// 	}
-	// },
 }

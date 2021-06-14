@@ -126,7 +126,7 @@ export default {
           inactiveColor: "#f7f7f7",
           textStyle: {
             color: "#000000",
-            fontSize: this.fGetChartFontSize(),
+            fontSize: 11,
             fontWeight: 300,
             padding: [0, 0, 0, 15],
           },
@@ -136,10 +136,10 @@ export default {
           triggerOn:"click",
           textStyle: {
             color: '#FFF',     // 文字的颜色
-            fontSize: '20',    // 文字字体大小
+            fontSize: '12',    // 文字字体大小
           },
-          padding:[12],
-          backgroundColor:"#000000b2", 
+          padding:[7],
+          backgroundColor:"rgba(0, 0, 0, 0.623)", 
           borderColor: 'transparent',  
           axisPointer: {
             type: "cross",
@@ -159,12 +159,12 @@ export default {
           show: true,
           type: "piecewise",
           splitNumber: 4,
-          itemWidth: "50px",
-          itemHeight: "20px",
+          itemWidth: 25,
+          itemHeight: 12,
           itemGap: 5,
           textStyle: {
             color: "#000000",
-            fontSize: this.fGetChartFontSize() + 3,
+            fontSize: 11,
           },
           pieces: [
             // 图表参数
@@ -237,7 +237,7 @@ export default {
             label: {
               normal: {
                 textStyle: {
-                  fontSize: 20,
+                  fontSize: 11,
                   color: "#000",
                 },
               },
@@ -330,6 +330,7 @@ export default {
   border: 1px solid rgb(235, 235, 235);
   border-radius: 5px;
   transition: all 0.2s linear;
+  font-size: 12px;
 }
 .map_toggle_top {
   display: flex;
@@ -339,7 +340,7 @@ export default {
 }
 .activeModule {
   color: var(--color);
-  background-color: #1d99d31f;
-  border: 1px solid #1d99d31f;
+  background-color: rgba(29, 153, 211, 0.122);
+  border: 1px solid rgba(29, 153, 211, 0.122);
 }
 </style>

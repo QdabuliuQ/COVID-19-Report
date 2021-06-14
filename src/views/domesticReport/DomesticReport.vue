@@ -150,7 +150,7 @@ export default {
 }
 .bgcImg_container_secondTitle {
   font-size: 20px;
-  font-weight: 550;
+  font-weight: bold;
   margin-bottom: 4px;
   letter-spacing: 2px;
 }

@@ -8,3 +8,27 @@
 .van-nav-bar{
   box-shadow: 0 1px 10px rgba(0, 0, 0, .1);
 }
+.van-dialog__header {
+  padding-top: 20px;
+}
+.van-dialog__content {
+  padding: 15px;
+}
+.van-cell__title {
+  font-size: 15px;
+}
+.van-cascader{
+  height: 100%;
+}
+.van-tabs {
+  height: calc(100% - 48px);
+}
+.van-tabs__content  {
+  height: calc(100% - 48px);
+}
+.van-tab__pane {
+  height: 100%;
+}
+.van-cascader__options {
+  height: 100%;
+}

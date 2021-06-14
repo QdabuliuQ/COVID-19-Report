@@ -1,5 +1,5 @@
 <template>
-  <div v-if="dataLength.lenght > 0" id="provinceHospital">
+  <div v-if="dataLength > 0" id="provinceHospital">
     <content-split
       :text="$route.params.cityName + '医疗救助医院'"
     ></content-split>
@@ -45,6 +45,7 @@ export default {
   },
   created () {
     getCityHospital(this.$route.params.cityName).then(res => {
+      console.log(res);
       this.dataLength = res.data.args.rsp.info.citys.length
       if (this.dataLength <= 8) {
         this.hospitalData = res.data.args.rsp.info.citys
@@ -62,6 +63,9 @@ export default {
 <style scoped>
 #provinceHospital{
   margin-bottom: var(--marginB);
+}
+.van-swipe {
+  padding: 6px 0;
 }
 .hospitalSwipe{
   width: 100%;
@@ -91,7 +95,7 @@ export default {
 }
 .item_hospCount{
   font-size: 12px;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
   letter-spacing: 0.5px;
 }
 .item_url a{
@@ -101,7 +105,7 @@ export default {
   align-items: center;
 }
 .item_url .iconfont{
-  font-size: 8px;
+  font-size: 7px;
   color: #fff;
   margin-left: 3px;
 }

@@ -20,6 +20,9 @@ const ToolsBox = () => import("views/toolsBox/ToolsBox")  // 世界疫情报告
 const NationalNews = () => import("views/toolsBox/childComps/nationalNews")  // 国内疫情速报
 const RumourRanking = () => import("views/toolsBox/childComps/rumourRanking")  // 疫情问题大全
 const GoOutPolicy = () => import("views/toolsBox/childComps/goOutPolicy")  // 疫情问题大全
+const PatientRoute = () => import("views/toolsBox/childComps/patientRoute")  // 疫情问题大全
+const SearchInstitution = () => import("views/toolsBox/childComps/searchInstitution")  // 核素检测机构
+const InstitutionMap = () => import("views/toolsBox/childComps/institutionMap")  // 核素检测机构
 
 const routes = [
   { path: '/', redirect: '/DomesticReport' },
@@ -37,6 +40,9 @@ const routes = [
   { path: '/NationalNews', component: NationalNews },
   { path: '/RumourRanking', component: RumourRanking },
   { path: '/GoOutPolicy', component: GoOutPolicy },
+  { path: '/PatientRoute', component: PatientRoute },
+  { path: '/SearchInstitution', component: SearchInstitution },
+  { path: '/InstitutionMap', component: InstitutionMap },
 ]
 
 const router = new VueRouter({

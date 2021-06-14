@@ -16,10 +16,8 @@ export default {
   },
   computed: {},
   created() {
-    getWorldJson().then((res) => {
-      this.mapData = res.data;
-    });
     getVaccineData().then((res) => {
+      // 获取全球疫苗数据
       for (const item of res.data.data.VaccineSituationData) {
         this.countryData.push({
           name: item.country,
@@ -27,17 +25,22 @@ export default {
           count: item.total_vaccinations_per_hundred,
         });
       }
-
-      this.$nextTick(() => {
-        setTimeout(() => {
-          let mapDom = this.$echarts.init(
-            document.getElementById("VaccineMap"),
-            null,
-            { renderer: "svg" }
-          );
-          this.$echarts.registerMap("world", this.mapData);
-          mapDom.setOption(this.getMapOptions(this.countryData, world));
-        }, 500);
+      getWorldJson().then((res) => {  // 获取json文件
+        this.mapData = res.data;
+        this.$nextTick(() => {
+          setTimeout(() => {
+            let mapDom = this.$echarts.init(
+              document.getElementById("VaccineMap"),
+              null,
+              { renderer: "svg" }
+            );
+            mapDom.showLoading({ text: "正在加载数据" }); // 加载动画
+            console.log(this.mapData);
+            this.$echarts.registerMap("world", this.mapData);
+            mapDom.setOption(this.getMapOptions(this.countryData, world));
+            mapDom.hideLoading(); // 隐藏加载动画
+          }, 500);
+        });
       });
     });
   },
@@ -50,7 +53,7 @@ export default {
         "#a1ccfd",
         "#c8e1fd",
         "#ecf5ff",
-      ]
+      ];
       let that = this;
       return {
         tooltip: {
@@ -83,19 +86,20 @@ export default {
           },
         },
         visualMap: {
-          type: 'piecewise',
+          type: "piecewise",
           splitNumber: 6,
           calculable: true,
-          orient: 'horizontal',
+          orient: "horizontal",
           dimension: 0,
           itemGap: 0,
-          pieces: [      // 自定义每一段的范围，以及每一段的文字
+          pieces: [
+            // 自定义每一段的范围，以及每一段的文字
             { gte: 100000000, color: colorArea[0] }, // 不指定 max，表示 max 为无限大（Infinity）。
             { gte: 10000000, lte: 99999999, color: colorArea[1] },
             { gte: 1000000, lte: 9999999, color: colorArea[2] },
             { gte: 100000, lte: 999999, color: colorArea[3] },
             { gte: 11, lte: 99999, color: colorArea[4] },
-            { lte: 10, color: colorArea[5] }          // 不指定 min，表示 min 为无限大（-Infinity）。
+            { lte: 10, color: colorArea[5] }, // 不指定 min，表示 min 为无限大（-Infinity）。
           ],
           realtime: false,
           color: colorArea,
@@ -104,7 +108,7 @@ export default {
           itemWidth: 45,
           itemHeight: 6,
           showLabel: false,
-          left: 'center',
+          left: "center",
         },
         series: [
           {

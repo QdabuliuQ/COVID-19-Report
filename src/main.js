@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import 'lib-flexible/flexible'  // 弹性布局
+import 'lib-flexible/flexible' // 弹性布局
 
 import {
   Swipe,
@@ -18,9 +18,20 @@ import {
 import {
   Sticky
 } from 'vant'; // 粘性布局
-import { Popup } from 'vant';  // 弹出层
-import { Cascader } from 'vant';
+import {
+  Popup
+} from 'vant'; // 弹出层
+import {
+  Cascader
+} from 'vant';
+import { Dialog } from 'vant';  // 对话框
+import { Form } from 'vant';  // 表单
+import { Field } from 'vant';  // 表单
+import { Calendar } from 'vant';  // 日历
+import { ActionSheet } from 'vant';  // 活动面板
+import { List } from 'vant';  // 下拉加载
 
+// 全局注册
 Vue.use(Swipe);
 Vue.use(SwipeItem);
 Vue.use(NavBar);
@@ -28,6 +39,13 @@ Vue.use(Icon);
 Vue.use(Sticky);
 Vue.use(Popup);
 Vue.use(Cascader);
+Vue.use(Dialog);
+Vue.use(Form);
+Vue.use(Field);
+Vue.use(Calendar);
+Vue.use(ActionSheet);
+Vue.use(List);
+
 
 import ContentSplit from "components/private/contentSplit/index.js" // 引入分割线组件
 Vue.use(ContentSplit)
@@ -36,8 +54,6 @@ import 'vant/lib/index.css' // 引入vantCss文件
 
 import 'assets/css/base.css' // 导入全局样式
 import 'assets/icon/common.css' // 导入全局字体图标
-
-// import 'lib-flexible' // 导入lib-flexible
 
 import * as echarts from 'echarts' // 导入echarts
 Vue.prototype.$echarts = echarts
@@ -70,7 +86,7 @@ Vue.prototype.fGetChartFontSize = () => {
     }
   })
 
-Vue.prototype.setUnitChar = (number, decimalDigit) => {  // 设置单位
+Vue.prototype.setUnitChar = (number, decimalDigit) => { // 设置单位
   decimalDigit = decimalDigit == null ? 2 : decimalDigit;
   var integer = Math.floor(number);
   var digit = getDigit(integer);

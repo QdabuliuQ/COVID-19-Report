@@ -124,7 +124,7 @@ export default {
 }
 .textBox_title2 {
   font-size: 20px;
-  font-weight: 550;
+  font-weight: bold;
   margin-bottom: 4px;
   letter-spacing: 2px;
 }

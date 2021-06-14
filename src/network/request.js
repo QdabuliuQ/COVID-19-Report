@@ -1,6 +1,5 @@
 import axios from 'axios'  // 导入axios
 import { Toast } from 'vant';  // 导入加载动画
-
 function startLoading() {
   ajaxTime ++
   Toast.loading({
@@ -24,6 +23,7 @@ function requestMethod(config, baseURL) {  // 封装请求
     baseURL,  // 请求根路径
     timeout: 10000,  // 请求时间
   })
+  
   instance.interceptors.request.use(config => {
     startLoading()
     return config
@@ -72,4 +72,8 @@ export function provinceNews(config) {
 
 export function RumourList(config) {
   return requestMethod(config, 'https://file1.dxycdn.com')
+}
+
+export function institutions(config) {
+  return requestMethod(config, '/apiMapQQ')
 }

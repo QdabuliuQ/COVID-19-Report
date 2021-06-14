@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2526750 */
-  src: url('//at.alicdn.com/t/font_2526750_ifx7h21jws.woff2?t=1623233565905') format('woff2'),
-       url('//at.alicdn.com/t/font_2526750_ifx7h21jws.woff?t=1623233565905') format('woff'),
-       url('//at.alicdn.com/t/font_2526750_ifx7h21jws.ttf?t=1623233565905') format('truetype');
+  src: url('//at.alicdn.com/t/font_2526750_3ji0xdnhwvs.woff2?t=1623638116328') format('woff2'),
+       url('//at.alicdn.com/t/font_2526750_3ji0xdnhwvs.woff?t=1623638116328') format('woff'),
+       url('//at.alicdn.com/t/font_2526750_3ji0xdnhwvs.ttf?t=1623638116328') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,30 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-fanhui:before {
+  content: "\e641";
+}
+
+.icon-dianhua:before {
+  content: "\e632";
+}
+
+.icon-jia:before {
+  content: "\e656";
+}
+
+.icon-fabu:before {
+  content: "\e63e";
+}
+
+.icon-checixiangqingriqi:before {
+  content: "\e621";
+}
+
+.icon-shijian:before {
+  content: "\e70f";
 }
 
 .icon-qidian:before {

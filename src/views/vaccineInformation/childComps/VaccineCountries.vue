@@ -74,9 +74,6 @@ export default {
           )
         );
       }
-      this.$nextTick(() => {
-        this.loadChart(0)
-      })
     });
   },
   components: {

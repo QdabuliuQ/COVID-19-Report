@@ -14,7 +14,7 @@
     <div class="province_container">
       <div class="province_top_bgImg">
         <div class="top_back_btn">
-          <van-icon @click="onClickLeft" size='46px' color="#fff" name="arrow-left" />
+          <van-icon @click="onClickLeft" size='22px' color="#fff" name="arrow-left" />
         </div>
         <div class="top_bgImg">
           <img src="https://mat1.gtimg.com/news/feiyanarea/area_head_bg.png" alt="">

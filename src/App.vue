@@ -3,7 +3,7 @@
     <!-- 对页面进行缓存处理 -->
     <div class="app_container">
       <transition>
-        <keep-alive exclude="ProvinceDetail">
+        <keep-alive exclude="ProvinceDetail,institutionMap">
           <router-view class="router" />
         </keep-alive>
       </transition>
@@ -146,8 +146,8 @@ export default {
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
   -ms-interpolation-mode: nearest-neighbor;
-  width: 23px;
-  height: 23px;
+  width: 21px;
+  height: 21px;
 }
 .tabbar_active {
   color: var(--color);

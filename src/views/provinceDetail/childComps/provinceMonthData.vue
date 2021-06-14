@@ -30,20 +30,21 @@ export default {
         title: {
           text: title,
           textStyle: {
-            fontSize: this.fGetChartFontSize() + 10,
+            fontSize: 14,
           },
           top: "0%",
           left: "1%",
         },
         legend: {
           // 图例
-          itemWidth: 30,
-          itemHeight: 20,
+          itemWidth: 25,
+          itemHeight: 12,
           textStyle: {
-            fontSize: this.fGetChartFontSize() + 5,
+            fontSize: 11,
           },
-          top: "0.5%",
+          top: "8%",
           right: "1%",
+          left: 'left'
         },
         xAxis: {
           type: "category",
@@ -51,7 +52,7 @@ export default {
           axisLabel: {
             rotate: 40,
             textStyle: {
-              fontSize: this.fGetChartFontSize(),
+              fontSize: 11,
             },
           },
           axisTick: {
@@ -64,10 +65,10 @@ export default {
           triggerOn: "click",
           textStyle: {
             color: "#FFF", // 文字的颜色
-            fontSize: "20", // 文字字体大小
+            fontSize: "11", // 文字字体大小
           },
-          padding: [12],
-          backgroundColor: "#000000b2",
+          padding: [7],
+          backgroundColor: "rgba(0, 0, 0, 0.623)",
           borderColor: "transparent",
           axisPointer: {
             type: "cross",
@@ -87,7 +88,7 @@ export default {
           type: "value",
           axisLabel: {
             textStyle: {
-              fontSize: this.fGetChartFontSize(),
+              fontSize: 11,
             },
           },
         },
@@ -95,7 +96,7 @@ export default {
         color,
         grid: {
           // 布局
-          top: "11%",
+          top: "20%",
           left: "1%",
           right: "1%",
           bottom: "2%",
@@ -199,6 +200,6 @@ export default {
 }
 .provinceNewData {
   width: 100%;
-  height: 230px;
+  height: 260px;
 }
 </style>
