@@ -1,4 +1,4 @@
-import {request, RumourList, anotherRequest, institutions} from './request'
+import {request, RumourList, anotherRequest, institutions, Transfer, vaccineData, vaccineNewsList} from './request'
 
 export function getNationalNews() {  // 获取国内日报
   return request({
@@ -44,5 +44,52 @@ export function getInstitutions(region, page_index, page_size) {  // 获取机�
       page_size,
       key: 'YNVBZ-FRJK3-BPX36-3XHBZ-U7WFQ-KBFMJ'
     }
+  })
+}
+
+export function getTransfer(id,type,date) {  // 迁徙路线
+  return Transfer({
+    url: 'app/qianxi/city',
+    params: {
+      dt: 'city',
+      id,
+      type,
+      date,
+      '_': '1623658817945',
+    }
+  })
+}
+
+export function getCityQushi(id,type,startDate) {  // 获取迁入迁出趋势数据
+  return Transfer({
+    url: 'app/qianxi/history',
+    params: {
+      dt: 'city',
+      id,
+      type,
+      startDate,
+      '_': '1623739834118',
+
+    }
+  })
+}
+
+export function getVaccineData(appid,schemaid,schemakey,size='',sort,order) {  // 获取疫苗信息
+  return vaccineData({
+    url: 'cache/wuji_public/object',
+    params: {
+      appid,
+      schemaid,
+      schemakey,
+      size,
+      sort,
+      order,
+    }
+  })
+}
+
+export function getVaccineNews() {  // 获取疫苗动态
+  return vaccineNewsList({
+    url: 'share/topic_news?id=TWF202011100035496L'
   })
 }

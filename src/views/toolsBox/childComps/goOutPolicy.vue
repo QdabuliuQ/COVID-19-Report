@@ -1,26 +1,16 @@
 <template>
   <div id="goOutPolicy">
-    <van-popup v-model="isShow" position="bottom" :style="{ height: '70%' }">
-      <van-cascader
-        v-model="cascaderValue"
-        :title="cascTitle"
-        :options="options"
-        active-color="#1d99d3"
-        @close="isShow = false"
-        @finish="onFinish"
-      />
-    </van-popup>
+    <cityListSheet @selectCity='selectCity' :cascTitle='cascTitle' ref="goOutPolicySheet"></cityListSheet>
     <van-nav-bar
       class="van-nav-bar"
       ref="nav_bar"
       :title="'出行政策查询'"
       left-arrow
       :fixed="true"
-      @click-left="onClickLeft"
+      @click-left="$router.go(-1)"
     />
     <div :style="{ marginTop: mTop }" class="policy_container">
-      <div class="clip_left clip_container"></div>
-      <div class="clip_right clip_container"></div>
+      <box-background></box-background>
       <div class="policy_select_box">
         <div class="policy_select_topBox">
           <div class="select_box_top select_box">
@@ -175,7 +165,10 @@
 <script>
 import "assets/css/vantCss/provinceDetail.css"; // 导入css样式
 import "assets/css/vantCss/goOutPolicy.css";
-import { getCityList, getCityPolicy } from "network/toolsBox";
+import boxBackground from "components/private/boxBackground";
+import { getCityPolicy } from "network/toolsBox";
+import cityListSheet from "components/private/cityListSheet"
+
 export default {
   name: "goOutPolicy",
   data() {
@@ -185,7 +178,6 @@ export default {
       options: [
         // 城市列表
       ],
-      cascaderValue: "",
       cascTitle: "",
       startPlace: {
         name: "请选择出发地",
@@ -201,63 +193,34 @@ export default {
     };
   },
   methods: {
-    onClickLeft() {
-      // 返回上一层
-      this.$router.go(-1);
-    },
 
     selectPlace() {
       // 打开选择面板
-      this.isShow = true;
+      this.$refs.goOutPolicySheet.showAction()
       this.cascTitle = "请选择出发地";
       this.selectFlag = "start";
     },
 
     selectPlace2() {
-      this.isShow = true;
+      this.$refs.goOutPolicySheet.showAction()
       this.cascTitle = "请选择目的地";
       this.selectFlag = "end";
     },
 
-    setCityList(list) {  // 设置城市数据
-      if (list.length != 0) {
-        let arr = [];
-        for (const item of list) {
-          if (item.list.length != 0) {
-            arr.push({
-              text: item.name,
-              value: item.id,
-              children: this.setCityList(item.list), // 进行递归调用
-            });
-          } else {
-            arr.push({
-              text: item.name,
-              value: item.id,
-            });
-          }
-        }
-        return arr;
-      } else {
-        return [];
-      }
-    },
-
-    onFinish(detail) {  // 监听是否选择完成
-      let result = detail.selectedOptions;
+    selectCity(city, value) {  // 监听是否选择完成
       if (this.selectFlag == "start") {
-        if (this.endPlace != result[result.length - 1].text) {
-          this.startPlace.name = result[result.length - 1].text;
-          this.startPlace.id = result[result.length - 1].value;
+        if (this.endPlace != city) {
+          this.startPlace.name = city;
+          this.startPlace.id = value;
           this.isShow = false;
         }
       } else {
-        if (result[result.length - 1].text != this.startPlace) {
-          this.endPlace.name = result[result.length - 1].text;
-          this.endPlace.id = result[result.length - 1].value;
+        if (city != this.startPlace) {
+          this.endPlace.name = city;
+          this.endPlace.id = value;
           this.isShow = false;
         }
       }
-      this.cascaderValue = "";
     },
 
     togglePlace() { // 切换目的地
@@ -289,11 +252,10 @@ export default {
       document.getElementsByClassName("van-nav-bar")[0].clientHeight + "px";
     this.noContentDomHeight = (window.screen.height - document.getElementsByClassName("van-nav-bar")[0].clientHeight - document.getElementsByClassName('policy_container')[0].clientHeight) + "px"
   },
-  created() {
-    getCityList().then((res) => {
-      this.options = this.setCityList(res.data.result);
-    });
-  },
+  components: {
+    cityListSheet,
+    boxBackground
+  }
 };
 </script>
 <style scoped>
@@ -307,35 +269,11 @@ export default {
   background-color: #fff;
 }
 .policy_container {
-  padding: 25px 15px;
   position: relative;
-}
-.clip_container {
-  position: absolute;
-}
-.clip_left {
-  clip-path: polygon(0 0, 0 100%, 100% 100%);
-  background-color: var(--color);
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-}
-.clip_right {
-  clip-path: polygon(0 0, 100% 0, 100% 100%);
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #4f5d73;
-}
-.policy_select_box {
-  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
-  padding: 15px;
-  border-radius: 8px;
-  overflow: hidden;
-  position: relative;
-  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
 }
 .select_box_top {
   display: flex;
@@ -388,7 +326,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #686868;
+  color: #f7f7f7;
   border-bottom: 1px solid #dfdfdf;
   box-sizing: border-box;
   font-weight: 550;
@@ -402,7 +340,7 @@ export default {
 .box_select_place .iconfont {
   font-size: 10px;
   margin-left: 5px;
-  color: #969696;
+  color: #ebebeb;
   position: relative;
   top: 1px;
 }
@@ -416,7 +354,7 @@ export default {
   font-size: 20px;
   position: relative;
   top: 1px;
-  color: #686868;
+  color: #f1f1f1;
 }
 .van-area {
   width: 100%;
@@ -552,6 +490,18 @@ export default {
   text-align: center;
   letter-spacing: 2px;
   font-weight: 550;
-  
+}
+.policy_select_box {
+  width: 90%;
+  background: rgba(231, 231, 231, 0.623);
+  backdrop-filter: blur(4px);
+  border-radius: 8px;
+  font-size: 12px;
+  position: relative;
+  z-index: 1;
+}
+.policy_select_topBox {
+  padding: 12px;
+  color: rgb(236, 236, 236);
 }
 </style>

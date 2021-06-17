@@ -64,6 +64,27 @@ export default {
       transitionName: "",
     };
   },
+  // 监听,当路由发生变化的时候执行
+  watch:{
+    $route(to,from){
+      switch (to.path) {
+        case '/DomesticReport':
+          this.activeIndex = 0
+          break;
+        case '/WorldReport':
+          this.activeIndex = 1
+          break;
+        case '/VaccineInformation':
+          this.activeIndex = 2
+          break;
+        case '/ToolsBox':
+          this.activeIndex = 3
+          break;
+        default:
+          break;
+      }
+    }
+  },
   methods: {
     toggleTabbar(index) {
       this.activeIndex = index;

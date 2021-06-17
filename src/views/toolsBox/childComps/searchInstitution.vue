@@ -142,8 +142,6 @@ export default {
         }
       }
       this.$store.state.otherInstitutions = arr
-      console.log(item);
-      console.log(arr);
       this.$router.push('/InstitutionMap')
     }
   },
@@ -183,7 +181,7 @@ export default {
   padding: 20px 0;
 }
 .select_place_container {
-  width: 80%;
+  width: 90%;
   background: rgba(231, 231, 231, 0.623);
   backdrop-filter: blur(4px);
   border-radius: 8px;

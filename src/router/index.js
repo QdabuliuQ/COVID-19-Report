@@ -23,6 +23,8 @@ const GoOutPolicy = () => import("views/toolsBox/childComps/goOutPolicy")  // �
 const PatientRoute = () => import("views/toolsBox/childComps/patientRoute")  // 疫情问题大全
 const SearchInstitution = () => import("views/toolsBox/childComps/searchInstitution")  // 核素检测机构
 const InstitutionMap = () => import("views/toolsBox/childComps/institutionMap")  // 核素检测机构
+const PopulationTransfer = () => import("views/toolsBox/childComps/populationTransfer")  // 入口迁徙
+const VaccineDetail = () => import("views/toolsBox/childComps/vaccineDetail")  // 世界疫苗动态
 
 const routes = [
   { path: '/', redirect: '/DomesticReport' },
@@ -43,6 +45,8 @@ const routes = [
   { path: '/PatientRoute', component: PatientRoute },
   { path: '/SearchInstitution', component: SearchInstitution },
   { path: '/InstitutionMap', component: InstitutionMap },
+  { path: '/PopulationTransfer', component: PopulationTransfer },
+  { path: '/VaccineDetail', component: VaccineDetail },
 ]
 
 const router = new VueRouter({

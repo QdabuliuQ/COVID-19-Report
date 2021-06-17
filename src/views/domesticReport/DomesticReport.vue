@@ -46,7 +46,9 @@ export default {
       demosticList: null,
       tableToTop: 500, // 表格顶部的距离
       demostic_trend_load: false,  // 国内疫情趋势是否加载
-      demostic_noinfect_load: false  // 国内无症状趋势是否加载
+      demostic_noinfect_load: false,  // 国内无症状趋势是否加载
+      throttleFun: null,  // 防抖动函数
+      throttleStopFun: null
     };
   },
   methods: {
@@ -103,13 +105,17 @@ export default {
     this.DemosticDetail();
   },
   mounted() {
+    this.throttleFun = throttle(this.$refs.cityTable.fixdHead, 150)
+
+    this.throttleStopFun = throttle(this.$refs.cityTable.hideHead, 150)
+
     setTimeout(() => {
       this.tableToTop = this.$refs.cityTable.$el.getBoundingClientRect().top;
       window.addEventListener("scroll", (e) => {  // 监听滚动
         if (window.pageYOffset >= this.tableToTop && window.pageYOffset <= this.tableToTop + 100) {
-          throttle(this.$refs.cityTable.fixdHead(), 300)
+          this.throttleFun()
         } else if(window.pageYOffset < this.tableToTop){
-          throttle(this.$refs.cityTable.hideHead(), 300)
+          this.throttleStopFun()
         }
       });
     }, 600);

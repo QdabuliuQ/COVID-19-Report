@@ -62,6 +62,7 @@
     <div @click="showDialogClick" class="addRoutesBtn">
       <i class="iconfont icon-jia"></i>
     </div>
+    <!-- 上报信息 -->
     <van-dialog
     :before-close="onBeforeClose"
     @confirm='submitForm'

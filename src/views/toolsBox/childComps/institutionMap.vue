@@ -37,10 +37,6 @@
 let infoWindow;
 export default {
   name: "institutionMap",
-  created() {
-    console.log(1);
-    console.log(this.$store.state.institutionDetail);
-  },
   methods: {
     backBtn() {
       this.$router.go(-1);

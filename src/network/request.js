@@ -59,7 +59,7 @@ export function provinceJsonRequest(config) {  // 获取省份json文件
 
 
 export function provinceHospital(config){
-  return requestMethod(config, 'https://wechat.wecity.qq.com/')
+  return requestMethod(config, '/apiProHospital')
 }
 
 export function provinceMapJson(config){  // 地图json数据
@@ -76,4 +76,16 @@ export function RumourList(config) {
 
 export function institutions(config) {
   return requestMethod(config, '/apiMapQQ')
+}
+
+export function Transfer(config) {
+  return requestMethod(config, '/apiMapTransfer')
+}
+
+export function vaccineData(config) {
+  return requestMethod(config, '/apiVaccineData')
+}
+
+export function vaccineNewsList(config) {
+  return requestMethod(config, '/apiVaccineNews')
 }

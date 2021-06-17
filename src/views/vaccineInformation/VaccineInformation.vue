@@ -43,7 +43,7 @@ export default {
   name: 'VaccineInformation',
   data () {
     return {
-      vaccine_countries_load: false
+      vaccine_countries_load: false,
     }
   },
   components: {
@@ -55,9 +55,12 @@ export default {
   },
   methods: {
     listenScroll() {
+      let chartToTop = this.$refs.vaccine_countries.$el.getBoundingClientRect().top
       if (!this.vaccine_countries_load) {
-        this.$refs.vaccine_countries.loadChart(0)
-        this.vaccine_countries_load = true
+        if (chartToTop <= window.innerHeight - this.$store.state.nav_bar_clientHeight) {
+          this.$refs.vaccine_countries.loadChart(0)
+          this.vaccine_countries_load = true
+        }
       }
     }
   },

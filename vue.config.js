@@ -78,6 +78,46 @@ module.exports = {
 					'^/apiMapQQ': '' //代理路径
 				}
 			},
+			'/apiMapTransfer': {
+				//代理api
+				target: 'https://map.so.com/', // 代理接口(注意只要域名就够了)
+				changeOrigin: true, //是否跨域
+				secure: false,
+				pathRewrite: {
+					//重写路径
+					'^/apiMapTransfer': '' //代理路径
+				}
+			},
+			'/apiVaccineData': {
+				//代理api
+				target: 'https://v.qq.com/', // 代理接口(注意只要域名就够了)
+				changeOrigin: true, //是否跨域
+				secure: false,
+				pathRewrite: {
+					//重写路径
+					'^/apiVaccineData': '' //代理路径
+				}
+			},
+			'/apiVaccineNews': {
+				//代理api
+				target: 'https://view.inews.qq.com', // 代理接口(注意只要域名就够了)
+				changeOrigin: true, //是否跨域
+				secure: false,
+				pathRewrite: {
+					//重写路径
+					'^/apiVaccineNews': '' //代理路径
+				}
+			},
+			'/apiProHospital': {
+				//代理api
+				target: 'https://wechat.wecity.qq.com/', // 代理接口(注意只要域名就够了)
+				changeOrigin: true, //是否跨域
+				secure: false,
+				pathRewrite: {
+					//重写路径
+					'^/apiProHospital': '' //代理路径
+				}
+			},
 		}
 	},
 }

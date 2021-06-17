@@ -1,6 +1,6 @@
 <template>
   <div id="ToolsBox">
-    <div class="tools_item" @click="routerClick(index)" v-for="item,index in toolList" :key="item.name">
+    <div class="tools_item" @click="routerClick(index, item.routerPath)" v-for="item,index in toolList" :key="item.name">
       <div :ref="'toolsItem'+index" :class="[index%2==0?'even_item':'odd_item']" class="left_item">
         <i :ref="'icon'+index" class="iconfont" :class="item.icon"></i>
       </div>
@@ -15,12 +15,13 @@ export default {
   data () {
     return {
       toolList: [
-        {name: '国内疫情速报', icon: 'icon-subao'},
-        {name: '谣言排行榜', icon: 'icon-yaoyan'},
-        {name: '出行政策查询', icon: 'icon-zengce'},
-        {name: '患者行程轨迹', icon: 'icon-chuxing'},
-        {name: '核酸检测机构', icon: 'icon-jigou'},
-        {name: '疫情风险等级', icon: 'icon-fengxian'},
+        {name: '国内疫情速报', icon: 'icon-subao', routerPath: '/NationalNews'},
+        {name: '谣言排行榜', icon: 'icon-yaoyan', routerPath: '/RumourRanking'},
+        {name: '出行政策查询', icon: 'icon-zengce', routerPath: '/GoOutPolicy'},
+        {name: '患者行程轨迹', icon: 'icon-chuxing', routerPath: '/PatientRoute'},
+        {name: '核酸检测机构', icon: 'icon-jigou', routerPath: '/SearchInstitution'},
+        {name: '入口迁徙分布', icon: 'icon-qianxi', routerPath: '/PopulationTransfer'},
+        {name: '世界疫苗动态', icon: 'icon-yimiaodongtai', routerPath: '/VaccineDetail'},
       ]
     }
   },
@@ -31,29 +32,11 @@ export default {
       }, 300);
     },
 
-    routerClick(index) {
+    routerClick(index, path) {
       this.$refs['icon'+index][0].classList.add('clickIconClass')
       this.$refs['title'+index][0].classList.add('clickTextClass')
       document.getElementsByClassName('left_item')[index].classList.add('clickClipClass')
-      switch (index) {
-        case 0:
-          this.setRouter('/NationalNews')
-          break;
-        case 1:
-          this.setRouter('/RumourRanking')
-          break;
-        case 2:
-          this.setRouter('/GoOutPolicy')
-          break;
-        case 3:
-          this.setRouter('/PatientRoute')
-          break;
-        case 4:
-          this.setRouter('/SearchInstitution')
-          break;
-        default:
-          break;
-      }
+      this.setRouter(path)  // 路由跳转
       setTimeout(() => {
         this.$refs['toolsItem'+index][0].classList.remove('clickClipClass')
         this.$refs['icon'+index][0].classList.remove('clickIconClass')
@@ -127,5 +110,8 @@ export default {
 }
 .clickClipClass {
   clip-path: polygon(0% 0%, 100% 0, 100% 50%, 100% 100%, 0% 100%);
+}
+.icon-qianxi {
+  font-size: 45px !important;
 }
 </style>
