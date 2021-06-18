@@ -38,7 +38,7 @@ export default {
   methods: {
     onFinish(detail) {  // 监听是否选择完成
       let result = detail.selectedOptions;
-      this.$emit('selectCity', result[result.length-1].text, result[result.length-1].value)
+      this.$emit('selectCity', result[result.length-1].text, result[result.length-1].value, result)
       this.cascaderValue = "";
       this.showSheet = false
     },

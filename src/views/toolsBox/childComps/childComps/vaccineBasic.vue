@@ -19,7 +19,7 @@
       </div>
     </div>
     <!-- 疫苗内容信息 -->
-    <van-popup v-model="showBasicDataPopup" closeable>
+    <van-popup class="basicPopuo" v-model="showBasicDataPopup" closeable>
       <div class="vaccine_data_box">
         <div class="data_box_scroll">
           <div

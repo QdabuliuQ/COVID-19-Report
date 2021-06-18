@@ -88,7 +88,13 @@ export default {
             this.$route.params.cityName,
             this.featuresData
           ); // 注册地图
-          mapChartDom.setOption(this.getMapOptions(this.cityNowData)); // 设置地图数据
+          let option = this.getMapOptions(this.cityNowData)
+          if (this.$route.params.cityName == "海南") {
+            option.geo.center = [109.844902, 19.0392];//中心位置
+            option.geo.layoutCenter = ['50%', '60%'];//地图相对容器偏移
+            option.geo.layoutSize = "700%";//地图放大比例
+          }
+          mapChartDom.setOption(option); // 设置地图数据
         }
       }, 800);
     }

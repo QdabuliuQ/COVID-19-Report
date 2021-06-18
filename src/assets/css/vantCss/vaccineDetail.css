@@ -1,6 +1,7 @@
-.van-popup {
+.basicPopuo {
   width: 80%;
   height: 65%;
   border-radius: 8px;
   overflow: hidden;
+  background-color: #fff;
 }

@@ -1,7 +1,27 @@
 <template>
   <div id="countriesTable">
+    <van-sticky>
+      <div class="sticky_container">
+        <div class="sticky_thead">
+          <div class="sticky_thead_item thead_item1 thead_td_color1">地区</div>
+          <div class="sticky_thead_item thead_item2 thead_td_color2">
+            现存确诊
+          </div>
+          <div class="sticky_thead_item thead_item3 thead_td_color3">
+            累计确诊
+          </div>
+          <div class="sticky_thead_item thead_item4 thead_td_color4">
+            累计治愈
+          </div>
+          <div class="sticky_thead_item thead_item5 thead_td_color5">
+            累计死亡
+          </div>
+        </div>
+      </div>
+    </van-sticky>
+
     <table class="table_list">
-      <thead>
+      <!-- <thead>
         <tr class="table_list_tr">
           <td class="table_thead_td thead_td_item1 thead_td_color1">地区</td>
           <td class="table_thead_td thead_td_item2 thead_td_color2">
@@ -17,58 +37,49 @@
             累计死亡
           </td>
         </tr>
-      </thead>
+      </thead> -->
       <tbody>
         <tr
           class="table_list_tr country_tr"
           v-for="item in countryData"
           :key="item.name"
         >
-          <td>
+          <td class="td_item item_country">
             <div class="td_item_name">{{ item.name }}</div>
           </td>
-          <td>
+          <td class="td_item">
             <div class="td_item_count">{{ item.nowConfirm | setUnit(2) }}</div>
             <div class="td_item_newAdd">
               {{ item.nowConfirmCompare | setData }}
             </div>
           </td>
-          <td>
+          <td class="td_item">
             <div class="td_item_count">{{ item.confirm | setUnit(2) }}</div>
             <div class="td_item_newAdd">{{ item.confirmAdd | setData }}</div>
           </td>
-          <td>
+          <td class="td_item">
             <div class="td_item_count">{{ item.heal | setUnit(2) }}</div>
             <div class="td_item_newAdd">{{ item.healCompare | setData }}</div>
           </td>
-          <td>
+          <td class="td_item">
             <div class="td_item_count">{{ item.dead | setUnit(2) }}</div>
             <div class="td_item_newAdd">{{ item.deadCompare | setData }}</div>
           </td>
         </tr>
       </tbody>
     </table>
-    <div v-show="showThead" class="sticky_container">
-      <div class="sticky_thead">
-        <div class="sticky_thead_item thead_item1 thead_td_color1">地区</div>
-        <div class="sticky_thead_item thead_item2 thead_td_color2">现存确诊</div>
-        <div class="sticky_thead_item thead_item3 thead_td_color3">累计确诊</div>
-        <div class="sticky_thead_item thead_item4 thead_td_color4">累计治愈</div>
-        <div class="sticky_thead_item thead_item5 thead_td_color5">累计死亡</div>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
 import { getAllCountryData } from "network/worldReport";
+import "assets/css/vantCss/countriesTable.css"
 
 export default {
   name: "countriesTable",
   data() {
     return {
       countryData: [],
-      showThead: false
     };
   },
   filters: {
@@ -88,37 +99,51 @@ export default {
     });
   },
   mounted() {
-    let thead_height =
-      document.getElementsByClassName("table_list_tr")[0].clientHeight;
-    let sticky_thead = document.getElementsByClassName("sticky_thead")[0];
-    sticky_thead.style.height = thead_height + "px";
-    let item_thead = document.getElementsByClassName("table_thead_td");
-    let item_sticky_thead = document.getElementsByClassName("sticky_thead_item");
-    for (let i = 0; i < item_thead.length; i++) {
-      item_sticky_thead[i].style.width = item_thead[i].getBoundingClientRect().width + "px";
-    }
-    this.tableToTop = document.getElementsByClassName('table_list')[0].getBoundingClientRect().top
+    this.$nextTick(() => {
+      setTimeout(() => {
+        let sticky_thead = document.getElementsByClassName("sticky_thead")[0];
+        sticky_thead.style.height = "40px";
+        let td_item = document.getElementsByClassName("td_item");
+        let sticky_thead_item =
+          document.getElementsByClassName("sticky_thead_item");
+        for (let i = 0; i < 5; i++) {
+          sticky_thead_item[i].style.width =
+            td_item[i].getBoundingClientRect().width + "px";
+        }
+        this.tableToTop = document
+          .getElementsByClassName("table_list")[0]
+          .getBoundingClientRect().top;
+      }, 1000);
+    });
   },
   methods: {
     listenScroll() {
-      if (window.pageYOffset >= this.tableToTop && window.pageYOffset <= this.tableToTop + 100) {
-        this.showThead = true
-      } else if(window.pageYOffset < this.tableToTop){
-        this.showThead = false
+      if (
+        window.pageYOffset >= this.tableToTop &&
+        window.pageYOffset <= this.tableToTop + 100
+      ) {
+        this.showThead = true;
+      } else if (window.pageYOffset < this.tableToTop) {
+        this.showThead = false;
       }
-    }
+    },
   },
-  activated () {
+  activated() {
     this.$nextTick(() => {
-      document.addEventListener('scroll', this.listenScroll)
-    })
+      document.addEventListener("scroll", this.listenScroll);
+    });
   },
-  deactivated () {
-    document.removeEventListener('scroll', this.listenScroll)
-  }
+  deactivated() {
+    document.removeEventListener("scroll", this.listenScroll);
+  },
 };
 </script>
 <style scoped>
+
+.sticky_thead {
+  display: flex;
+  align-items: center;
+}
 .table_list {
   width: 100%;
   text-align: center;
@@ -186,9 +211,13 @@ export default {
   background-color: #9696960c;
 }
 .sticky_container {
-  position: fixed;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* position: fixed;
   top: 0;
-  background-color: #f6f6f6 !important
+  background-color: #f6f6f6 !important */
 }
 .sticky_thead_item {
   display: flex;
@@ -198,9 +227,22 @@ export default {
   float: left;
   font-size: 12px;
 }
-.thead_item1{background-color: #f6f6f6 !important; }
-.thead_item2{background-color: #fff2de !important; }
-.thead_item3{background-color: #ffcdcd !important; }
-.thead_item4{background-color: #ceffce !important; }
-.thead_item5{background-color: #cbcbcb !important; }
+.thead_item1 {
+  background-color: #f6f6f6 !important;
+}
+.thead_item2 {
+  background-color: #fff2de !important;
+}
+.thead_item3 {
+  background-color: #ffcdcd !important;
+}
+.thead_item4 {
+  background-color: #ceffce !important;
+}
+.thead_item5 {
+  background-color: #cbcbcb !important;
+}
+.item_country {
+  width: 20%;
+}
 </style>

@@ -70,6 +70,7 @@
     :width='"90%"'
     title="上报患者行程路线" 
     :confirm-button-color='"#1d99d3"'
+    class="routerForm"
     show-cancel-button>
       <div class="dialogTip">患者行程信息审核通过后自动发布</div>
       <van-form ref="vanForm" @submit="onSubmit">
@@ -113,7 +114,7 @@
       </van-form>
     </van-dialog>
     <!-- 地区选择 -->
-    <van-popup v-model="showPopup" position="bottom" :style="{ height: '70%' }">
+    <van-popup class="routerPopup" v-model="showPopup" position="bottom" :style="{ height: '70%' }" :title="'选择城市'">
       <van-cascader
         v-model="cascaderValue"
         :title="cascTitle"
@@ -221,11 +222,13 @@ export default {
     selectEndPlace() {  // 选择终点城市
       this.selectPlace = 'end'
       this.showPopup = true
+      this.cascTitle = '选择目的城市'
     },
 
     selectStartPlace() {  // 选择起点城市
       this.selectPlace = 'start'
       this.showPopup = true
+      this.cascTitle = '选择出发城市'
     },
 
     confirmDate(d) {  // 确定日期
@@ -408,5 +411,8 @@ export default {
   font-size: 12px;
   color: rgb(165, 165, 165);
   margin-bottom: 10px;
+}
+.routerForm .van-button {
+  background-color: #fff !important;
 }
 </style>

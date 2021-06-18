@@ -6,7 +6,7 @@
       :title="'国内疫情速报'"
       left-arrow
       :fixed="true"
-      @click-left="onClickLeft"
+      @click-left="$router.go(-1)"
     />
     <div v-if="newsList.length != 0" :style="{ marginTop: mTop }" class="news_container">
       <a :href="item.url" class="news_items" v-for="(item, index) in newsList" :key="index">

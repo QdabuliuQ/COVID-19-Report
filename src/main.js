@@ -30,7 +30,11 @@ import { Field } from 'vant';  // 表单
 import { Calendar } from 'vant';  // 日历
 import { ActionSheet } from 'vant';  // 活动面板
 import { List } from 'vant';  // 下拉加载
-import { Tab, Tabs } from 'vant';
+import { Tab, Tabs } from 'vant';  // tab栏
+import { Stepper } from 'vant';  // 步进器
+import { RadioGroup, Radio } from 'vant';  // 单选框
+import { Button } from 'vant';  // 按钮
+import { DatetimePicker } from 'vant';
 
 // 全局注册
 Vue.use(Swipe);
@@ -48,6 +52,11 @@ Vue.use(ActionSheet);
 Vue.use(List);
 Vue.use(Tab);
 Vue.use(Tabs);
+Vue.use(Stepper);
+Vue.use(Radio);
+Vue.use(RadioGroup);
+Vue.use(Button);
+Vue.use(DatetimePicker);
 
 import ContentSplit from "components/private/contentSplit/index.js" // 引入分割线组件
 Vue.use(ContentSplit)

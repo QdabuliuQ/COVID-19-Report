@@ -2,7 +2,7 @@
   <div id="VaccineInformation">
     <div class="vac_top_container">
       <div class="vac_top_bgImg">
-        <img src="https://www.picbed.cn/images/2021/06/08/head_bg_new.png" alt="">
+        <img src="https://z3.ax1x.com/2021/06/17/2znZOf.png" alt="">
       </div>
       <div class="vac_top_textBox">
         <div class="textBox_title">全球新冠疫苗</div>

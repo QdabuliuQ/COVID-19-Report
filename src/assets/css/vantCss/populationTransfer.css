@@ -1,6 +1,8 @@
-.van-popup {
-  background-color: #364152;
+.transferSheet {
+  height: 70%;
+  width: 100%;
+  background-color: #364152 !important;
 }
-.van-action-sheet__header {
+.transferSheet .van-action-sheet__header {
   color: rgb(230, 230, 230);
 }

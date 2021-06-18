@@ -15,13 +15,14 @@ export default {
   data () {
     return {
       toolList: [
-        {name: '国内疫情速报', icon: 'icon-subao', routerPath: '/NationalNews'},
-        {name: '谣言排行榜', icon: 'icon-yaoyan', routerPath: '/RumourRanking'},
-        {name: '出行政策查询', icon: 'icon-zengce', routerPath: '/GoOutPolicy'},
-        {name: '患者行程轨迹', icon: 'icon-chuxing', routerPath: '/PatientRoute'},
-        {name: '核酸检测机构', icon: 'icon-jigou', routerPath: '/SearchInstitution'},
-        {name: '入口迁徙分布', icon: 'icon-qianxi', routerPath: '/PopulationTransfer'},
         {name: '世界疫苗动态', icon: 'icon-yimiaodongtai', routerPath: '/VaccineDetail'},
+        {name: '疫情人口迁徙', icon: 'icon-qianxi', routerPath: '/PopulationTransfer'},
+        {name: '疫苗接种预约', icon: 'icon-yuyue', routerPath: '/AppointVaccine'},
+        {name: '国内疫情速报', icon: 'icon-subao', routerPath: '/NationalNews'},
+        {name: '谣言排行榜', icon: 'icon-yaoyan', routerPath: '/RumourRanking'}, 
+        {name: '出行政策查询', icon: 'icon-zengce', routerPath: '/GoOutPolicy'},
+        {name: '核酸检测机构', icon: 'icon-jigou', routerPath: '/SearchInstitution'},
+        {name: '患者行程轨迹', icon: 'icon-chuxing', routerPath: '/PatientRoute'},
       ]
     }
   },

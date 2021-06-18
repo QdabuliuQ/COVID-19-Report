@@ -25,6 +25,7 @@ const SearchInstitution = () => import("views/toolsBox/childComps/searchInstitut
 const InstitutionMap = () => import("views/toolsBox/childComps/institutionMap")  // 核素检测机构
 const PopulationTransfer = () => import("views/toolsBox/childComps/populationTransfer")  // 入口迁徙
 const VaccineDetail = () => import("views/toolsBox/childComps/vaccineDetail")  // 世界疫苗动态
+const AppointVaccine = () => import("views/toolsBox/childComps/appointVaccine")  // 世界疫苗动态
 
 const routes = [
   { path: '/', redirect: '/DomesticReport' },
@@ -47,6 +48,7 @@ const routes = [
   { path: '/InstitutionMap', component: InstitutionMap },
   { path: '/PopulationTransfer', component: PopulationTransfer },
   { path: '/VaccineDetail', component: VaccineDetail },
+  { path: '/AppointVaccine', component: AppointVaccine },
 ]
 
 const router = new VueRouter({

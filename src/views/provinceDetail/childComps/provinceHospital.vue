@@ -10,7 +10,7 @@
             <div class="hospitalItem_box">
               <div class="item_cityName">{{item.cityName}}</div>
               <div class="item_hospCount">{{item.count}}家</div>
-              <div class="item_url">
+              <div v-if="item.link" class="item_url">
                 <a :href="item.link.url">查看<i class="iconfont icon-gengduo"></i></a>
               </div>
             </div>
@@ -45,10 +45,9 @@ export default {
   },
   created () {
     getCityHospital(this.$route.params.cityName).then(res => {
-      console.log(res);
       this.dataLength = res.data.args.rsp.info.citys.length
       if (this.dataLength <= 8) {
-        this.hospitalData = res.data.args.rsp.info.citys
+        this.hospitalData = [res.data.args.rsp.info.citys]
       } else if (this.dataLength > 8) {
         this.hospitalData = this.group(res.data.args.rsp.info.citys, 8)
       } else {

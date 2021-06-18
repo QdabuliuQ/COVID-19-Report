@@ -1,0 +1,33 @@
+.van-cell__title {
+  width: 90px;
+}
+.van-cell {
+  box-sizing: border-box;
+  border-bottom: 1px solid rgb(233, 233, 233);
+}
+.van-cell:last-child {
+  border-bottom: 1px solid transparent;
+}
+.van-field__control {
+  font-size: 15px;
+}
+/* .van-button {
+  background-color: var(--color);
+  border: 1px solid #1485b9;
+  letter-spacing: 1px;
+} */
+.vaccinePopup {
+  background-color: transparent;
+  height: 50%;
+}
+.van-picker {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.smsField .van-button {
+  background-color: var(--color);
+}

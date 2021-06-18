@@ -259,6 +259,9 @@ export default {
 };
 </script>
 <style scoped>
+.van-nav-bar {
+  z-index: 999;
+}
 #goOutPolicy {
   min-width: 100vw;
   min-height: 100vh;
@@ -329,7 +332,6 @@ export default {
   color: #f7f7f7;
   border-bottom: 1px solid #dfdfdf;
   box-sizing: border-box;
-  font-weight: 550;
 }
 .box_select_left {
   margin: 0 10px 0 0;

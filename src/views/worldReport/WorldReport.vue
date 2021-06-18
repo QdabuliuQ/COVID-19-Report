@@ -3,7 +3,7 @@
   <div id="worldReport">
     <div class="report_top_container">
       <div class="top_container_imgBox">
-        <img src="https://www.picbed.cn/images/2021/06/08/1622190733.jpg" alt="">
+        <img src="https://z3.ax1x.com/2021/06/17/2zmTwF.jpg" alt="">
       </div>
       <div class="top_container_textBox">
         <div class="textBox_title">新型冠状病毒</div>

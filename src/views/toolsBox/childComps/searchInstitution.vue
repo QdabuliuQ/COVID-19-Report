@@ -62,7 +62,7 @@
         <img src="~assets/image/goOutPolicy/noContent.svg" alt="">
       </div>
     </div>
-    <van-action-sheet v-model="showSheet" title="选择城市">
+    <van-action-sheet class="institutionSheet" v-model="showSheet" title="选择城市">
       <div class="sheetContent">
         <div
           @click="selectPlaceItem(index, item.name)"
@@ -163,6 +163,9 @@ export default {
 };
 </script>
 <style scoped>
+.institutionSheet {
+  background-color: #fff !important;
+}
 .van-nav-bar {
   z-index: 2;
 }

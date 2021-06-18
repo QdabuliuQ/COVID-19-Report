@@ -33,6 +33,7 @@
       :max-date="maxDate"
     />
     <van-action-sheet
+      class="transferSheet"
       v-model="showSheetQushi"
       :title="`${city}${moduleMap}趋势图`"
     >
@@ -47,7 +48,7 @@
 import { getTransfer, getCityQushi } from "network/toolsBox";
 import cityListSheet from "components/private/cityListSheet";
 import "assets/css/vantCss/populationTransfer.css";
-
+import { Toast } from 'vant';
 
 export default {
   name: "populationTransfer",
@@ -284,43 +285,55 @@ export default {
       // 请求数据创建地图
       this.geoCoordMap = {};
       this.toCityData = [];
-      getTransfer(this.code, this.NowMode, this.time).then((res) => {
-        let result = res.data.data;
-        if (this.NowMode == "move_in") {
-          // 迁入模式数据设计
-          for (const item of result.list) {
-            this.geoCoordMap[item.city_name] = [
-              item.coords.lng,
-              item.coords.lat,
-            ];
-            this.toCityData.push([
-              { name: item.city_name },
-              { name: result.ori.city, value: item.value },
-            ]);
+      getTransfer(this.code, this.NowMode, this.time).then((res) => {  // 获取数据
+        if (res.data.data.list.length != 0 && res.data.data.ori.length != 0) {   // 判断是否有数据
+          let result = res.data.data;
+          if (this.NowMode == "move_in") {
+            // 迁入模式数据设计
+            for (const item of result.list) {
+              this.geoCoordMap[item.city_name] = [
+                item.coords.lng,
+                item.coords.lat,
+              ];
+              this.toCityData.push([
+                { name: item.city_name },
+                { name: result.ori.city, value: item.value },
+              ]);
+            }
+          } else {
+            // 迁出模式数据设计
+            for (const item of result.list) {
+              this.geoCoordMap[item.city_name] = [
+                item.coords.lng,
+                item.coords.lat,
+              ];
+              this.toCityData.push([
+                { name: result.ori.city },
+                { name: item.city_name, value: item.value },
+              ]);
+            }
           }
+          this.geoCoordMap[result.ori.city] = [
+            // 添加当地的经纬度
+            result.ori.coords.lng,
+            result.ori.coords.lat,
+          ];
+          this.$nextTick(() => {
+            setTimeout(() => {
+              this.setMapMethod();
+            }, 300);
+          });
         } else {
-          // 迁出模式数据设计
-          for (const item of result.list) {
-            this.geoCoordMap[item.city_name] = [
-              item.coords.lng,
-              item.coords.lat,
-            ];
-            this.toCityData.push([
-              { name: result.ori.city },
-              { name: item.city_name, value: item.value },
-            ]);
+          Toast.fail('暂无数据来源');
+          // 模式切换
+          if (this.NowMode == "move_in") {
+            this.NowMode = "move_out";
+            this.moduleMap = "迁出情况";
+          } else {
+            this.NowMode = "move_in";
+            this.moduleMap = "迁入情况";
           }
         }
-        this.geoCoordMap[result.ori.city] = [
-          // 添加当地的经纬度
-          result.ori.coords.lng,
-          result.ori.coords.lat,
-        ];
-        this.$nextTick(() => {
-          setTimeout(() => {
-            this.setMapMethod();
-          }, 300);
-        });
       });
     },
 
@@ -367,11 +380,18 @@ export default {
     },
 
     qushiCharts() {
+      // 打开趋势图表
       let myChart;
       setTimeout(() => {
-        myChart = this.$echarts.getInstanceByDom(document.getElementsByClassName("chart_container")[0])
+        myChart = this.$echarts.getInstanceByDom(
+          document.getElementsByClassName("chart_container")[0]
+        );
         if (myChart == null) {
-          myChart = this.$echarts.init(document.getElementsByClassName("chart_container")[0], null, { renderer: "svg" });
+          myChart = this.$echarts.init(
+            document.getElementsByClassName("chart_container")[0],
+            null,
+            { renderer: "svg" }
+          );
         }
       }, 200);
       this.showSheetQushi = true; // 显示action
@@ -385,8 +405,12 @@ export default {
         } else {
           m = (m - 1 + "").padStart(2, "0");
         }
-        let d = (date.getDate() + "").padStart(2, "0");  // 处理日期
-        getCityQushi(this.code, this.NowMode, y + m + d).then((res) => {  // 获取趋势数据
+        let d = (date.getDate() + "").padStart(2, "0"); // 处理日期
+        this.yearList = [];
+        this.dateList = [];
+        this.lastYearList = [];
+        getCityQushi(this.code, this.NowMode, y + m + d).then((res) => {
+          // 获取趋势数据
           // 获取数据
           for (const key in res.data.data.list) {
             this.yearList.push(res.data.data.list[key]);
@@ -482,15 +506,13 @@ export default {
               },
             },
           };
-          myChart.setOption(options);
+          myChart.setOption(options, true);
         });
-        this.chartsCity = this.city
+        this.chartsCity = this.city;
       }
     },
   },
-  mounted() {
-    
-  },
+  mounted() {},
 };
 </script>
 <style scoped>
