@@ -166,6 +166,7 @@ export default {
 
     getCityList().then((res) => {  // 获取城市数据
       this.options = this.setCityList(res.data.result);
+      console.log(this.options);
     });
   },
   methods: {

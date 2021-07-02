@@ -44,7 +44,6 @@
             {{item.showText}} <i class="iconfont" :class="item.showIcon"></i>
           </div>
         </div>
-        
       </div>
     </div>
   </div>

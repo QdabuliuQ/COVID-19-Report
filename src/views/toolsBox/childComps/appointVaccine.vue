@@ -235,10 +235,10 @@ export default {
     },
 
     submitData() {  // 提交数据
-      this.$refs.userFormData.validate().then(res => {
+      this.$refs.userFormData.validate().then(res => {  // 表单验证
         if (res == undefined) {
-          Toast.success('信息提交成功');
-          for (const key in this.userForm) {
+          Toast.success('信息提交成功');  // 提示
+          for (const key in this.userForm) {  // 清除数据
             if (key != 'gender' && key != 'age' && key != 'hasDisease') {
               this.userForm[key] = ''
             } else {
@@ -257,7 +257,7 @@ export default {
               }
             }
           }
-          this.formKey ++
+          this.formKey ++  // 刷新表单
         }
       }, err => {
       })

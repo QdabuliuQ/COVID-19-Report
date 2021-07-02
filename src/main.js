@@ -21,9 +21,7 @@ import {
 import {
   Popup
 } from 'vant'; // 弹出层
-import {
-  Cascader
-} from 'vant';
+import { Cascader } from 'vant';
 import { Dialog } from 'vant';  // 对话框
 import { Form } from 'vant';  // 表单
 import { Field } from 'vant';  // 表单
@@ -68,6 +66,8 @@ import 'assets/icon/common.css' // 导入全局字体图标
 
 import * as echarts from 'echarts' // 导入echarts
 Vue.prototype.$echarts = echarts
+
+
 import 'static/js/china.js' // 导入china.js配合地图显示
 
 Vue.config.productionTip = false
