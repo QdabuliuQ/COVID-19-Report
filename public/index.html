@@ -4,9 +4,23 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>新冠肺炎实时报告</title>
-    <script charset="utf-8" src="https://map.qq.com/api/gljs?v=1.exp&key=YLSBZ-6UP6O-U4PWN-SSULI-P33EO-TSBKE"></script>
+    <link rel="shortcut icon" href="reportIcon.ico" />
+    <title><%= htmlWebpackPlugin.options.isProd ? '' : 'dev-' %>新冠肺炎实时报告</title>
+
+    <!-- 判断是否是生产模式 -->
+    <% if(htmlWebpackPlugin.options.isProd){ %>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script> <!-- vue -->
+    <script src="https://cdn.staticfile.org/vue-router/3.5.1/vue-router.min.js"></script> <!-- vue-router -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- axios -->
+    <script src="https://cdn.staticfile.org/echarts/5.1.1/echarts.min.js"></script> <!-- echarts -->
+    <script src="https://cdn.jsdelivr.net/npm/vant@2.12.16/lib/vant.min.js"></script> <!-- vant -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.12.16/lib/index.css"/> <!-- vant-css -->
+    <script src="https://unpkg.com/vuex"></script> <!-- vuex -->
+    
+    <% } %>
+
+    <script charset="utf-8" src="https://map.qq.com/api/gljs?v=1.exp&key=YLSBZ-6UP6O-U4PWN-SSULI-P33EO-TSBKE"></script> <!-- 腾讯地图 -->
   </head>
   <body>
     <div id="app"></div>

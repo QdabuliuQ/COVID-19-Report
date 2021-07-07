@@ -12,20 +12,20 @@ VueRouter.prototype.push = function push(location) {
 }
 
 // 路由懒加载
-const DomesticReport = () => import( "views/domesticReport/DomesticReport" )  // 国内疫情
-const ProvinceDetail = () => import( "views/provinceDetail/ProvinceDetail" )  // 省份疫情
-const VaccineInformation = () => import( "views/vaccineInformation/VaccineInformation" )  // 疫苗接种
-const WorldReport = () => import("views/worldReport/WorldReport")  // 世界疫情报告
-const ToolsBox = () => import("views/toolsBox/ToolsBox")  // 世界疫情报告
-const NationalNews = () => import("views/toolsBox/childComps/nationalNews")  // 国内疫情速报
-const RumourRanking = () => import("views/toolsBox/childComps/rumourRanking")  // 疫情问题大全
-const GoOutPolicy = () => import("views/toolsBox/childComps/goOutPolicy")  // 疫情问题大全
-const PatientRoute = () => import("views/toolsBox/childComps/patientRoute")  // 疫情问题大全
-const SearchInstitution = () => import("views/toolsBox/childComps/searchInstitution")  // 核素检测机构
-const InstitutionMap = () => import("views/toolsBox/childComps/institutionMap")  // 核素检测机构
-const PopulationTransfer = () => import("views/toolsBox/childComps/populationTransfer")  // 入口迁徙
-const VaccineDetail = () => import("views/toolsBox/childComps/vaccineDetail")  // 世界疫苗动态
-const AppointVaccine = () => import("views/toolsBox/childComps/appointVaccine")  // 世界疫苗动态
+const DomesticReport = () => import(/* webpackChunkName: "domesticDetail" */ "views/domesticReport/DomesticReport" )  // 国内疫情
+const ProvinceDetail = () => import(/* webpackChunkName: "domesticDetail" */ "views/provinceDetail/ProvinceDetail" )  // 省份疫情
+const VaccineInformation = () => import(/* webpackChunkName: "vaccineDetail" */ "views/vaccineInformation/VaccineInformation" )  // 疫苗接种
+const WorldReport = () => import(/* webpackChunkName: "worldDetail" */ "views/worldReport/WorldReport")  // 世界疫情报告
+const ToolsBox = () => import(/* webpackChunkName: "ToolsBox" */ "views/toolsBox/ToolsBox")  // 工具箱
+const NationalNews = () => import(/* webpackChunkName: "newsDetail" */ "views/toolsBox/childComps/nationalNews")  // 国内疫情速报
+const RumourRanking = () => import(/* webpackChunkName: "newsDetail" */ "views/toolsBox/childComps/rumourRanking")  // 疫情问题大全
+const GoOutPolicy = () => import(/* webpackChunkName: "ToolsBox" */ "views/toolsBox/childComps/goOutPolicy")  // 出行政策
+const PatientRoute = () => import(/* webpackChunkName: "routeDetail" */ "views/toolsBox/childComps/patientRoute")  // 病人轨迹
+const SearchInstitution = () => import(/* webpackChunkName: "institutionDetail" */ "views/toolsBox/childComps/searchInstitution")  // 核素检测机构
+const InstitutionMap = () => import(/* webpackChunkName: "institutionDetail" */ "views/toolsBox/childComps/institutionMap")  // 核素检测机构地图
+const PopulationTransfer = () => import(/* webpackChunkName: "routeDetail" */ "views/toolsBox/childComps/populationTransfer")  // 入口迁徙
+const VaccineDetail = () => import(/* webpackChunkName: "vaccineDetail" */ "views/toolsBox/childComps/vaccineDetail")  // 世界疫苗动态
+const AppointVaccine = () => import(/* webpackChunkName: "vaccineDetail" */ "views/toolsBox/childComps/appointVaccine")  // 疫苗预约
 
 const routes = [
   { path: '/', redirect: '/DomesticReport' },
