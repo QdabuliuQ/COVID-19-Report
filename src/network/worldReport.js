@@ -2,7 +2,7 @@ import {request} from './request'
 
 export function getWorldData() {  // 获取世界疫情基本数据
   return request({
-    url: 'automation/modules/list?modules=FAutoGlobalStatis,FAutoGlobalDailyList,FAutoCountryConfirmAdd'
+    url: 'automation/modules/list?modules=FAutoCountryConfirmAdd,WomWorld,WomAboard'
   })
 }
 

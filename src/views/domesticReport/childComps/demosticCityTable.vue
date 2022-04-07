@@ -14,7 +14,10 @@
       <tbody class="province_tbody" v-for="item,index in cityDetail" :key="index">
         <tr @click="toggleProvinceDetail(index)" class="borderB">
           <td class="body_td body_td_city">{{item.name}}</td>
-          <td class="body_td">{{item.total.nowConfirm}}<br><span>{{item.today.confirm | addCount}}</span></td>
+          <td class="body_td">
+            <div>{{item.total.nowConfirm}}</div>
+            <div class="td_tip">{{item.today.confirm | addCount}}</div>
+          </td>
           <td class="body_td">{{item.total.heal}}</td>
           <td class="body_td">{{item.total.confirm}}</td>
           <td class="body_td">{{item.total.dead}}</td>
@@ -125,7 +128,7 @@ export default {
   background-color: #f2f2f2;
 }
 .table_head_td{
-  padding: 7px 0;
+  padding: 10px 0;
   font-size: 12px;
 }
 .head_td1{
@@ -155,15 +158,16 @@ export default {
 .fixd_item5{color: rgb(99, 59, 97); background-color: #ede8ec;}
 .fixd_item6{color: rgb(0, 0, 0); background-color: #f2f2f2;}
 .body_td{
-  padding: 5px 0;
+  padding: 7px 0;
   font-size: 12px;
   font-weight: 550;
   box-sizing: border-box;
 }
-.body_td span{
+.body_td .td_tip{
   font-size: 10px;
-  color: rgb(114, 114, 114);
+  color: rgb(141, 141, 141);
   font-weight: normal;
+  margin-top: 3px;
 }
 .body_td_city{
   color: var(--color);
@@ -177,7 +181,7 @@ export default {
 }
 .province_container_td{
   font-size: 12px;
-  padding: 5px 0;
+  padding: 8px 0;
   box-sizing: border-box;
   border-bottom: 1px solid rgb(245, 245, 245);
 }
@@ -193,6 +197,5 @@ export default {
 }
 .cityName{
   max-width: 30px !important; 
-  /* text-align: left !important; */
 }
 </style>

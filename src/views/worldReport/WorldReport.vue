@@ -3,7 +3,7 @@
   <div id="worldReport">
     <div class="report_top_container">
       <div class="top_container_imgBox">
-        <img src="https://z3.ax1x.com/2021/06/17/2zmTwF.jpg" alt="">
+        <img src="~assets/image/worldPageBgImage.png" alt="">
       </div>
       <div class="top_container_textBox">
         <div class="textBox_title">新型冠状病毒</div>
@@ -19,8 +19,8 @@
       <serious-country ref="serious_country"></serious-country>
       <content-split :text="'海外多国累计趋势'"></content-split>
       <countries-trend ref="countries_trend"></countries-trend>
-      <content-split :text="'海外疫情趋势图'"></content-split>
-      <oversea-trend ref="oversea_trend"></oversea-trend>
+      <content-split :text="'各大洲疫情累计确诊统计'"></content-split>
+      <continentData></continentData>
       <content-split :text="'海外各国详情信息'"></content-split>
       <countries-table></countries-table>
     </div>
@@ -34,6 +34,7 @@ import countriesTrend from './childComps/countriesTrend'  // 主要国家疫情�
 import seriousCountry from './childComps/seriousCountry'  // 严重国家的疫情趋势
 import overseaTrend from './childComps/overseaTrend'  // 海外趋势
 import countriesTable from './childComps/countriesTable'  // 各国详情信息
+import continentData from './childComps/continentData.vue'  // 大洲数据
 
 export default {
   name: 'WorldReport',
@@ -50,7 +51,8 @@ export default {
     countriesTrend,
     seriousCountry,
     overseaTrend,
-    countriesTable
+    countriesTable,
+    continentData
   },
   methods: {
     loadCountriesTrendLoad() {
@@ -71,13 +73,15 @@ export default {
           this.$refs.countries_trend.setCharts()  // 加载图表
           this.countries_trend_load = true  // 修改判断条件
         }
-      } else if (!this.oversea_trend_load) {
-        let toTop = this.$refs.oversea_trend.$el.getBoundingClientRect().top
-          if (toTop <= window.innerHeight - this.$store.state.nav_bar_clientHeight) {
-          this.$refs.oversea_trend.setChartsOption2()  // 加载图表
-          this.oversea_trend_load = true  // 修改判断条件
-        }
-      }
+      } 
+      // else if (!this.oversea_trend_load) {
+      //   let toTop = this.$refs.oversea_trend.$el.getBoundingClientRect().top
+      //     if (toTop <= window.innerHeight - this.$store.state.nav_bar_clientHeight) {
+      //       console.log(this.$refs.oversea_trend);
+      //     this.$refs.oversea_trend.setChartsOption2()  // 加载图表
+      //     this.oversea_trend_load = true  // 修改判断条件
+      //   }
+      // }
     }
   },
   activated () {

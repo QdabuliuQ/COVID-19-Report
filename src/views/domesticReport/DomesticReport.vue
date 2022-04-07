@@ -8,7 +8,7 @@
           数据来源：国家及各地卫健委每日信息发布
         </div>
       </div>
-      <img src="https://www.picbed.cn/images/2021/06/08/bg.png" alt="" />
+      <img src="~assets/image/homePageBgImage.png" alt="" />
     </div>
     <div v-if="demosticList" class="report_container">
       <!-- 疫情信息汇总表格 -->

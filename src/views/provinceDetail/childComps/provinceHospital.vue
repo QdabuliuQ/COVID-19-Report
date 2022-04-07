@@ -104,8 +104,11 @@ export default {
   align-items: center;
 }
 .item_url .iconfont{
-  font-size: 7px;
+  font-size: 12px;
   color: #fff;
   margin-left: 3px;
+  transform: scale(0.7);
+  position: relative;
+  top: 1px;
 }
 </style>

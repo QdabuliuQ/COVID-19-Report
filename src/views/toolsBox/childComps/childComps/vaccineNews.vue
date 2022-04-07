@@ -8,7 +8,7 @@
             <div class="item_author_name">发布来源：{{news.author_name}}</div>
           </div>
           <div class="item_right_box">
-            <img :src="news.cover_url" alt="">
+            <img referrer="no-referrer|origin|unsafe-url" :src="news.cover_url" alt="">
           </div>
         </a>
       </van-tab>

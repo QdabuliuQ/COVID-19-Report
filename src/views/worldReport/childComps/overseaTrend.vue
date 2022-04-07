@@ -35,13 +35,63 @@ export default {
   data() {
     return {
       overseaData: {
-        confirm: [],
-        heal: [],
-        dead: [],
-        deadRate: [],
-        healRate: [],
-        newAddConfirm: [],
         date: [],
+        asia: {
+          confirm: [],
+          heal: [],
+          dead: [],
+          deadRate: [],
+          healRate: [],
+          newAddConfirm: [],
+        }, // 亚洲
+        africa: {
+          confirm: [],
+          heal: [],
+          dead: [],
+          deadRate: [],
+          healRate: [],
+          newAddConfirm: [],
+        }, // 非洲
+        oceania: {
+          confirm: [],
+          heal: [],
+          dead: [],
+          deadRate: [],
+          healRate: [],
+          newAddConfirm: [],
+        }, // 大洋洲
+        northAmerica: {
+          confirm: [],
+          heal: [],
+          dead: [],
+          deadRate: [],
+          healRate: [],
+          newAddConfirm: [],
+        }, // 北美洲
+        southAmerica: {
+          confirm: [],
+          heal: [],
+          dead: [],
+          deadRate: [],
+          healRate: [],
+          newAddConfirm: [],
+        }, // 南美洲
+        europe: {
+          confirm: [],
+          heal: [],
+          dead: [],
+          deadRate: [],
+          healRate: [],
+          newAddConfirm: [],
+        }, // 欧洲
+        otherArea: {
+          confirm: [],
+          heal: [],
+          dead: [],
+          deadRate: [],
+          healRate: [],
+          newAddConfirm: [],
+        }, // 其他地区
       },
       currentIndex: 0,
       btnList: ["累计趋势", "病死率/治愈率", "新增趋势"],
@@ -70,7 +120,7 @@ export default {
         color, // 颜色
         grid: {
           // 布局
-          top: "22%",
+          top: "30%",
           left: "3%",
           right: "3%",
           bottom: "2%",
@@ -93,11 +143,8 @@ export default {
             },
           },
           formatter: function (params) {
-            let str = `日期：${params[0].axisValue}<br>`;
-            for (const item of params) {
-              str += `${item.marker} ${item.seriesName}：${item.data}<br>`;
-            }
-            return str;
+            
+            return 'xxxxxx';
           },
         },
         legend: {
@@ -218,13 +265,36 @@ export default {
     },
 
     setChartsOption2() {
-      let data = this.$store.state.worldData.FAutoGlobalDailyList;
+      let data = this.$store.state.worldData.WomAboard;
+      let areaName = "";
       for (const item of data) {
         // 处理数据
-        this.overseaData.confirm.push(item.all.confirm);
-        this.overseaData.heal.push(item.all.heal);
-        this.overseaData.dead.push(item.all.dead);
-        this.overseaData.date.push(item.date);
+        switch (item.continent) {
+          case "亚洲":
+            areaName = "asia";
+            break;
+          case "非洲":
+            areaName = "africa";
+            break;
+          case "大洋洲":
+            areaName = "oceania";
+            break;
+          case "北美洲":
+            areaName = "northAmerica";
+            break;
+          case "南美洲":
+            areaName = "southAmerica";
+            break;
+          case "欧洲":
+            areaName = "europe";
+            break;
+        }
+        this.overseaData[areaName].confirm.push(item.confirm);
+        this.overseaData[areaName].heal.push(item.heal);
+        this.overseaData[areaName].dead.push(item.dead);
+        this.overseaData[areaName].deadRate.push(item.deadCompare);
+        this.overseaData[areaName].healRate.push(item.healCompare);
+        this.overseaData[areaName].newAddConfirm.push(item.nowConfirm);
       }
       this.$nextTick(() => {
         // 加载图表
@@ -234,26 +304,46 @@ export default {
 
         myChart.setOption(
           this.setChartsOption(
-            "海外疫情累计趋势",
+            "各大洲疫情累计趋势",
             this.overseaData.date,
             [
               {
-                name: "累计确诊",
+                name: "亚洲",
                 type: "line",
-                data: this.overseaData.confirm,
+                data: this.overseaData['asia'].confirm,
               },
               {
-                name: "累计治愈",
+                name: "非洲",
                 type: "line",
-                data: this.overseaData.heal,
+                data: this.overseaData['africa'].confirm,
               },
               {
-                name: "累计死亡",
+                name: "大洋洲",
                 type: "line",
-                data: this.overseaData.dead,
+                data: this.overseaData['oceania'].confirm,
+              },
+              {
+                name: "北美洲",
+                type: "line",
+                data: this.overseaData['northAmerica'].confirm,
+              },
+              {
+                name: "南美洲",
+                type: "line",
+                data: this.overseaData['southAmerica'].confirm,
+              },
+              {
+                name: "欧洲",
+                type: "line",
+                data: this.overseaData['europe'].confirm,
+              },
+              {
+                name: "其他地区",
+                type: "line",
+                data: this.overseaData['otherArea'].confirm,
               },
             ],
-            ["#f73838", "#3dbe31", "#6e6e6e"]
+            ["#329aef", "#bdc0c1", "#6bf0b2", "#e7f138", "#faab34", "#fa4434", "#fa34e6"]
           )
         );
       });
@@ -271,6 +361,7 @@ export default {
 .my-swipe {
   width: 100%;
   height: 300px;
+  color: #fa34e6;
 }
 .overseaTrand_item_dom {
   width: 100%;

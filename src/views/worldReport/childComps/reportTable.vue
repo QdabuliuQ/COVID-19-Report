@@ -2,28 +2,28 @@
   <div v-if="worldData" id="reportTable">
     <div class="table_item_color1 report_table_item">
       <div class="table_item_newData">
-        较上日<span> {{ worldData.nowConfirmAdd | setAddNum }}</span>
+        较上日<div class="addTip"> {{ worldData.nowConfirmAdd | setAddNum }}</div>
       </div>
       <div class="table_item_num">{{ worldData.nowConfirm }}</div>
       <div class="table_item_title">现有确诊</div>
     </div>
     <div class="table_item_color2 report_table_item">
       <div class="table_item_newData">
-        较上日<span> {{ worldData.confirmAdd | setAddNum }}</span>
+        较上日<div class="addTip"> {{ worldData.confirmAdd | setAddNum }}</div>
       </div>
       <div class="table_item_num">{{ worldData.confirm }}</div>
       <div class="table_item_title">累计确诊</div>
     </div>
     <div class="table_item_color3 report_table_item">
       <div class="table_item_newData">
-        较上日<span> {{ worldData.healAdd | setAddNum }}</span>
+        较上日<div class="addTip"> {{ worldData.healAdd | setAddNum }}</div>
       </div>
       <div class="table_item_num">{{ worldData.heal }}</div>
       <div class="table_item_title">累计治愈</div>
     </div>
     <div class="table_item_color4 report_table_item">
       <div class="table_item_newData">
-        较上日<span> {{ worldData.deadAdd | setAddNum }}</span>
+        较上日<div class="addTip"> {{ worldData.deadAdd | setAddNum }}</div>
       </div>
       <div class="table_item_num">{{ worldData.dead }}</div>
       <div class="table_item_title">累计死亡</div>
@@ -57,15 +57,11 @@ export default {
   methods: {
     getData() {
       // 获取数据
-      if (JSON.stringify(this.$store.state.worldData) == "{}") {
-        getWorldData().then((res) => {
-          this.$store.state.worldData = res.data.data;
-          this.worldData = this.$store.state.worldData.FAutoGlobalStatis;
-        });
-      } else {
-        this.worldData = this.$store.state.worldData.FAutoGlobalStatis;
-      }
-      this.$store.state.indexSet ++
+      getWorldData().then((res) => {
+        this.$store.state.worldData = res.data.data;
+        this.worldData = this.$store.state.worldData.WomWorld;
+      });
+      this.$store.state.indexSet++;
     },
   },
 };
@@ -81,7 +77,7 @@ export default {
   box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.08);
   margin-bottom: var(--marginB);
 }
-.table_item_title{
+.table_item_title {
   font-size: 12px;
 }
 .report_table_item {
@@ -95,7 +91,7 @@ export default {
 .table_item_color1 .table_item_num {
   color: #ff4747;
 }
-.table_item_color1 span {
+.table_item_color1 .addTip {
   color: #ff4747;
 }
 .table_item_color2 {
@@ -104,7 +100,7 @@ export default {
 .table_item_color2 .table_item_num {
   color: #b91c1c;
 }
-.table_item_color2 span {
+.table_item_color2 .addTip {
   color: #b91c1c;
 }
 .table_item_color3 {
@@ -113,7 +109,7 @@ export default {
 .table_item_color3 .table_item_num {
   color: #19d808;
 }
-.table_item_color3 span {
+.table_item_color3 .addTip {
   color: #19d808;
 }
 .table_item_color4 {
@@ -122,7 +118,7 @@ export default {
 .table_item_color4 .table_item_num {
   color: #838383;
 }
-.table_item_color4 span {
+.table_item_color4 .addTip {
   color: #838383;
 }
 .table_item_num {

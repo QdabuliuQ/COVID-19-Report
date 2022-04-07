@@ -8,4 +8,5 @@ body{
 :root{
   --color: #1d99d3;
   --marginB: 20px;
+  --bgcBoxColor: rgba(255, 255, 255, 0.694);
 }

@@ -8,53 +8,81 @@
       :fixed="true"
       @click-left="onClickLeft"
     />
-    <div :style="{ marginTop: mTop }" class="patientRoute_container">
-      <a :href="item.source" class="search_items" v-for="item,index in dataList" :key="index">
+    <div :style="{ marginTop: mTop }" class="bgImage_box">
+      <img src="~assets/image/searchInstitution/patientsRoute.png" alt="" />
+      <div class="detail_topBox">
+        <div class="detail_topBox_title">患者行程轨迹统计</div>
+        <div class="detail_topBox_tip">
+          如果发现与患者有同行轨迹请马上向有关部门报告。疫情防控，人人有责。
+        </div>
+      </div>
+    </div>
+    <div class="patientRoute_container">
+      <a
+        :href="item.source"
+        class="search_items"
+        v-for="(item, index) in dataList"
+        :key="index"
+      >
+        <img class="routeIcon" src="~assets/image/searchInstitution/patientRouteBgImage.png" alt="">
         <div class="itemBox2 itemBox item_startTime">
           <div class="item_title">
-            <div class="item_title_icon"><i class="iconfont icon-shijian"></i></div>
+            <div class="item_title_icon">
+              <!-- <i class="iconfont icon-shijian"></i> -->
+              <img style="width: 18px" src="~assets/image/time.png" alt="">
+            </div>
             <div class="item_title_text">出行日期：</div>
           </div>
           <div class="item_content">
-            <div class="item_time">{{item.date}}</div>
+            <div class="item_time">{{ item.date }}</div>
           </div>
         </div>
         <!-- 地点 -->
         <div class="itemBox2 itemBox item_place">
-          <div class="item_start">
-            <div class="item_title">
-              <div class="item_title_icon"><i class="iconfont icon-qidian"></i></div>
-              <div class="item_title_text">出发地：</div>
+          <div class="item_title">
+            <div class="item_title_icon">
+              <i class="iconfont icon-qidian"></i>
             </div>
-            <div class="item_content">
-              {{item.pos_start}}
-            </div>
+            <div class="item_title_text">出发地：</div>
           </div>
-          <div class="item_end">
-            <div class="item_title">
-              <div class="item_title_icon"><i class="iconfont icon-zhongdian"></i></div>
+          <div class="item_content">
+            {{ item.pos_start }}
+          </div>
+        </div>
+        <div class="itemBox2 itemBox item_place">
+          <div class="item_title">
+              <div class="item_title_icon">
+                <i style="color: #d8d83b" class="iconfont icon-zhongdian"></i>
+              </div>
               <div class="item_title_text">目的地：</div>
             </div>
             <div class="item_content">
-              {{item.pos_end}}
-            </div>
+              {{ item.pos_end }}
             </div>
         </div>
         <!-- 车次航班 -->
         <div class="itemBox2 itemBox">
           <div class="item_title">
-            <div class="item_title_icon"><i class="iconfont icon-checixiangqingriqi"></i></div>
+            <div class="item_title_icon">
+              <img style="width: 17px" src="~assets/image/checi.png" alt="">
+              <!-- <i class="iconfont icon-checixiangqingriqi"></i> -->
+            </div>
             <div class="item_title_text">车次/航班：</div>
           </div>
-          <div class="item_content">{{item.no}}{{item.memo != '' ? '('+item.memo+')' : ''}}</div>
+          <div class="item_content">
+            {{ item.no }}{{ item.memo != "" ? "(" + item.memo + ")" : "" }}
+          </div>
         </div>
         <div class="itemBox2 itemBox lastItemBox">
           <div class="item_title">
-            <div class="item_title_icon"><i class="iconfont icon-fabu"></i></div>
+            <div class="item_title_icon">
+              <img style="width: 16px" src="~assets/image/fabu.png" alt="">
+              <!-- <i class="iconfont icon-fabu"></i> -->
+            </div>
             <div class="item_title_text">发布来源：</div>
           </div>
           <div class="item_content">
-            {{item.who}}
+            {{ item.who }}
           </div>
         </div>
       </a>
@@ -64,14 +92,15 @@
     </div>
     <!-- 上报信息 -->
     <van-dialog
-    :before-close="onBeforeClose"
-    @confirm='submitForm'
-    v-model="showDialog" 
-    :width='"90%"'
-    title="上报患者行程路线" 
-    :confirm-button-color='"#1d99d3"'
-    class="routerForm"
-    show-cancel-button>
+      :before-close="onBeforeClose"
+      @confirm="submitForm"
+      v-model="showDialog"
+      :width="'90%'"
+      title="上报患者行程路线"
+      :confirm-button-color="'#1d99d3'"
+      class="routerForm"
+      show-cancel-button
+    >
       <div class="dialogTip">患者行程信息审核通过后自动发布</div>
       <van-form ref="vanForm" @submit="onSubmit">
         <van-field
@@ -89,7 +118,9 @@
           @click="selectStartPlace"
           :value="formData.startPlace"
           name="选择城市"
-          :rules="[{ trigger: 'onChange',required: true, message: '请选择出发城市' }]"
+          :rules="[
+            { trigger: 'onChange', required: true, message: '请选择出发城市' },
+          ]"
         />
         <van-field
           readonly
@@ -99,7 +130,9 @@
           @click="selectEndPlace"
           :value="formData.endPlace"
           name="选择城市"
-          :rules="[{ trigger: 'onChange',required: true, message: '请选择终点城市' }]"
+          :rules="[
+            { trigger: 'onChange', required: true, message: '请选择终点城市' },
+          ]"
         />
         <van-field
           readonly
@@ -109,12 +142,20 @@
           label="时间选择"
           placeholder="点击选择当天时间"
           @click="showCalendar = true"
-          :rules="[{ trigger: 'onChange',required: true, message: '请选择当天时间' }]"
+          :rules="[
+            { trigger: 'onChange', required: true, message: '请选择当天时间' },
+          ]"
         />
       </van-form>
     </van-dialog>
     <!-- 地区选择 -->
-    <van-popup class="routerPopup" v-model="showPopup" position="bottom" :style="{ height: '70%' }" :title="'选择城市'">
+    <van-popup
+      class="routerPopup"
+      v-model="showPopup"
+      position="bottom"
+      :style="{ height: '70%' }"
+      :title="'选择城市'"
+    >
       <van-cascader
         v-model="cascaderValue"
         :title="cascTitle"
@@ -125,14 +166,20 @@
       />
     </van-popup>
     <!-- 日历 -->
-    <van-calendar @confirm='confirmDate' :color="'#1d99d3'"  v-model="showCalendar" :min-date="minDate" :max-date="maxDate" />
+    <van-calendar
+      @confirm="confirmDate"
+      :color="'#1d99d3'"
+      v-model="showCalendar"
+      :min-date="minDate"
+      :max-date="maxDate"
+    />
   </div>
 </template>
 
 <script>
 import "assets/css/vantCss/provinceDetail.css"; // 导入css样式
 import { getCityList, getPatientsRoutes } from "network/toolsBox";
-import { Toast } from 'vant';
+import { Toast } from "vant";
 
 export default {
   name: "patientRoute",
@@ -142,62 +189,71 @@ export default {
       mTop: 0,
       showDialog: false,
       formData: {
-        noNumber: '',
-        startPlace: '',
-        endPlace: '',
-        date: ''
+        noNumber: "",
+        startPlace: "",
+        endPlace: "",
+        date: "",
       },
-      cascaderValue: false,  // 选择器
-      cascaderValue: "", 
-      cascTitle: "",  // 选择器标题
-      options: [],  // 城市数组
-      showPopup: false,  // 显示/隐藏弹窗
-      selectPlace: 'start',
-      showCalendar: false,  // 显示/隐藏日期
-      minDate: new Date(new Date().getFullYear(),0,1),
-      maxDate: new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate()),
-      close: false
+      cascaderValue: false, // 选择器
+      cascaderValue: "",
+      cascTitle: "", // 选择器标题
+      options: [], // 城市数组
+      showPopup: false, // 显示/隐藏弹窗
+      selectPlace: "start",
+      showCalendar: false, // 显示/隐藏日期
+      minDate: new Date(new Date().getFullYear(), 0, 1),
+      maxDate: new Date(
+        new Date().getFullYear(),
+        new Date().getMonth(),
+        new Date().getDate()
+      ),
+      close: false,
     };
   },
   created() {
-    getPatientsRoutes().then(res => {  // 获取所有数据
-      this.dataList = res.data.data.list
-    })
+    getPatientsRoutes().then((res) => {
+      // 获取所有数据
+      this.dataList = res.data.data.list;
+    });
 
-    getCityList().then((res) => {  // 获取城市数据
+    getCityList().then((res) => {
+      // 获取城市数据
       this.options = this.setCityList(res.data.result);
-      console.log(this.options);
     });
   },
   methods: {
-    onClickLeft() {  // 退出页面
+    onClickLeft() {
+      // 退出页面
       this.$router.go(-1);
     },
-    
-    onSubmit() {  // 提交信息
-      Toast.success('上传信息成功');
-      this.showDialog = false
+
+    onSubmit() {
+      // 提交信息
+      Toast.success("上传信息成功");
+      this.showDialog = false;
     },
 
-    onFinish(detail) {  // 选择结束回调函数
-      let str = ''
+    onFinish(detail) {
+      // 选择结束回调函数
+      let str = "";
       for (const item of detail.selectedOptions) {
-        str += item.text
+        str += item.text;
       }
-      if (this.selectPlace == 'start') {
+      if (this.selectPlace == "start") {
         if (str != this.formData.endPlace) {
-          this.formData.startPlace = str
+          this.formData.startPlace = str;
         }
       } else {
         if (str != this.formData.startPlace) {
-          this.formData.endPlace = str
+          this.formData.endPlace = str;
         }
       }
-      this.cascaderValue = ""
-      this.showPopup = false
+      this.cascaderValue = "";
+      this.showPopup = false;
     },
 
-    setCityList(list) {  // 设置城市数据
+    setCityList(list) {
+      // 设置城市数据
       if (list.length != 0) {
         let arr = [];
         for (const item of list) {
@@ -220,68 +276,79 @@ export default {
       }
     },
 
-    selectEndPlace() {  // 选择终点城市
-      this.selectPlace = 'end'
-      this.showPopup = true
-      this.cascTitle = '选择目的城市'
+    selectEndPlace() {
+      // 选择终点城市
+      this.selectPlace = "end";
+      this.showPopup = true;
+      this.cascTitle = "选择目的城市";
     },
 
-    selectStartPlace() {  // 选择起点城市
-      this.selectPlace = 'start'
-      this.showPopup = true
-      this.cascTitle = '选择出发城市'
+    selectStartPlace() {
+      // 选择起点城市
+      this.selectPlace = "start";
+      this.showPopup = true;
+      this.cascTitle = "选择出发城市";
     },
 
-    confirmDate(d) {  // 确定日期
-      let date = new Date(d)
-      this.formData.date = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
-      this.showCalendar = false
+    confirmDate(d) {
+      // 确定日期
+      let date = new Date(d);
+      this.formData.date = `${date.getFullYear()}-${
+        date.getMonth() + 1
+      }-${date.getDate()}`;
+      this.showCalendar = false;
     },
 
-    submitForm() {  // 提交表单
-      this.$refs.vanForm.validate().then((res) => {  // 判断表单
-        this.$refs.vanForm.submit()
-        this.close = true
-        this.onBeforeClose()
-      })
+    submitForm() {
+      // 提交表单
+      this.$refs.vanForm.validate().then((res) => {
+        // 判断表单
+        this.$refs.vanForm.submit();
+        this.close = true;
+        this.onBeforeClose();
+      });
     },
 
-    onBeforeClose(action, done) {  // 监听关闭弹窗
-      if (action === 'confirm') {
-        this.$refs.vanForm.validate().then((res) => {  // 判断表单
-          this.$refs.vanForm.submit()
-          this.close = true
-          done(false)
-          this.onSubmit()
-          setTimeout(() => {
-            this.clearForm()
-          }, 200);
-        }, (err) => {
-
-        })
+    onBeforeClose(action, done) {
+      // 监听关闭弹窗
+      if (action === "confirm") {
+        this.$refs.vanForm.validate().then(
+          (res) => {
+            // 判断表单
+            this.$refs.vanForm.submit();
+            this.close = true;
+            done(false);
+            this.onSubmit();
+            setTimeout(() => {
+              this.clearForm();
+            }, 200);
+          },
+          (err) => {}
+        );
       } else {
         try {
-          done(true)
-        } catch (error) {
-        }
+          done(true);
+        } catch (error) {}
         setTimeout(() => {
-          this.clearForm()
+          this.clearForm();
         }, 200);
       }
     },
 
-    clearForm() {  // 清除表单数据
-      this.formData.noNumber = ''
-      this.formData.startPlace = ''
-      this.formData.endPlace = ''
-      this.formData.date = ''
-      this.$refs.vanForm.resetValidation()
+    clearForm() {
+      // 清除表单数据
+      this.formData.noNumber = "";
+      this.formData.startPlace = "";
+      this.formData.endPlace = "";
+      this.formData.date = "";
+      this.$refs.vanForm.resetValidation();
     },
 
-    showDialogClick() {  // 显示对话框
-      this.showDialog = true
+    showDialogClick() {
+      // 显示对话框
+      this.showDialog = true;
       // this.$refs.vanForm.resetValidation()
-    }
+    },
   },
   mounted() {
     this.mTop =
@@ -299,29 +366,67 @@ export default {
   overflow: hidden;
   background-color: #fff;
 }
+.bgImage_box {
+  padding: 0 15px;
+  height: 170px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color);
+}
+.bgImage_box img {
+  width: 45%;
+}
+.detail_topBox {
+  padding: 12px;
+  border-radius: 8px;
+  margin-left: 10px;
+  background-color: rgba(255, 255, 255, 0.804);
+}
+.detail_container {
+  padding: 15px;
+}
+.detail_topBox_title {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+.detail_topBox_tip {
+  font-size: 12px;
+  color: rgb(117, 117, 117);
+}
 .patientRoute_container {
   padding: 15px;
   position: relative;
   font-size: 12px;
   background-color: #f8f8f8;
 }
+.routeIcon {
+  position: absolute;
+  height: 100%;
+  bottom: 0px;
+  opacity: 0.2;
+  left: 50%;
+  transform: translateX(-50%);
+}
 .search_items {
   display: block;
   color: #000;
-  padding: 8px 12px;
-  background-color: #fff;
+  padding: 12px;
   margin-bottom: 20px;
-  box-shadow:  0 1px 10px rgba(0, 0, 0, 0.055),
-  0 5px 10px rgba(0, 0, 0, 0.055),
-  0 1px 10px rgba(0, 0, 0, 0.055);
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.055), 0 5px 10px rgba(0, 0, 0, 0.055),
+    0 1px 10px rgba(0, 0, 0, 0.055);
   border-radius: 8px;
+  overflow: hidden;
+  position: relative;
 }
 .itemBox {
   display: flex;
   font-size: 13px;
-  padding: 8px 0;
+  padding: 13px 0;
   box-sizing: border-box;
-  border-bottom: 1px solid rgb(226, 226, 226);
+  border-bottom: 1px solid rgba(226, 226, 226, 0.5);
 }
 .lastItemBox {
   border-bottom: 1px solid transparent !important;
@@ -347,7 +452,6 @@ export default {
 .item_content {
   display: flex;
   flex: 7;
-  align-items: center;
 }
 .item_time {
   position: relative;
@@ -380,7 +484,7 @@ export default {
   display: flex;
 }
 .item_place .item_title {
-  flex: 5 !important;
+  flex: 1.9 !important;
   display: flex;
   align-items: center;
 }
@@ -401,10 +505,10 @@ export default {
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
 }
 .addRoutesBtn .iconfont {
-  color: #Fff;
+  color: #fff;
   font-size: 16px;
 }
-.addRoutesBtn:active{
+.addRoutesBtn:active {
   background-color: #167baa;
 }
 .dialogTip {
@@ -415,5 +519,11 @@ export default {
 }
 .routerForm .van-button {
   background-color: #fff !important;
+}
+.item_startTime {
+  padding: 0 0 13px;
+}
+.lastItemBox {
+  padding: 13px 0 0;
 }
 </style>

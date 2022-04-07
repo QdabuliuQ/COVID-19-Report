@@ -33,7 +33,11 @@
         ></content-split>
         <province-month-data></province-month-data>
         <province-hospital></province-hospital>
-        <province-news></province-news>
+        <!-- <province-news></province-news> -->
+        <content-split
+          :text="$route.params.cityName + '疫情'"
+        ></content-split>
+        <province-data-list></province-data-list>
       </div>
     </div>
   </div>
@@ -46,6 +50,7 @@ import provinceMap from './childComps/provinceMap'  // 地图组件
 import provinceMonthData from './childComps/provinceMonthData'  // 两个月数据图表
 import provinceHospital from './childComps/provinceHospital'  // 医院组件
 import provinceNews from './childComps/provinceNews'  // 疫情资讯
+import provinceDataList from "./childComps/provinceDataList.vue"
 
 export default {
   name: 'ProvinceDetail',
@@ -86,7 +91,8 @@ export default {
     provinceMap,
     provinceMonthData,
     provinceHospital,
-    provinceNews
+    provinceNews,
+    provinceDataList
   }
 }
 

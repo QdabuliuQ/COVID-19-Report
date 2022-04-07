@@ -8,7 +8,16 @@
       :fixed="true"
       @click-left="$router.go(-1)"
     />
-    <div :style="{ marginTop: mTop }" class="appoint_container">
+    <div :style="{ marginTop: mTop }" class="bgImage_box">
+      <img src="~assets/image/searchInstitution/vaccineApplication.png" alt="">
+      <div class="detail_topBox">
+        <div class="detail_topBox_title">新型冠状病毒疫苗</div>
+        <div class="detail_topBox_tip">
+          新型冠状病毒疫苗（2019-nCoVvaccine），是针对新型冠状病毒的疫苗。
+        </div>
+      </div>
+    </div>
+    <div class="appoint_container">
       <van-form :key='formKey' ref="userFormData" @submit="onSubmit">
         <van-field
           v-model="userForm.userName"
@@ -277,6 +286,32 @@ export default {
   position: relative;
   z-index: 11;
   font-size: 12px;
+}
+.bgImage_box{
+  padding: 0 15px;
+  height: 170px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color);
+}
+.detail_topBox {
+  padding: 12px;
+  border-radius: 8px;
+  margin-left: 5px;
+  background-color: rgba(255, 255, 255, 0.804);
+}
+.detail_container {
+  padding: 15px;
+}
+.detail_topBox_title {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+.bgImage_box img {
+  width: 50%;
 }
 .appoint_container {
   padding: 15px;

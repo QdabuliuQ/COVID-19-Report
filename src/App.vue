@@ -130,6 +130,9 @@ export default {
   z-index: 0;
   background-color: #fff;
 }
+.van-nav-bar__content {
+  height: 46px !important;
+}
 .app_nav_bar {
   width: 100%;
   height: 49px;
@@ -141,6 +144,9 @@ export default {
   right: 0;
   display: flex;
   background-color: #fff;
+}
+.van-nav-bar__title {
+  font-size: 15px !important;
 }
 .app_container {
   position: relative;

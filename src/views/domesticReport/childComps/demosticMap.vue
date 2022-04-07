@@ -28,27 +28,27 @@ export default {
         // 图表参数
         {
           // 现存确诊
-          min: 300,
+          min: 1000,
           color: "#7D1818",
-          label: "300人以上",
+          label: "1000人以上",
         },
         {
-          min: 100,
-          max: 200,
+          min: 700,
+          max: 1000,
           color: "#BF2321",
-          label: "100-200人",
+          label: "700-1000人",
         },
         {
-          min: 50,
-          max: 100,
+          min: 300,
+          max: 700,
           color: "#FF7B66",
-          label: "50-100人",
+          label: "300-700人",
         },
         {
           min: 1,
-          max: 50,
+          max: 300,
           color: "#FFA789",
-          label: "1-9人",
+          label: "1-300人",
         },
         {
           max: 0,

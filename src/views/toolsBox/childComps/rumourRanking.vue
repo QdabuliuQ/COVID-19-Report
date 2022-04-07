@@ -8,7 +8,16 @@
       :fixed="true"
       @click-left="onClickLeft"
     />
-    <div :style="{ marginTop: mTop }" class="rumour_container">
+    <div :style="{ marginTop: mTop }" class="bgImage_box">
+      <img src="~assets/image/searchInstitution/newsList.png" alt="">
+      <div class="detail_topBox">
+        <div class="detail_topBox_title">在线辟谣</div>
+        <div class="detail_topBox_tip">
+          疫情期间谣言四起，我们要做到不传谣，不信谣。谣言止于智者！
+        </div>
+      </div>
+    </div>
+    <div class="rumour_container">
       <div class="rumour_item" v-for="(item, index) in dataList" :key="item.id">
         <div class="romour_item_target">
           <div class="romour_item_index">{{ index + 1 }}</div>
@@ -110,6 +119,36 @@ export default {
   background-color: #fff;
   position: relative;
   z-index: 11;
+}
+.bgImage_box{
+  padding: 0 15px;
+  height: 170px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color);
+}
+.bgImage_box img {
+  width: 40%;
+}
+.detail_topBox {
+  padding: 12px;
+  border-radius: 8px;
+  margin-left: 10px;
+  background-color: rgba(255, 255, 255, 0.804);
+}
+.detail_container {
+  padding: 15px;
+}
+.detail_topBox_title {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+.detail_topBox_tip {
+  font-size: 12px;
+  color: rgb(117, 117, 117);
 }
 .rumour_container {
   padding: 15px;

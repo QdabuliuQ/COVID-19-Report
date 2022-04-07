@@ -9,21 +9,28 @@
       @click-left="onClickLeft"
     />
     <div :style="{ marginTop: mTop }" class="search_topContainer">
-      <box-background></box-background>
-      <div class="select_place_container">
-        <div class="select_majorContainer">
-          <div class="container_topTip">
-            已收录31个省 448个城市的核酸检测机构
-          </div>
-          <div @click="showSheet = true" class="select_palce_Box">
-            <i class="iconfont icon-qidian"></i>选择城市：{{ placeName }}
-          </div>
-          <div @click="searchInstitution" class="select_place_btn">
-            查询附近机构
-          </div>
+      <!-- <box-background></box-background> -->
+      <!-- <div class="insitution_bg_image_box">
+      </div> -->
+      <img src="~assets/image/searchInstitution/institutionBgImage.png" alt="">
+      <div class="detail_topBox">
+        <div class="detail_topBox_title">核酸检测机构</div>
+        <div class="detail_topBox_tip">
+          为保障常态化疫情防控形势下的核酸检测、诊疗服务等有关工作需要，已经收集全国各省的检测机构。
         </div>
       </div>
     </div>
+    <div class="select_place_container">
+        <div class="select_majorContainer">
+          <img class="institutionCardBgImage" src="~assets/image/searchInstitution/institutionCardBgImage.png" alt="">
+          <div @click="showSheet = true" class="select_palce_Box">
+            <i style="color: #fff" class="iconfont icon-qidian"></i>{{ placeName }}
+          </div>
+          <div class="container_topTip">
+            已收录31个省 448个城市的核酸检测机构
+          </div>
+        </div>
+      </div>
     <div class="search_result_container">
       <van-sticky :offset-top="mTop">
         <div class="search_topTitle">
@@ -117,6 +124,8 @@ export default {
       // 切换地点
       this.activeIndex = index;
       this.placeName = name;
+      this.showSheet = false;
+      this.searchInstitution()
     },
 
     searchInstitution() {
@@ -176,39 +185,87 @@ export default {
   position: relative;
   z-index: 11;
 }
+.detail_topBox {
+  padding: 12px;
+  border-radius: 8px;
+  margin-left: 10px;
+  background-color: rgba(255, 255, 255, 0.804);
+}
+.detail_container {
+  padding: 15px;
+}
+.detail_topBox_title {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+.detail_topBox_tip {
+  font-size: 12px;
+  color: rgb(117, 117, 117);
+}
 .search_topContainer {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px 0;
+  background-color: var(--color);
+  padding: 0 15px;
+  overflow: hidden;
+  height: 170px;
+}
+.search_topContainer img {
+  width: 50%;
 }
 .select_place_container {
-  width: 90%;
-  background: rgba(231, 231, 231, 0.623);
-  backdrop-filter: blur(4px);
-  border-radius: 8px;
+  padding: 15px;
   font-size: 12px;
   position: relative;
   z-index: 1;
 }
 .select_majorContainer {
-  padding: 12px;
+  padding: 30px 12px;
+  background-color: #fff;
+  border-radius: 8px;
+  margin-left: 10px;
+  box-shadow:0px 2px 15px 5px rgb(225, 225, 225);
+  position: relative;
+  overflow: hidden;
+}
+.institutionCardBgImage {
+  position: absolute;
+  top: 50%;
+  height: 100%;
+  left: 50%;
+  opacity: 0.4;
+  transform: translate(-50%, -50%);
 }
 .container_topTip {
-  color: rgb(236, 236, 236);
+  color: rgb(0, 0, 0);
   text-align: center;
-  margin-bottom: 10px;
+  font-size: 12px;
+  padding-bottom: 10px;
 }
 .select_palce_Box {
-  padding: 12px;
+  padding: 10px 12px;
   font-size: 14px;
-  background-color: rgba(255, 255, 255, 0.678);
+  background-color: rgba(0, 119, 254, 0.495);
   border-radius: 8px;
-  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 8px;
+  color: #Fff;
+  font-weight: 550;
+}
+.select_palce_Box .iconfont {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
 }
 .select_palce_Box:active {
-  background-color: rgba(255, 255, 255, 0.37);
+  background-color: rgba(0, 119, 254, 0.694);
 }
 .iconfont {
   color: var(--color);
@@ -230,9 +287,6 @@ export default {
 .select_place_btn:active {
   background-color: #177dac;
 }
-.search_result_container {
-  padding: 10px 0;
-}
 .search_topTitle {
   padding: 12px;
   text-align: center;
@@ -243,7 +297,7 @@ export default {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 .search_item_container {
-  padding: 12px;
+  padding: 12px 15px;
   background-color: rgb(248, 248, 248);
 }
 .search_items {
@@ -262,7 +316,7 @@ export default {
   flex: 2;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
 }
 .item_right_img img {
   width: 80%;
@@ -308,11 +362,11 @@ export default {
   height: 60%;
 }
 .sheet_city_items {
-  padding: 6px 12px;
+  padding: 6px 15px;
   margin-bottom: 8px;
-  background-color: rgb(236, 236, 236);
-  margin: 0 6px 10px;
-  border-radius: 8px;
+  background-color: rgba(245, 245, 245, 0.71);
+  margin: 0 6px 8px;
+  border-radius: 6px;
   transition: all 0.15s linear;
 }
 .activeItems {

@@ -1,6 +1,10 @@
 <template>
   <div id="goOutPolicy">
-    <cityListSheet @selectCity='selectCity' :cascTitle='cascTitle' ref="goOutPolicySheet"></cityListSheet>
+    <cityListSheet
+      @selectCity="selectCity"
+      :cascTitle="cascTitle"
+      ref="goOutPolicySheet"
+    ></cityListSheet>
     <van-nav-bar
       class="van-nav-bar"
       ref="nav_bar"
@@ -9,34 +13,45 @@
       :fixed="true"
       @click-left="$router.go(-1)"
     />
-    <div :style="{ marginTop: mTop }" class="policy_container">
-      <box-background></box-background>
-      <div class="policy_select_box">
-        <div class="policy_select_topBox">
-          <div class="select_box_top select_box">
-            <div class="box_title box_title_line box_title3">出发地</div>
-            <div class="box_title box_title2">目的地</div>
+
+    <div class="policy_container">
+      <div :style="{ marginTop: mTop }" class="bgImage_box">
+        <img src="~assets/image/searchInstitution/policySearch.png" alt="" />
+        <div class="detail_topBox">
+          <div class="detail_topBox_title">出行政策查询</div>
+          <div class="detail_topBox_tip">
+            疫情期间出行需要注意目的地的相关防疫政策和措施。以及当地疫情基本情况。
           </div>
-          <div class="select_box_center select_box">
-            <div
-              @click="selectPlace"
-              class="box_select_place box_select_item box_select_left"
-            >
-              {{ startPlace.name }}<i class="iconfont icon-policy-xia"></i>
-            </div>
-            <div class="box_toggle box_select_item">
-              <i @click="togglePlace" class="iconfont icon-zhuanhuan"></i>
-            </div>
-            <div
-              @click="selectPlace2"
-              class="box_select_place box_select_item box_select_right"
-            >
-              {{ endPlace.name }} <i class="iconfont icon-policy-xia"></i>
-            </div>
+        </div>
+      </div>
+      <!-- <box-background></box-background> -->
+    </div>
+    <div class="policy_select_box">
+      <div class="policy_select_topBox">
+        <img class="policyBgImage" src="~assets/image/policyBgImage.png" alt="">
+        <div style="position:relative; z-index: 1" class="select_box_top select_box">
+          <div class="box_title box_title_line box_title3">出发地</div>
+          <div class="box_title box_title2">目的地</div>
+        </div>
+        <div style="position:relative; z-index: 1" class="select_box_center select_box">
+          <div
+            @click="selectPlace"
+            class="box_select_place box_select_item box_select_left"
+          >
+            {{ startPlace.name }}<i class="iconfont icon-policy-xia"></i>
           </div>
-          <div class="select_box_bottom">
-            <div @click="searchPolicy" class="select_box_btn">查询出行政策</div>
+          <div class="box_toggle box_select_item">
+            <i @click="togglePlace" class="iconfont icon-zhuanhuan"></i>
           </div>
+          <div
+            @click="selectPlace2"
+            class="box_select_place box_select_item box_select_right"
+          >
+            {{ endPlace.name }} <i class="iconfont icon-policy-xia"></i>
+          </div>
+        </div>
+        <div style="position:relative; z-index: 1" class="select_box_bottom">
+          <div @click="searchPolicy" class="select_box_btn">查询出行政策</div>
         </div>
       </div>
     </div>
@@ -151,11 +166,15 @@
         </div>
       </div>
     </div>
-    <div v-else :style="{ height: noContentDomHeight }" class="policy_result_noContent">
-      <div class="noContent_box"> 
-        <img src="~assets/image/goOutPolicy/noContent.svg" alt="">
+    <div
+      v-else
+      :style="{ height: noContentDomHeight }"
+      class="policy_result_noContent"
+    >
+      <div class="noContent_box">
+        <img src="~assets/image/empty.png" alt="" />
         <div class="noContent_text">
-          <i>还没有找到相关地区政策</i>
+          暂无相关数据
         </div>
       </div>
     </div>
@@ -167,7 +186,7 @@ import "assets/css/vantCss/provinceDetail.css"; // 导入css样式
 import "assets/css/vantCss/goOutPolicy.css";
 import boxBackground from "components/private/boxBackground";
 import { getCityPolicy } from "network/toolsBox";
-import cityListSheet from "components/private/cityListSheet"
+import cityListSheet from "components/private/cityListSheet";
 
 export default {
   name: "goOutPolicy",
@@ -189,25 +208,25 @@ export default {
       },
       selectFlag: "", // 判断选择是出发还是目的
       policyList: [],
-      noContentDomHeight: '200px'
+      noContentDomHeight: "200px",
     };
   },
   methods: {
-
     selectPlace() {
       // 打开选择面板
-      this.$refs.goOutPolicySheet.showAction()
+      this.$refs.goOutPolicySheet.showAction();
       this.cascTitle = "请选择出发地";
       this.selectFlag = "start";
     },
 
     selectPlace2() {
-      this.$refs.goOutPolicySheet.showAction()
+      this.$refs.goOutPolicySheet.showAction();
       this.cascTitle = "请选择目的地";
       this.selectFlag = "end";
     },
 
-    selectCity(city, value) {  // 监听是否选择完成
+    selectCity(city, value) {
+      // 监听是否选择完成
       if (this.selectFlag == "start") {
         if (this.endPlace != city) {
           this.startPlace.name = city;
@@ -223,7 +242,8 @@ export default {
       }
     },
 
-    togglePlace() { // 切换目的地
+    togglePlace() {
+      // 切换目的地
       if (
         this.startPlace.name != "请选择出发点" &&
         this.endPlace.name != "请选择目的地"
@@ -234,7 +254,8 @@ export default {
       }
     },
 
-    searchPolicy() {  // 搜索政策
+    searchPolicy() {
+      // 搜索政策
       if (
         this.startPlace.name != "请选择出发地" &&
         this.endPlace.name != "请选择目的地"
@@ -250,12 +271,16 @@ export default {
   mounted() {
     this.mTop =
       document.getElementsByClassName("van-nav-bar")[0].clientHeight + "px";
-    this.noContentDomHeight = (window.screen.height - document.getElementsByClassName("van-nav-bar")[0].clientHeight - document.getElementsByClassName('policy_container')[0].clientHeight) + "px"
+    this.noContentDomHeight =
+      window.screen.height -
+      document.getElementsByClassName("van-nav-bar")[0].clientHeight -
+      document.getElementsByClassName("policy_container")[0].clientHeight +
+      "px";
   },
   components: {
     cityListSheet,
-    boxBackground
-  }
+    boxBackground,
+  },
 };
 </script>
 <style scoped>
@@ -271,19 +296,49 @@ export default {
   overflow: hidden;
   background-color: #fff;
 }
+.bgImage_box {
+  padding: 0 15px;
+  height: 170px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color);
+}
+.bgImage_box img {
+  width: 45%;
+}
+.detail_topBox {
+  padding: 12px;
+  border-radius: 8px;
+  margin-left: 10px;
+  background-color: rgba(255, 255, 255, 0.804);
+}
+.detail_container {
+  padding: 15px;
+}
+.detail_topBox_title {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+.detail_topBox_tip {
+  font-size: 12px;
+  color: rgb(117, 117, 117);
+}
 .policy_container {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px 0;
+  padding:0 0 20px;
 }
 .select_box_top {
   display: flex;
 }
 .box_title_line {
   box-sizing: border-box;
-  border-right: 1px solid rgba(0, 0, 0, 0.192);
+  border-right: 1px solid rgba(0, 0, 0, 0.301);
 }
 .select_box_bottom {
   margin-top: 15px;
@@ -313,6 +368,7 @@ export default {
 .box_title {
   flex: 1;
   font-size: 11px;
+  color: #000;
 }
 .box_title2 {
   text-align: right;
@@ -325,12 +381,12 @@ export default {
 }
 .box_select_place {
   padding: 10px;
-  font-size: 15px;
+  font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #f7f7f7;
-  border-bottom: 1px solid #dfdfdf;
+  color: #000000;
+  border-bottom: 1px solid #dadada;
   box-sizing: border-box;
 }
 .box_select_left {
@@ -340,11 +396,12 @@ export default {
   margin: 0 0 0 10px;
 }
 .box_select_place .iconfont {
-  font-size: 10px;
+  font-size: 5px;
   margin-left: 5px;
-  color: #ebebeb;
+  color: #dadada;
   position: relative;
   top: 1px;
+  transform: scale(0.75);
 }
 .box_toggle {
   flex: 1.5;
@@ -356,14 +413,11 @@ export default {
   font-size: 20px;
   position: relative;
   top: 1px;
-  color: #f1f1f1;
+  color: #dadada;
 }
 .van-area {
   width: 100%;
   height: 100%;
-}
-.policy_result_container {
-  border-top: 8px solid rgb(247, 247, 247);
 }
 .policy_search_result {
   padding: 15px;
@@ -389,7 +443,7 @@ export default {
   display: flex;
   align-items: center;
 }
-.item_right_title .icon-zhongdian{
+.item_right_title .icon-zhongdian {
   color: rgb(250, 180, 50) !important;
 }
 .item_right_title .iconfont {
@@ -474,7 +528,7 @@ export default {
   display: flex;
   align-items: center;
 }
-.policy_result_noContent{
+.policy_result_noContent {
   width: 100%;
   display: flex;
   align-items: center;
@@ -484,26 +538,37 @@ export default {
 .noContent_box img {
   width: 100%;
 }
-.noContent_box{
+.noContent_box {
   width: 70%;
 }
-.noContent_box .noContent_text{
-  font-size: 15px;
+.noContent_box .noContent_text {
+  font-size: 14px;
   text-align: center;
   letter-spacing: 2px;
-  font-weight: 550;
+  color: #9e9e9e;
 }
 .policy_select_box {
   width: 90%;
-  background: rgba(231, 231, 231, 0.623);
-  backdrop-filter: blur(4px);
+  background: rgb(255, 255, 255);
   border-radius: 8px;
   font-size: 12px;
   position: relative;
   z-index: 1;
+  margin: 0 auto;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
 }
 .policy_select_topBox {
   padding: 12px;
   color: rgb(236, 236, 236);
+  position: relative;
+  overflow: hidden;
+}
+.policyBgImage {
+  position: absolute;
+  width: 90%;
+  opacity: 0.3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>

@@ -8,13 +8,16 @@
       :fixed="true"
       @click-left="$router.go(-1)"
     />
-    <div :style="{ marginTop: mTop }" class="detail_container">
+    <div :style="{ marginTop: mTop }" class="bgImage_box">
+      <img src="~assets/image/searchInstitution/vaccinesInformation.png" alt="">
       <div class="detail_topBox">
         <div class="detail_topBox_title">国际疫苗研发进度</div>
         <div class="detail_topBox_tip">
           数据来源：均为世卫组织公布或权威媒体公开报道可查询数据，本表仅统计进入临床II期以后疫苗进展。
         </div>
       </div>
+    </div>
+    <div class="detail_container">
       <content-split :text="'主要国家接种疫苗情况'"></content-split>
       <vaccine-countries></vaccine-countries>
       <content-split :text="'疫苗概况'"></content-split>
@@ -66,11 +69,23 @@ export default {
   z-index: 11;
   font-size: 12px;
 }
+.bgImage_box{
+  padding: 0 15px;
+  height: 170px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color);
+}
+.bgImage_box img {
+  width: 45%;
+}
 .detail_topBox {
   padding: 12px;
-  box-shadow: 0 0 7px 5px rgba(0, 0, 0, 0.07);
-  margin-bottom: 15px;
   border-radius: 8px;
+  margin-left: 10px;
+  background-color: rgba(255, 255, 255, 0.804);
 }
 .detail_container {
   padding: 15px;

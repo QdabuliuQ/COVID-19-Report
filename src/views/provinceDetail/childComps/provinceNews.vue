@@ -50,9 +50,9 @@ export default {
     } else {
       cityPY = "cq";
     }
-    getProvinceNews(cityPY, 10).then((res) => {
-      this.newsList = res.data.data.items
-    });
+    // getProvinceNews(cityPY, 10).then((res) => {
+    //   this.newsList = res.data.data.items
+    // });
   },
 };
 </script>
