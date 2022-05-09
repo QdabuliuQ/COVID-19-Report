@@ -5,11 +5,17 @@
       ref="nav_bar"
       :title="'患者行程轨迹'"
       left-arrow
+      :z-index='999'
       :fixed="true"
       @click-left="onClickLeft"
     />
     <div :style="{ marginTop: mTop }" class="bgImage_box">
-      <img src="~assets/image/searchInstitution/patientsRoute.png" alt="" />
+      <img class="bgImg" src="~assets/image/toolBgImage.jpg" alt="" />
+      <img
+        class="leftImg"
+        src="~assets/image/searchInstitution/patientsRoute.png"
+        alt=""
+      />
       <div class="detail_topBox">
         <div class="detail_topBox_title">患者行程轨迹统计</div>
         <div class="detail_topBox_tip">
@@ -24,33 +30,38 @@
         v-for="(item, index) in dataList"
         :key="index"
       >
-        <img class="routeIcon" src="~assets/image/searchInstitution/patientRouteBgImage.png" alt="">
-        <div class="itemBox2 itemBox item_startTime">
-          <div class="item_title">
-            <div class="item_title_icon">
-              <!-- <i class="iconfont icon-shijian"></i> -->
-              <img style="width: 18px" src="~assets/image/time.png" alt="">
+        <img
+          class="routeIcon"
+          src="~assets/image/searchInstitution/patientRouteBgImage2.png"
+          alt=""
+        />
+        <div style="position:relative; z-index:1">
+          <div class="itemBox2 itemBox item_startTime">
+            <div class="item_title">
+              <div class="item_title_icon">
+                <!-- <i class="iconfont icon-shijian"></i> -->
+                <img style="width: 18px" src="~assets/image/time.png" alt="" />
+              </div>
+              <div class="item_title_text">出行日期：</div>
             </div>
-            <div class="item_title_text">出行日期：</div>
-          </div>
-          <div class="item_content">
-            <div class="item_time">{{ item.date }}</div>
-          </div>
-        </div>
-        <!-- 地点 -->
-        <div class="itemBox2 itemBox item_place">
-          <div class="item_title">
-            <div class="item_title_icon">
-              <i class="iconfont icon-qidian"></i>
+            <div class="item_content">
+              <div class="item_time">{{ item.date }}</div>
             </div>
-            <div class="item_title_text">出发地：</div>
           </div>
-          <div class="item_content">
-            {{ item.pos_start }}
+          <!-- 地点 -->
+          <div class="itemBox2 itemBox item_place">
+            <div class="item_title">
+              <div class="item_title_icon">
+                <i class="iconfont icon-qidian"></i>
+              </div>
+              <div class="item_title_text">出发地：</div>
+            </div>
+            <div class="item_content">
+              {{ item.pos_start }}
+            </div>
           </div>
-        </div>
-        <div class="itemBox2 itemBox item_place">
-          <div class="item_title">
+          <div class="itemBox2 itemBox item_place">
+            <div class="item_title">
               <div class="item_title_icon">
                 <i style="color: #d8d83b" class="iconfont icon-zhongdian"></i>
               </div>
@@ -59,30 +70,31 @@
             <div class="item_content">
               {{ item.pos_end }}
             </div>
-        </div>
-        <!-- 车次航班 -->
-        <div class="itemBox2 itemBox">
-          <div class="item_title">
-            <div class="item_title_icon">
-              <img style="width: 17px" src="~assets/image/checi.png" alt="">
-              <!-- <i class="iconfont icon-checixiangqingriqi"></i> -->
+          </div>
+          <!-- 车次航班 -->
+          <div class="itemBox2 itemBox">
+            <div class="item_title">
+              <div class="item_title_icon">
+                <img style="width: 17px" src="~assets/image/checi.png" alt="" />
+                <!-- <i class="iconfont icon-checixiangqingriqi"></i> -->
+              </div>
+              <div class="item_title_text">车次/航班：</div>
             </div>
-            <div class="item_title_text">车次/航班：</div>
-          </div>
-          <div class="item_content">
-            {{ item.no }}{{ item.memo != "" ? "(" + item.memo + ")" : "" }}
-          </div>
-        </div>
-        <div class="itemBox2 itemBox lastItemBox">
-          <div class="item_title">
-            <div class="item_title_icon">
-              <img style="width: 16px" src="~assets/image/fabu.png" alt="">
-              <!-- <i class="iconfont icon-fabu"></i> -->
+            <div class="item_content">
+              {{ item.no }}{{ item.memo != "" ? "(" + item.memo + ")" : "" }}
             </div>
-            <div class="item_title_text">发布来源：</div>
           </div>
-          <div class="item_content">
-            {{ item.who }}
+          <div class="itemBox2 itemBox lastItemBox">
+            <div class="item_title">
+              <div class="item_title_icon">
+                <img style="width: 16px" src="~assets/image/fabu.png" alt="" />
+                <!-- <i class="iconfont icon-fabu"></i> -->
+              </div>
+              <div class="item_title_text">发布来源：</div>
+            </div>
+            <div class="item_content">
+              {{ item.who }}
+            </div>
           </div>
         </div>
       </a>
@@ -366,6 +378,12 @@ export default {
   overflow: hidden;
   background-color: #fff;
 }
+.van-nav-bar {
+  background-color: #fff;
+}
+.van-nav-bar__content {
+  background: #fff !important;
+}
 .bgImage_box {
   padding: 0 15px;
   height: 170px;
@@ -373,16 +391,28 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color);
+  position: relative;
 }
-.bgImage_box img {
+.bgImage_box .leftImg {
   width: 45%;
+}
+.bgImage_box .bgImg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: -1;
 }
 .detail_topBox {
   padding: 12px;
   border-radius: 8px;
   margin-left: 10px;
-  background-color: rgba(255, 255, 255, 0.804);
+  backdrop-filter: blur(2px) saturate(200%);
+  -webkit-backdrop-filter: blur(2px) saturate(200%);
+  background-color: rgba(255, 255, 255, 0.22);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  color: #fff !important;
 }
 .detail_container {
   padding: 15px;
@@ -394,7 +424,7 @@ export default {
 }
 .detail_topBox_tip {
   font-size: 12px;
-  color: rgb(117, 117, 117);
+  color: rgb(241, 241, 241);
 }
 .patientRoute_container {
   padding: 15px;
@@ -404,11 +434,11 @@ export default {
 }
 .routeIcon {
   position: absolute;
-  height: 100%;
+  width: 100%;
   bottom: 0px;
-  opacity: 0.2;
-  left: 50%;
-  transform: translateX(-50%);
+  opacity: 0.9;
+  top: 0;
+  left: 0;
 }
 .search_items {
   display: block;

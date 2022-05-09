@@ -7,8 +7,8 @@ export function getEpidemicTrend() {  // 获取国内疫情趋势
 }
 
 export function getDemosticDetail() {  // 获取国内基本数据
-  return viewRequest({
-    url: 'getOnsInfo?name=disease_h5'
+  return request({
+    url: '/query/inner/publish/modules/list?modules=statisGradeCityDetail,diseaseh5Shelf'
   })
 }
 

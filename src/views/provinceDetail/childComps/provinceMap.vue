@@ -4,9 +4,12 @@
     id="provinceMapContainer"
   >
     <content-split
+      v-if="typeIndex == 1"
       :text="$route.params.cityName + '疫情分布图'"
+      :btnText="'分享数据'"
+      @clickEvent="clickEvent"
     ></content-split>
-    <div class="map_toggle_top">
+    <div class="map_toggle_top" v-if="typeIndex == 1">
       <div
         @click="toggleShowMap(index)"
         :class="[activeIndex == index ? 'activeModule' : '']"
@@ -17,7 +20,8 @@
         {{ item }}
     </div>
     </div>
-    <div id="provinceMap"></div>
+    <div v-if="typeIndex == 1" id="provinceMap1"></div>
+    <div v-else id="provinceMap2"></div>
   </div>
 </template>.
 
@@ -25,12 +29,18 @@
 import { getCityJson } from "network/provinceDetail";
 import { codefans_net_CC2PY } from "static/js/PinYin";
 
-let mapChartDom;  // 图表dom
 
 export default {
   name: "provinceMap",
+  props: {
+    typeIndex: {
+      type: Number,
+      default: 1
+    }
+  },
   data() {
     return {
+      mapChartDom: null,
       cityDetail: null,
       cityNowData: [], // 现有确诊
       citySumData: [], // 累计确诊
@@ -81,8 +91,9 @@ export default {
 
       setTimeout(() => {
         if ( this.setAllDetail ) {
-          mapChartDom = this.$echarts.init(
-            document.getElementById("provinceMap")
+          console.log(document.getElementById("provinceMap"+this.typeIndex));
+          this.mapChartDom = this.$echarts.init(
+            document.getElementById("provinceMap"+this.typeIndex)
           ); // 获取dom元素
           this.$echarts.registerMap(
             this.$route.params.cityName,
@@ -94,13 +105,17 @@ export default {
             option.geo.layoutCenter = ['50%', '60%'];//地图相对容器偏移
             option.geo.layoutSize = "700%";//地图放大比例
           }
-          mapChartDom.setOption(option); // 设置地图数据
+          this.mapChartDom.setOption(option); // 设置地图数据
         }
       }, 800);
     }
   },
 
   methods: {
+    clickEvent() {
+      this.$emit('shareClickEvent')
+    },
+
     // 获取像素比
     fGetChartFontSize() {
       const dpr = window.devicePixelRatio;
@@ -301,13 +316,16 @@ export default {
     // 切换显示方式
     toggleShowMap(index) {
       // 切换地图
+      if (this.typeIndex == 1) {
+        this.$emit("toggleEvent", index)
+      }
       this.activeIndex = index;
       switch (this.activeIndex) {
         case 0:
-          mapChartDom.setOption(this.getMapOptions(this.cityNowData));
+          this.mapChartDom.setOption(this.getMapOptions(this.cityNowData));
           break;
         case 1:
-          mapChartDom.setOption(this.getMapOptions(this.citySumData));
+          this.mapChartDom.setOption(this.getMapOptions(this.citySumData));
           break;
         default:
           break;
@@ -323,7 +341,14 @@ export default {
 #provinceMapContainer{
   margin-bottom: var(--marginB);
 }
-#provinceMap {
+#provinceMap1 {
+  width: 100%;
+  height: 260px !important;
+  position: relative;
+  z-index: 1;
+  background-color: #ffffff;
+}
+#provinceMap2 {
   width: 100%;
   height: 260px !important;
   position: relative;

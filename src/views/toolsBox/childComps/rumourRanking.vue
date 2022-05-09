@@ -9,7 +9,8 @@
       @click-left="onClickLeft"
     />
     <div :style="{ marginTop: mTop }" class="bgImage_box">
-      <img src="~assets/image/searchInstitution/newsList.png" alt="">
+      <img class="bgImg" src="~assets/image/toolBgImage.jpg" alt="" />
+      <img class="leftImg" src="~assets/image/searchInstitution/newsList.png" alt="">
       <div class="detail_topBox">
         <div class="detail_topBox_title">在线辟谣</div>
         <div class="detail_topBox_tip">
@@ -127,16 +128,28 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color);
+  position: relative;
 }
-.bgImage_box img {
+.bgImage_box .leftImg {
   width: 40%;
+}
+.bgImage_box .bgImg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: -1;
 }
 .detail_topBox {
   padding: 12px;
   border-radius: 8px;
   margin-left: 10px;
-  background-color: rgba(255, 255, 255, 0.804);
+  backdrop-filter: blur(2px) saturate(200%);
+    -webkit-backdrop-filter: blur(2px) saturate(200%);
+  background-color: rgba(255, 255, 255, 0.22);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  color: #Fff !important;
 }
 .detail_container {
   padding: 15px;
@@ -148,7 +161,7 @@ export default {
 }
 .detail_topBox_tip {
   font-size: 12px;
-  color: rgb(117, 117, 117);
+  color: rgb(241, 241, 241);
 }
 .rumour_container {
   padding: 15px;

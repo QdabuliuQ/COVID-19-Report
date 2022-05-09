@@ -1,6 +1,6 @@
 <template>
   <div id="demosticMap">
-    <div class="map_toggle_top">
+    <div v-if="typeIndex == 1" class="map_toggle_top">
       <div
         @click="toggleShowMap(index)"
         :class="[activeIndex == index ? 'activeModule' : '']"
@@ -11,16 +11,23 @@
         {{ item }}
       </div>
     </div>
-    <div id="demostic_map_container"></div>
+    <div v-if="typeIndex == 1" id="demostic_map_container1"></div>
+    <div v-else id="demostic_map_container2"></div>
   </div>
 </template>
 
 <script>
-let myChart; // 地图实例
 export default {
   name: "demosticMap",
+  props: {
+    typeIndex: {
+      type: Number,
+      default: 1
+    }
+  },
   data() {
     return {
+      myChart: null,
       toggleMap: ["现存确诊", "累计确诊"], // 切换按钮
       activeIndex: 0, // 切换索引
       allCityDetail: [], // 所有城市信息
@@ -96,6 +103,7 @@ export default {
     };
   },
   methods: {
+
     fGetChartFontSize() {
       // 获取像素比
       const dpr = window.devicePixelRatio;
@@ -113,13 +121,15 @@ export default {
     toggleShowMap(index) {
       // 切换地图
       this.activeIndex = index;
-
+      if (this.typeIndex == 1) {
+        this.$emit("toggleEvent", index)
+      }
       switch (this.activeIndex) {
         case 0:
-          myChart.setOption(this.allCityDetailOptions);
+          this.myChart.setOption(this.allCityDetailOptions);
           break;
         case 1:
-          myChart.setOption(this.allCitySumDetailOptions);
+          this.myChart.setOption(this.allCitySumDetailOptions);
           break;
         default:
           break;
@@ -144,14 +154,14 @@ export default {
         },
         tooltip: {
           trigger: "item",
-          triggerOn:"click",
+          triggerOn: "click",
           textStyle: {
-            color: '#FFF',     // 文字的颜色
-            fontSize: '12',    // 文字字体大小
+            color: "#FFF", // 文字的颜色
+            fontSize: "12", // 文字字体大小
           },
-          padding:[7],
-          backgroundColor:"rgba(0, 0, 0, 0.623)", 
-          borderColor: 'transparent',  
+          padding: [7],
+          backgroundColor: "rgba(0, 0, 0, 0.623)",
+          borderColor: "transparent",
           axisPointer: {
             type: "cross",
             crossStyle: {
@@ -160,9 +170,11 @@ export default {
           },
           formatter: function (params) {
             return (
-              "地区："+params.data.name +
+              "地区：" +
+              params.data.name +
               "<br>" +
-              "确诊人数：" +params.data.value
+              "确诊人数：" +
+              params.data.value
             );
           },
         },
@@ -230,13 +242,13 @@ export default {
         this.allCityDetailOptions = option;
         this.allCitySumDetailOptions = options;
         setTimeout(() => {
-          myChart = this.$echarts.init(
-            document.getElementById("demostic_map_container"),
+          this.myChart = this.$echarts.init(
+            document.getElementById("demostic_map_container"+this.typeIndex),
             null,
             { renderer: "svg" }
           ); // 创建echarts对象
-          myChart.setOption(option);
-          myChart.resize();
+          this.myChart.setOption(option);
+          this.myChart.resize();
         }, 300);
       }
     });
@@ -268,8 +280,35 @@ export default {
   background-color: rgba(29, 153, 211, 0.122);
   border: 1px solid rgba(29, 153, 211, 0.122);
 }
-#demostic_map_container {
+#demostic_map_container1 {
   width: 100%;
   height: 320px;
+}
+#demostic_map_container2 {
+  width: 100%;
+  height: 280px;
+}
+.shareContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+}
+.shareBtn {
+  font-size: 13px;
+  color: #fff;
+  background-color: var(--color);
+  padding: 7px 15px 9px 13px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.shareBtn:active {
+  background-color: var(--clickColor);
+}
+.shareBtn .shareIcon {
+  width: 20px;
+  margin-right: 3px;
 }
 </style>

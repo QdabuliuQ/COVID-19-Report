@@ -130,6 +130,7 @@ export default {
   z-index: 0;
   background-color: #fff;
 }
+.body{ font-size: 0; }
 .van-nav-bar__content {
   height: 46px !important;
 }

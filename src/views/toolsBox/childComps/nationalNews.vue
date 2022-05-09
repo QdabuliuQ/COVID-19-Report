@@ -9,7 +9,8 @@
       @click-left="$router.go(-1)"
     />
     <div :style="{ marginTop: mTop }" class="bgImage_box">
-      <img src="~assets/image/searchInstitution/newsList2.png" alt="">
+      <img class="bgImg" src="~assets/image/toolBgImage.jpg" alt="" />
+      <img class="leftImg" src="~assets/image/searchInstitution/newsList2.png" alt="">
       <div class="detail_topBox">
         <div class="detail_topBox_title">国内疫情速报</div>
         <div class="detail_topBox_tip">
@@ -87,7 +88,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color);
+  position: relative;
 }
 .itemBgImage {
   position: absolute;
@@ -100,19 +101,29 @@ export default {
 .newsItemBgImage {
   position: relative;
   width: 100%;
-  top: 64%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0.25;
+  height: 100%;
+  opacity: 0.4;
 }
-.bgImage_box img {
-  width: 43%;
+.bgImage_box .leftImg {
+  width: 40%;
+}
+.bgImage_box .bgImg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: -1;
 }
 .detail_topBox {
   padding: 12px;
   border-radius: 8px;
   margin-left: 10px;
-  background-color: rgba(255, 255, 255, 0.804);
+  backdrop-filter: blur(2px) saturate(200%);
+    -webkit-backdrop-filter: blur(2px) saturate(200%);
+  background-color: rgba(255, 255, 255, 0.22);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  color: #Fff !important;
 }
 .detail_container {
   padding: 15px;
@@ -124,7 +135,7 @@ export default {
 }
 .detail_topBox_tip {
   font-size: 12px;
-  color: rgb(117, 117, 117);
+  color: rgb(241, 241, 241);
 }
 .news_container {
   padding: 15px;
@@ -165,6 +176,7 @@ export default {
   position: relative;
   color: rgb(0, 0, 0);
   border: 1px solid rgb(235, 235, 235);
+  overflow: hidden;
   /* box-shadow:5px 5px 10px 5px rgba(0, 0, 0, .1); */
 }
 .item_container::before {

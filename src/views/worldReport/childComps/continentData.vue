@@ -1,5 +1,34 @@
 <template>
   <div id="continentData">
+    <van-popover
+      v-model="showPopover"
+      trigger="click"
+      :actions="actions"
+      @select="onSelect"
+      :placement="'bottom-end'"
+    >
+      <template #reference>
+        <div
+          :style="{
+            backgroundColor:
+              dataType == 'confirm'
+                ? 'hsla(0, 74%, 42%, 0.5)'
+                : dataType == 'heal'
+                ? 'hsla(115, 93%, 44%, 0.5)'
+                : 'hsla(0, 0%, 51%, 0.5)',
+          }"
+          class="toggleBtn"
+        >
+          {{
+            dataType == "confirm"
+              ? "累计确诊"
+              : dataType == "heal"
+              ? "累计治愈"
+              : "累计死亡"
+          }}<img src="~assets/image/toggleIcon.png" />
+        </div>
+      </template>
+    </van-popover>
     <div id="continentChartDom"></div>
     <div class="btnList">
       <div
@@ -20,22 +49,22 @@
     <div class="dataTable">
       <div class="tableItem">
         <div class="topText"></div>
-        <div style="color: #ff4747" class="itemData">{{totalNewConfirm}}</div>
+        <div style="color: #ff4747" class="itemData">{{ totalNewConfirm }}</div>
         <div class="bottomText">现有确诊</div>
       </div>
       <div class="tableItem">
         <div class="topText"></div>
-        <div style="color: #b91c1c" class="itemData">{{totalConfirm}}</div>
+        <div style="color: #b91c1c" class="itemData">{{ totalConfirm }}</div>
         <div class="bottomText">累计确诊</div>
       </div>
       <div class="tableItem">
         <div class="topText"></div>
-        <div style="color: #19d808" class="itemData">{{totalHeal}}</div>
+        <div style="color: #19d808" class="itemData">{{ totalHeal }}</div>
         <div class="bottomText">累计治愈</div>
       </div>
       <div class="tableItem">
         <div class="topText"></div>
-        <div style="color: #838383" class="itemData">{{totalDead}}</div>
+        <div style="color: #838383" class="itemData">{{ totalDead }}</div>
         <div class="bottomText">累计死亡</div>
       </div>
     </div>
@@ -48,11 +77,17 @@ export default {
   name: "continentData",
   data() {
     return {
-      activeIndex: 0,  // 活跃索引
-      totalNewConfirm: 0,  // 新确诊
-      totalConfirm: 0,  // 累计确诊
-      totalHeal: 0,  // 累计治愈
-      totalDead: 0,  // 累计死亡
+      showPopover: false,
+      actions: [
+        { text: "累计确诊" },
+        { text: "累计治愈" },
+        { text: "累计死亡" },
+      ],
+      activeIndex: 0, // 活跃索引
+      totalNewConfirm: 0, // 新确诊
+      totalConfirm: 0, // 累计确诊
+      totalHeal: 0, // 累计治愈
+      totalDead: 0, // 累计死亡
       overseaData: {
         asia: [], // 亚洲
         africa: [], // 非洲
@@ -90,9 +125,27 @@ export default {
       legendData: [],
       dataList: [],
       areaName: "asia",
+      dataType: "confirm",
+      dataText: "累计确诊",
     };
   },
   methods: {
+    onSelect(action) {
+      this.dataText = action.text;
+      switch (action.text) {
+        case "累计确诊":
+          this.dataType = "confirm";
+          break;
+        case "累计治愈":
+          this.dataType = "heal";
+          break;
+        case "累计死亡":
+          this.dataType = "dead";
+          break;
+      }
+      this.createChart(this.areaName, this.dataType);
+    },
+
     toggleContinentData(index) {
       this.activeIndex = index;
       switch (index) {
@@ -115,15 +168,15 @@ export default {
           this.areaName = "europe";
           break;
       }
-      this.createChart(this.areaName)
+      this.createChart(this.areaName, this.dataType);
     },
 
-    createChart(continent) {
-      this.getCountryList(continent); // 格式化数据
+    createChart(continent, dataType) {
+      this.getCountryList(continent, dataType); // 格式化数据
       let option = {
         tooltip: {
           trigger: "item",
-          formatter: "{b}:{c}例",
+          formatter: `{b}(${this.dataText}):{c}例 <br/>`,
         },
         legend: {
           type: "scroll",
@@ -156,66 +209,96 @@ export default {
       myChart.setOption(option);
     },
 
-    getCountryList(continentName) {
+    getCountryList(continentName, dataType) {
       // 格式化数据
       this.legendData = [];
       this.dataList = [];
-      this.totalNewConfirm = 0  // 新确诊
-      this.totalConfirm = 0  // 累计确诊
-      this.totalHeal = 0  // 累计治愈
-      this.totalDead = 0  // 累计死亡
+      this.totalNewConfirm = 0; // 新确诊
+      this.totalConfirm = 0; // 累计确诊
+      this.totalHeal = 0; // 累计治愈
+      this.totalDead = 0; // 累计死亡
       for (const item of this.overseaData[continentName]) {
         this.legendData.push(item.name);
         this.dataList.push({
           name: item.name,
-          value: item.confirm,
+          value: item[dataType],
         });
-        this.totalNewConfirm += item.confirmAdd
-        this.totalConfirm += item.confirm
-        this.totalHeal += item.heal
-        this.totalDead += item.dead
+        this.totalNewConfirm += item.nowConfirm;
+        this.totalConfirm += item.confirm;
+        this.totalHeal += item.heal;
+        this.totalDead += item.dead;
       }
     },
   },
-  created() {
-    let data = this.$store.state.worldData.WomAboard;
-    for (const item of data) {
-      // 处理数据
-      switch (item.continent) {
-        case "亚洲":
-          this.areaName = "asia";
-          break;
-        case "非洲":
-          this.areaName = "africa";
-          break;
-        case "大洋洲":
-          this.areaName = "oceania";
-          break;
-        case "北美洲":
-          this.areaName = "northAmerica";
-          break;
-        case "南美洲":
-          this.areaName = "southAmerica";
-          break;
-        case "欧洲":
-          this.areaName = "europe";
-          break;
+  mounted() {
+    setTimeout(() => {
+      let data = this.$store.state.worldData.WomAboard;
+      for (const item of data) {
+        // 处理数据
+        switch (item.continent) {
+          case "亚洲":
+            this.areaName = "asia";
+            break;
+          case "非洲":
+            this.areaName = "africa";
+            break;
+          case "大洋洲":
+            this.areaName = "oceania";
+            break;
+          case "北美洲":
+            this.areaName = "northAmerica";
+            break;
+          case "南美洲":
+            this.areaName = "southAmerica";
+            break;
+          case "欧洲":
+            this.areaName = "europe";
+            break;
+        }
+        this.overseaData[this.areaName].push(item);
       }
-      this.overseaData[this.areaName].push(item);
-    }
-    this.$nextTick(() => {
-      // 创建erchart实例
-      myChart = this.$echarts.init(
-        document.getElementById("continentChartDom")
-      );
-      this.createChart('asia')
-    });
+      this.$nextTick(() => {
+        // 创建erchart实例
+        myChart = this.$echarts.init(
+          document.getElementById("continentChartDom")
+        );
+        this.createChart("asia", "confirm");
+      });
+    }, 1000);
   },
 };
 </script>
+<style>
+.van-popover__action {
+  height: 40px;
+  font-size: 13px !important;
+  padding: 0 15px;
+}
+</style>
 <style scoped>
 #continentData {
   margin-bottom: var(--marginB);
+  position: relative;
+}
+.van-popover__wrapper {
+  position: absolute;
+  right: 0;
+  z-index: 9999;
+}
+
+.toggleBtn {
+  font-size: 12px;
+  padding: 7px 15px;
+  transition: 0.2s all linear;
+  border-radius: 6px;
+  background-color: rgb(243, 108, 108);
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+.toggleBtn img {
+  width: 15px;
+  margin-left: 2px;
 }
 #continentChartDom {
   width: 100%;

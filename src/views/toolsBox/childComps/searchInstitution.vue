@@ -12,17 +12,18 @@
       <!-- <box-background></box-background> -->
       <!-- <div class="insitution_bg_image_box">
       </div> -->
-      <img src="~assets/image/searchInstitution/institutionBgImage.png" alt="">
+      <img class="bgImg" src="~assets/image/toolBgImage.jpg" alt="" />
+      <img class="leftImg" src="~assets/image/searchInstitution/institutionBgImage.png" alt="">
       <div class="detail_topBox">
         <div class="detail_topBox_title">核酸检测机构</div>
         <div class="detail_topBox_tip">
-          为保障常态化疫情防控形势下的核酸检测、诊疗服务等有关工作需要，已经收集全国各省的检测机构。
+          为保障常态化疫情防控形势下的核酸检测，已经收集全国各省的检测机构。
         </div>
       </div>
     </div>
     <div class="select_place_container">
         <div class="select_majorContainer">
-          <img class="institutionCardBgImage" src="~assets/image/searchInstitution/institutionCardBgImage.png" alt="">
+          <img class="institutionCardBgImage" src="~assets/image/searchInstitution/institutionCardBgImage2.png" alt="">
           <div @click="showSheet = true" class="select_palce_Box">
             <i style="color: #fff" class="iconfont icon-qidian"></i>{{ placeName }}
           </div>
@@ -189,7 +190,12 @@ export default {
   padding: 12px;
   border-radius: 8px;
   margin-left: 10px;
-  background-color: rgba(255, 255, 255, 0.804);
+  backdrop-filter: blur(2px) saturate(200%);
+    -webkit-backdrop-filter: blur(2px) saturate(200%);
+  background-color: rgba(255, 255, 255, 0.22);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  color: #Fff !important;
 }
 .detail_container {
   padding: 15px;
@@ -201,20 +207,27 @@ export default {
 }
 .detail_topBox_tip {
   font-size: 12px;
-  color: rgb(117, 117, 117);
+  color: rgb(241, 241, 241);
 }
 .search_topContainer {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color);
+  position: relative;
   padding: 0 15px;
   overflow: hidden;
   height: 170px;
 }
-.search_topContainer img {
-  width: 50%;
+.search_topContainer .leftImg {
+  width: 45%;
+}
+.search_topContainer .bgImg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: -1;
 }
 .select_place_container {
   padding: 15px;
@@ -233,11 +246,11 @@ export default {
 }
 .institutionCardBgImage {
   position: absolute;
-  top: 50%;
-  height: 100%;
-  left: 50%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200%;
   opacity: 0.4;
-  transform: translate(-50%, -50%);
 }
 .container_topTip {
   color: rgb(0, 0, 0);

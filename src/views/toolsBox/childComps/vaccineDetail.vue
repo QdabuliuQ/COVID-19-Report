@@ -9,7 +9,12 @@
       @click-left="$router.go(-1)"
     />
     <div :style="{ marginTop: mTop }" class="bgImage_box">
-      <img src="~assets/image/searchInstitution/vaccinesInformation.png" alt="">
+      <img class="bgImg" src="~assets/image/toolBgImage.jpg" alt="" />
+      <img
+        class="leftImg"
+        src="~assets/image/searchInstitution/vaccinesInformation.png"
+        alt=""
+      />
       <div class="detail_topBox">
         <div class="detail_topBox_title">国际疫苗研发进度</div>
         <div class="detail_topBox_tip">
@@ -32,32 +37,31 @@
 </template>
 
 <script>
-
 import "assets/css/vantCss/provinceDetail.css"; // 导入css样式
-import vaccineBasic from './childComps/vaccineBasic.vue'  // 疫苗基本信息
-import vaccineTable from './childComps/vaccineTable.vue'  // 疫苗信息表格
-import vaccineCountries from './childComps/vaccineCountries.vue'  // 国家疫苗信息
-import vaccineProcess from './childComps/vaccineProcess.vue'  // 上市流程
-import vaccineNews from './childComps/vaccineNews.vue'  // 疫苗信息
+import vaccineBasic from "./childComps/vaccineBasic.vue"; // 疫苗基本信息
+import vaccineTable from "./childComps/vaccineTable.vue"; // 疫苗信息表格
+import vaccineCountries from "./childComps/vaccineCountries.vue"; // 国家疫苗信息
+import vaccineProcess from "./childComps/vaccineProcess.vue"; // 上市流程
+import vaccineNews from "./childComps/vaccineNews.vue"; // 疫苗信息
 
 export default {
   name: "vaccineDetail",
   data() {
     return {
       mTop: 0, // 距离顶部距离
-      
     };
   },
   mounted() {
-    this.mTop = document.getElementsByClassName("van-nav-bar")[0].clientHeight + "px";
+    this.mTop =
+      document.getElementsByClassName("van-nav-bar")[0].clientHeight + "px";
   },
   components: {
     vaccineBasic,
     vaccineTable,
     vaccineCountries,
     vaccineProcess,
-    vaccineNews
-  }
+    vaccineNews,
+  },
 };
 </script>
 <style scoped>
@@ -69,23 +73,35 @@ export default {
   z-index: 11;
   font-size: 12px;
 }
-.bgImage_box{
+.bgImage_box {
   padding: 0 15px;
   height: 170px;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color);
+  position: relative;
 }
-.bgImage_box img {
+.bgImage_box .leftImg {
   width: 45%;
+}
+.bgImage_box .bgImg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: -1;
 }
 .detail_topBox {
   padding: 12px;
   border-radius: 8px;
   margin-left: 10px;
-  background-color: rgba(255, 255, 255, 0.804);
+  backdrop-filter: blur(2px) saturate(200%);
+    -webkit-backdrop-filter: blur(2px) saturate(200%);
+  background-color: rgba(255, 255, 255, 0.22);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  color: #Fff !important;
 }
 .detail_container {
   padding: 15px;
@@ -97,6 +113,6 @@ export default {
 }
 .detail_topBox_tip {
   font-size: 12px;
-  color: rgb(117, 117, 117);
+  color: rgb(241, 241, 241);
 }
 </style>

@@ -106,6 +106,7 @@ export default {
         let td_item = document.getElementsByClassName("td_item");
         let sticky_thead_item =
           document.getElementsByClassName("sticky_thead_item");
+          console.log(sticky_thead_item);
         for (let i = 0; i < 5; i++) {
           sticky_thead_item[i].style.width =
             td_item[i].getBoundingClientRect().width + "px";

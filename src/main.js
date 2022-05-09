@@ -26,6 +26,8 @@ import {
   Radio,
   Button, // 按钮
   DatetimePicker,
+  Popover,
+  Toast
 } from 'vant';
 
 // 全局注册
@@ -49,6 +51,7 @@ Vue.use(Radio);
 Vue.use(RadioGroup);
 Vue.use(Button);
 Vue.use(DatetimePicker);
+Vue.use(Popover);
 
 import ContentSplit from "components/private/contentSplit/index.js" // 引入分割线组件
 Vue.use(ContentSplit)

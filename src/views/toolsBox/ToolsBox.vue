@@ -136,6 +136,8 @@ export default {
 }
 .top_container_imgBox {
   height: 100%;
+  height: 185px;
+  overflow: hidden;
 }
 .top_container_imgBox img {
   width: 100%;

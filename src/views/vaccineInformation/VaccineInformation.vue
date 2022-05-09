@@ -2,7 +2,7 @@
   <div id="VaccineInformation">
     <div class="vac_top_container">
       <div class="vac_top_bgImg">
-        <img src="https://z3.ax1x.com/2021/06/17/2znZOf.png" alt="">
+        <img src="~assets/image/vaccinePageBgImage.jpg" alt="">
       </div>
       <div class="vac_top_textBox">
         <div class="textBox_title">全球新冠疫苗</div>
@@ -86,9 +86,15 @@ export default {
 }
 .vac_top_bgImg{
   width: 100%;
+  height: 185px;
+  position: relative;
+  overflow: hidden;
 }
 .vac_top_bgImg img{
   width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .vac_top_textBox{
   position: absolute;

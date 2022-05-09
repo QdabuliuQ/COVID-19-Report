@@ -33,6 +33,7 @@ import { Stepper } from 'vant';  // 步进器
 import { RadioGroup, Radio } from 'vant';  // 单选框
 import { Button } from 'vant';  // 按钮
 import { DatetimePicker } from 'vant';
+import { Popover } from 'vant';
 
 // 全局注册
 Vue.use(Swipe);
@@ -55,6 +56,7 @@ Vue.use(Radio);
 Vue.use(RadioGroup);
 Vue.use(Button);
 Vue.use(DatetimePicker);
+Vue.use(Popover);
 
 import ContentSplit from "components/private/contentSplit/index.js" // 引入分割线组件
 Vue.use(ContentSplit)

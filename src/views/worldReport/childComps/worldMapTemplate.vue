@@ -2,17 +2,6 @@
   <div id="worldMap">
     <div v-if="typeIndex==1" id="map_container1"></div>
     <div v-else id="map_container2"></div>
-    <div v-if="typeIndex==1" class="map_toggle_top">
-      <div
-        @click="toggleShowMap(index)"
-        :class="[activeIndex == index ? 'activeModule' : '']"
-        v-for="(item, index) in toggleMap"
-        :key="index"
-        class="map_toggle_item"
-      >
-        {{ item }}
-      </div>
-    </div>
   </div>
 </template>
 
@@ -24,7 +13,7 @@ import world from "static/js/world";
 let mapDom;
 
 export default {
-  name: "worldMap",
+  name: "worldMapTemplate",
   props: {
     typeIndex: {
       type: Number,
@@ -39,7 +28,6 @@ export default {
         dead: [],
         nowConfirm: [],
       },
-      activeIndex: 0,  // 活跃索引
       toggleMap: ["累计确诊", "现存确诊", "累计死亡"],  // 地图切换
     };
   },
@@ -164,8 +152,6 @@ export default {
 
     toggleShowMap(index) {
       // 切换模式
-      this.activeIndex = index;
-      
       switch (index) {
         case 0:
           if (this.worldData.confirm.length > 0) {
@@ -285,7 +271,6 @@ export default {
         default:
           break;
       }
-      this.$emit('typeToggle', this.toggleMap[index], index)
     },
 
     setCountryData(str) {
